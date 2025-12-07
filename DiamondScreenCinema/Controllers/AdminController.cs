@@ -1,5 +1,4 @@
-﻿using DiamondScreenCinema.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace DiamondScreenCinema.Controllers;
@@ -21,7 +20,7 @@ public class AdminController : Controller
 
     public IActionResult Dashboard()
     {
-        ViewBag.title = "Diamond Screen Cinema - Admin Dashboard";
+        ViewBag.title = "Admin Dashboard | Diamond Screen Cinema";
         return View();
     }
 
@@ -30,31 +29,39 @@ public class AdminController : Controller
         switch (Page)
         {
             case "CinemaManagement":
-                ViewBag.title = "Diamond Screen Cinema - CinemaManagement";
+                ViewBag.title = "Cinema Management | Diamond Screen Cinema";
                 return View("Cinemas/CinemaManagement");
+
             case "HallManagement":
-                ViewBag.title = "Diamond Screen Cinema - HallManagement";
+                ViewBag.title = "Hall Management | Diamond Screen Cinema";
                 return View("Cinemas/HallManagement");
+
             case "CreateHall":
-                ViewBag.title = "Diamond Screen Cinema - Create New Hall";
+                ViewBag.title = "Create New Hall | Diamond Screen Cinema";
                 return View("Cinemas/CreateHall");
+
             case "ViewHall":
-                ViewBag.title = "Diamond Screen Cinema - View Hall";
+                ViewBag.title = "View Hall | Diamond Screen Cinema";
                 return View("Cinemas/ViewHall");
+
             case "UpdateHall":
-                ViewBag.title = "Diamond Screen Cinema - Update Hall";
+                ViewBag.title = "Update Hall | Diamond Screen Cinema";
                 return View("Cinemas/UpdateHall");
+
             case "CreateCinema":
-                ViewBag.title = "Diamond Screen Cinema - Create New Cinema";
+                ViewBag.title = "Create New Cinema | Diamond Screen Cinema";
                 return View("Cinemas/CreateCinema");
+
             case "ViewCinema":
-                ViewBag.title = "Diamond Screen Cinema - View Cinema";
+                ViewBag.title = "View Cinema | Diamond Screen Cinema";
                 return View("Cinemas/ViewCinema");
+
             case "UpdateCinema":
-                ViewBag.title = "Diamond Screen Cinema - Update Cinema";
+                ViewBag.title = "Update Cinema | Diamond Screen Cinema";
                 return View("Cinemas/UpdateCinema");
+
             default:
-                ViewBag.title = "Diamond Screen Cinema - SeatManagement";
+                ViewBag.title = "Seat Management | Diamond Screen Cinema";
                 return View("Cinemas/SeatManagement");
         }
     }
@@ -63,47 +70,47 @@ public class AdminController : Controller
     {
         if (Page == "CustomerManagement")
         {
-            ViewBag.title = "Diamond Screen Cinema - CustomerManagement";
+            ViewBag.title = "Customer Management | Diamond Screen Cinema";
             return View("Users/CustomerManagement");
         }
         else if (Page == "StaffManagement")
         {
-            ViewBag.title = "Diamond Screen Cinema - StaffManagement";
+            ViewBag.title = "Staff Management | Diamond Screen Cinema";
             return View("Users/StaffManagement");
         }
         else if (Page == "UpdateCustomer")
         {
-            ViewBag.title = "Diamond Screen Cinema - Update Customer Details";
+            ViewBag.title = "Update Customer Details | Diamond Screen Cinema";
             return View("Users/UpdateCustomer");
         }
         else if (Page == "CreateCustomer")
         {
-            ViewBag.title = "Diamond Screen Cinema - Create New Customer";
+            ViewBag.title = "Create New Customer | Diamond Screen Cinema";
             return View("Users/CreateCustomer");
         }
         else if (Page == "UpdateStaff")
         {
-            ViewBag.title = "Diamond Screen Cinema - Update Staff Details";
+            ViewBag.title = "Update Staff Details | Diamond Screen Cinema";
             return View("Users/UpdateStaff");
         }
         else if (Page == "CreateStaff")
-        { 
-            ViewBag.title = "Diamond Screen Cinema - Create New Staff";
+        {
+            ViewBag.title = "Create New Staff | Diamond Screen Cinema";
             return View("Users/CreateStaff");
         }
         else if (Page == "UpdateAdmin")
         {
-            ViewBag.title = "Diamond Screen Cinema - Update Admin Details";
+            ViewBag.title = "Update Admin Details | Diamond Screen Cinema";
             return View("Users/UpdateAdmin");
         }
         else if (Page == "CreateAdmin")
         {
-            ViewBag.title = "Diamond Screen Cinema - Create New Admin";
+            ViewBag.title = "Create New Admin | Diamond Screen Cinema";
             return View("Users/CreateAdmin");
         }
         else
         {
-            ViewBag.title = "Diamond Screen Cinema - AdminManagement";
+            ViewBag.title = "Admin Management | Diamond Screen Cinema";
             return View("Users/AdminManagement");
         }
     }
@@ -113,14 +120,15 @@ public class AdminController : Controller
         switch (Page)
         {
             case "MovieManagement":
-                ViewBag.title = "Diamond Screen Cinema - Movie Management";
+                ViewBag.title = "Movie Management | Diamond Screen Cinema";
                 return await MovieManagement();
-            case "ShowtimeManagement":
-                ViewBag.title = "Diamond Screen Cinema - Showtime Management";
-                return View("Movies/ShowtimeManagement");
-            case "MovieCreate":
-                ViewBag.title = "Diamond Screen Cinema - Movie Create";
 
+            case "ShowtimeManagement":
+                ViewBag.title = "Showtime Management | Diamond Screen Cinema";
+                return View("Movies/ShowtimeManagement");
+
+            case "MovieCreate":
+                ViewBag.title = "Create Movie | Diamond Screen Cinema";
                 var savedCreateModel = hp.LoadModel<MovieVM>(TempData);
                 var savedCreateErrors = hp.LoadModelState(TempData);
 
@@ -137,11 +145,13 @@ public class AdminController : Controller
                 }
 
                 return View("Movies/MovieCreate", new MovieVM());
+
             case "MovieDetail":
-                ViewBag.title = "Diamond Screen Cinema - Movie Detail";
+                ViewBag.title = "Movie Detail | Diamond Screen Cinema";
                 return MovieDetail(Request.Query["id"]!);
+
             case "MovieUpdate":
-                ViewBag.title = "Diamond Screen Cinema - Movie Update";
+                ViewBag.title = "Update Movie | Diamond Screen Cinema";
 
                 var savedUpdateModel = hp.LoadModel<MovieVM>(TempData);
                 var savedUpdateErrors = hp.LoadModelState(TempData);
@@ -159,8 +169,9 @@ public class AdminController : Controller
                 }
 
                 return MovieUpdate(Request.Query["id"]!);
+
             case "ShowtimeCUD":
-                ViewBag.title = "Diamond Screen Cinema - Showtime CUD";
+                ViewBag.title = "Showtime CUD | Diamond Screen Cinema";
 
                 var movies = db.Movies
                     .OrderBy(m => m.Title)
@@ -178,6 +189,7 @@ public class AdminController : Controller
                     .ToList();
 
                 return View("Movies/ShowtimeCUD", movies);
+
             default:
                 return RedirectToAction("Movies", new { Page = "MovieManagement" });
         }
@@ -185,8 +197,8 @@ public class AdminController : Controller
 
     [HttpGet]
     public async Task<IActionResult> MovieManagement(string search = "",
-         string genreFilter = "", string languageFilter = "", string sortBy = "title",
-         string statusFilter = "all", int page = 1, bool ajax = false)
+     string genreFilter = "", string languageFilter = "", string sortBy = "title",
+     string statusFilter = "all", int page = 1, bool ajax = false)
     {
         await AutoUpdateMovieStatuses();
         const int PageSize = 8;
@@ -239,7 +251,6 @@ public class AdminController : Controller
 
         return View("Movies/MovieManagement", movies);
     }
-
 
     public async Task<IActionResult> DeleteMovie(string id)
     {
@@ -570,7 +581,7 @@ public class AdminController : Controller
             return RedirectToAction("Movies", new { Page = "MovieManagement" });
         }
 
-        ViewBag.title = "Diamond Screen Cinema - Movie Detail";
+        ViewBag.title = "Movie Detail | Diamond Screen Cinema";
         return View("Movies/MovieDetail", movie);
     }
 

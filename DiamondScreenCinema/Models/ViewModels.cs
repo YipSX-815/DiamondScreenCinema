@@ -152,3 +152,15 @@ public class MovieMenuViewModel
     public List<Movie> ComingSoonMovies { get; set; } = new List<Movie>();
     public List<Movie> TopRatedMovies { get; set; } = new List<Movie>();
 }
+
+public class ForgotPasswordVM
+{
+    [EmailAddress(ErrorMessage = "Invalid Email Address")]
+    public string? Email { get; set; }
+
+    public string? PhonePrefix { get; set; }
+    public string? Phone { get; set; }
+    public string? Password { get; set; }
+    [Compare("Password", ErrorMessage = "Password do not match")]
+    public string? ConfirmPassword { get; set; }
+}

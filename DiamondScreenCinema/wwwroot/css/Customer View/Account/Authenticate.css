@@ -187,6 +187,11 @@ body {
     font-size: 15px;
 }
 
+.toggle-text a {
+    text-decoration: none;
+    color: inherit;
+}
+
 .toggle-btn {
     color: #3BB7E5;
     font-weight: 700;
