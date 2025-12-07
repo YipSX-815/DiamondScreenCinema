@@ -1,0 +1,231 @@
+﻿@model List<MovieVM>
+
+@{
+    Layout = "_AdminLayout";
+}
+
+@section Head {
+    <link rel="stylesheet" href="~/css/Admin View/Movies/ShowtimeCUD.css" asp-append-version="true" />
+}
+
+<div class="app">
+    <header>
+        <div class="header-left">
+            <h1>Showtime Management</h1>
+            <p>8:00 AM – 3:00 AM • Multi-Hall • Automated Scheduling</p>
+        </div>
+    </header>
+
+    <div class="layout">
+        <div class="left-column" id="leftColumn">
+            <div class="steps-card">
+                <!-- Step 1: Movie Selection -->
+                <div class="section-header">
+                    <div class="step-title">
+                        <span class="step-number">1</span>
+                        Movie Selection
+                    </div>
+                    <div class="section-description">Choose a movie to schedule</div>
+                </div>
+
+                <div class="form-control-group">
+                    <div class="movie-select-wrapper">
+                        <div class="custom-dropdown movie-dropdown" id="movieSelectDropdown">
+                            <input type="hidden" id="movieSelect" value="" />
+                            <div class="dropdown-header">
+                                <span class="selected-value">Select Movie</span>
+                                <span class="material-symbols-outlined">expand_more</span>
+                            </div>
+
+                            <div class="dropdown-list">
+                                @foreach (var m in Model)
+                                {
+                                    <div class="dropdown-item"
+                                         data-value="@m.MovieId"
+                                         data-title="@m.Title"
+                                         data-genre="@m.Genre"
+                                         data-language="@m.Language"
+                                         data-status="@m.Status"
+                                         data-poster="@m.Poster"
+                                         data-date="@m.ReleaseDate.ToString("yyyy-MM-dd")"
+                                         data-duration="@m.Duration">
+
+                                        <span class="item-text">@m.Title</span>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="movie-preview-container">
+                    <div id="moviePreview" class="movie-preview-card">
+                        <img id="previewPoster" src="/images/no-poster.png" alt="" class="movie-poster">
+                        <div class="movie-details">
+                            <div class="movie-details-header">
+                                <h3 id="previewTitle" class="movie-title">Select a movie</h3>
+                                <div class="movie-meta">
+                                    <span id="previewGenre" class="meta-item">Genre</span>
+                                    <span class="meta-divider">•</span>
+                                    <span id="previewLanguage" class="meta-item">Language</span>
+                                </div>
+                            </div>
+                            <span id="previewStatus" class="movie-status">Status</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2: Halls -->
+                <div class="section-header">
+                    <div class="step-title">
+                        <span class="step-number">2</span>
+                        Halls
+                    </div>
+                    <div class="section-description">Select available screening halls</div>
+                </div>
+
+                <div id="halls" class="halls-grid"></div>
+
+                <!-- Step 3: Dates & Time Windows -->
+                <div class="section-header">
+                    <div class="step-title">
+                        <span class="step-number">3</span>
+                        Dates & Time Windows
+                    </div>
+                    <div class="section-description">Set schedule date range and time slots</div>
+                </div>
+
+                <div class="form-control-group">
+                    <div class="date-range-container">
+                        <div class="date-input-wrapper">
+                            <label class="control-label">start date</label>
+                            <input type="date" id="startDate" class="input-field" placeholder="Start date" readonly>
+                        </div>
+                        <div class="date-input-wrapper">
+                            <label class="control-label">end date</label>
+                            <input type="date" id="endDate" class="input-field" placeholder="End date">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-control-group">
+                    <div class="section-description" style="margin-top:10px;margin-bottom:15px;">
+                        Define time windows for generating showtimes
+                    </div>
+                    <div class="time-windows-container">
+                        <div id="windows" class="time-window-list"></div>
+                        <div class="window-actions">
+                            <button id="addWindow" type="button" class="btn-secondary">Add Window</button>
+                            <button id="resetWindows" type="button" class="btn-secondary">Reset</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 4: Movie Popularity -->
+                <div class="section-header">
+                    <div class="step-title">
+                        <span class="step-number">4</span>
+                        Movie Popularity
+                    </div>
+                    <div class="section-description">Adjust scheduling frequency</div>
+                </div>
+
+                <div class="popularity-grid">
+                    <div class="popularity-option selected" data-value="high">
+                        <span class="popularity-icon">🔥</span>
+                        <span class="popularity-label">High</span>
+                        <span class="popularity-desc">More frequent</span>
+                    </div>
+                    <div class="popularity-option" data-value="medium">
+                        <span class="popularity-icon">⚡</span>
+                        <span class="popularity-label">Medium</span>
+                        <span class="popularity-desc">Balanced</span>
+                    </div>
+                    <div class="popularity-option" data-value="low">
+                        <span class="popularity-icon">💨</span>
+                        <span class="popularity-label">Low</span>
+                        <span class="popularity-desc">Less frequent</span>
+                    </div>
+                </div>
+
+                <!-- Step 5: Buffers -->
+                <div class="section-header">
+                    <div class="step-title">
+                        <span class="step-number">5</span>
+                        Buffers (Minutes)
+                    </div>
+                    <div class="section-description">Set intervals between screenings</div>
+                </div>
+
+                <div class="buffer-grid">
+                    <div class="buffer-item">
+                        <label class="control-label">Cleaning Buffer :</label>
+                        <span class="material-symbols-outlined buffer-icon">cleaning_services</span>
+                        <input id="cleanBuffer" type="number" value="15" min="0" max="60" class="input-field buffer-input" placeholder="15">
+                    </div>
+                    <div class="buffer-item">
+                        <label class="control-label">Preparation Buffer :</label>
+                        <span class="material-symbols-outlined buffer-icon">settings</span>
+                        <input id="prepBuffer" type="number" value="5" min="0" max="30" class="input-field buffer-input" placeholder="5">
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-grid">
+                    <button id="generate" class="btn-generate">
+                        Generate Preview
+                    </button>
+                    <button id="addMore" class="btn-secondary">
+                        Add Another Movie
+                    </button>
+                </div>
+
+                <!-- Messages Area -->
+                <div id="messages" class="messages-container"></div>
+            </div>
+        </div>
+
+        <div class="right-column" id="rightColumn">
+            <div class="card timeline-card schedule-hidden" id="scheduleCard">
+                <div id="adminToolbar" class="admin-toolbar">
+                    <button id="undoBtn" class="toolbar-btn">↶ Undo</button>
+                    <button id="redoBtn" class="toolbar-btn">↷ Redo</button>
+                    <button id="addBlockBtn" class="toolbar-btn primary">＋ Add Block</button>
+                </div>
+
+                <div class="delete-hint">
+                    <span class="delete-icon">🗑</span>
+                    Drag a show outside to delete
+                </div>
+                
+                <div id="floatingBlocks"></div>
+
+                <div class="controls">
+                    <div id="rangeLabel" class="muted">No schedule generated</div>
+                </div>
+
+                <div class="timeline-container">
+                    <div class="time-scale">
+                        <div class="time-scale-spacer"></div>
+                        <div id="timeScale" class="time-scale-track"></div>
+                    </div>
+
+                    <!-- timelineArea will be populated by JS -->
+                    <div id="timelineArea"></div>
+                </div>
+
+                <footer class="timeline-footer">
+                    <div class="muted">Preview only — Save to persist.</div>
+                    <div class="footer-actions">
+                        <button id="clear" class="btn ghost">Clear</button>
+                        <button id="save" class="btn primary">Save Schedule</button>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Script {
+    <script src="~/js/Admin View/Movies/ShowtimeCUD.js" asp-append-version="true"></script>
+}

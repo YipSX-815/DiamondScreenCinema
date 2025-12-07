@@ -1,0 +1,114 @@
+﻿body.dark .seat-management {
+    background: #1a1a1a;
+    border-color: #333;
+}
+
+body.dark .seat-top h1 {
+    color: white;
+}
+
+body.dark .seat-top p {
+    color: #a0a0a0;
+}
+
+body.dark .seat-controls {
+    background: #222;
+    border-color: #333;
+}
+
+body.dark .hall-selector label {
+    color: #e0e0e0;
+}
+
+body.dark .dropdown-header {
+    background: #2d2d2d;
+    border-color: #444;
+    color: #e0e0e0;
+}
+
+body.dark .dropdown-header:hover {
+    border-color: var(--blue);
+}
+
+body.dark .dropdown-list {
+    background: #2d2d2d;
+    border-color: #444;
+}
+
+body.dark .dropdown-item {
+    border-color: #3a3a3a;
+    color: #e0e0e0;
+}
+
+body.dark .dropdown-item:hover {
+    background: #3a3a3a;
+}
+
+body.dark .dropdown-item.selected {
+    background: rgba(59, 183, 229, 0.2);
+    color: var(--blue);
+}
+
+body.dark .btn-secondary {
+    background: #2d2d2d;
+    color: #e0e0e0;
+    border-color: #444;
+}
+
+body.dark .btn-secondary:hover:not(:disabled) {
+    border-color: var(--blue);
+    color: var(--blue);
+}
+
+body.dark .seat-layout-container {
+    background: #222;
+}
+
+body.dark .empty-cell {
+    background: transparent;
+}
+
+body.dark .edit-mode .empty-cell {
+    background: #2d2d2d;
+    border-color: #555;
+}
+
+body.dark .edit-mode .empty-cell:hover {
+    background: #3a3a3a;
+}
+
+body.dark .row-label {
+    background: transparent;
+    color: #a0a0a0;
+}
+
+body.dark .seat-legend {
+    background: #2d2d2d;
+    border-color: #444;
+}
+
+body.dark .legend-item {
+    color: #e0e0e0;
+}
+
+body.dark .edit-panel {
+    background: #222;
+    border-color: #333;
+}
+
+body.dark .seat-type-btn {
+    background: #2d2d2d;
+    border-color: #444;
+    color: #e0e0e0;
+}
+
+body.dark .seat-type-btn:hover {
+    border-color: var(--blue);
+    color: var(--blue);
+}
+
+body.dark .seat-type-btn.active {
+    background: var(--blue);
+    color: white;
+    border-color: var(--blue);
+}

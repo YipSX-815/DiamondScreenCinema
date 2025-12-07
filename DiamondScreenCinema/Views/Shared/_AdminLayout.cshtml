@@ -1,0 +1,247 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewBag.title</title>
+    <link rel="icon" href="~/images/Slogan.png" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/Admin View/AdminLayout.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Admin View - Dark/AdminLayout.css" asp-append-version="true" />
+    @RenderSection("Head", false)
+</head>
+
+<body>
+    <div class="sidebar">
+        <div class="sidebar-title">
+            <img src="~/images/Logo.png">
+            <h1>Diamond Screen Cinema</h1>
+        </div>
+
+        <div class="sidebar-menu">
+            <a asp-controller="Admin" asp-action="Dashboard" date-page="Dashboard">
+                <div class="menu-dashboard" data-page="Dashboard">
+                    <div class="menu-title">
+                        <span class="material-symbols-outlined">dashboard</span>
+                        Dashboard
+                    </div>
+                </div>
+            </a>
+
+            <div class="menu-category">
+                Operations
+            </div>
+
+            <div class="menu" data-page="Bookings">
+                <div class="menu-title">
+                    <span class="material-symbols-outlined">local_activity</span>
+                    Bookings
+                </div>
+                <div class="submenu">
+                    <div class="vertical-line"></div>
+                    <div class="loader">
+                        <div class="loader-dot"></div>
+                        <div class="loader-dot"></div>
+                        <div class="loader-dot"></div>
+                    </div>
+                    <ul>
+                        <li><a asp-controller="Admin" asp-action="Bookings" asp-route-Page="BookingRecords" data-page="BookingRecords" draggable="true">Booking Records</a></li>
+                        <li><a asp-controller="Admin" asp-action="Bookings" asp-route-Page="RefundRequests" data-page="RefundRequests" draggable="true">Refund Requests</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="menu" data-page="Cinema">
+                <div class="menu-title">
+                    <span class="material-symbols-outlined">theaters</span>
+                    Cinemas and Halls
+                </div>
+                <div class="submenu">
+                    <div class="vertical-line"></div>
+                    <div class="loader">
+                        <div class="loader-dot"></div>
+                        <div class="loader-dot"></div>
+                        <div class="loader-dot"></div>
+                    </div>
+                    <ul>
+                        <li><a asp-controller="Admin" asp-action="Cinemas" asp-route-Page="CinemaManagement" data-page="CinemaManagement" draggable="true">Cinema Management</a></li>
+                        <li><a asp-controller="Admin" asp-action="Cinemas" asp-route-Page="HallManagement" data-page="HallManagement" draggable="true">Hall Management</a></li>
+                        <li><a asp-controller="Admin" asp-action="Cinemas" asp-route-Page="SeatManagement" data-page="SeatManagement" draggable="true">Seat Management</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="menu" data-page="Movies">
+                <div class="menu-title">
+                    <span class="material-symbols-outlined">movie</span>
+                    Movies
+                </div>
+                <div class="submenu">
+                    <div class="vertical-line"></div>
+                    <div class="loader">
+                        <div class="loader-dot"></div>
+                        <div class="loader-dot"></div>
+                        <div class="loader-dot"></div>
+                    </div>
+                    <ul>
+                        <li><a asp-controller="Admin" asp-action="Movies" asp-route-Page="MovieManagement" data-page="MovieManagement" draggable="true">Movie Management</a></li>
+                        <li><a asp-controller="Admin" asp-action="Movies" asp-route-Page="ShowtimeManagement" data-page="ShowtimeManagement" draggable="true">Showtime Management</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="menu" data-page="Products">
+                <div class="menu-title">
+                    <span class="material-symbols-outlined">package_2</span>
+                    Products
+                </div>
+                <div class="submenu">
+                    <div class="vertical-line"></div>
+                    <div class="loader">
+                        <div class="loader-dot"></div>
+                        <div class="loader-dot"></div>
+                        <div class="loader-dot"></div>
+                    </div>
+                    <ul>
+                        <li><a asp-controller="Admin" asp-action="Products" asp-route-Page="FoodBeverage" data-page="FoodBeverage" draggable="true">Food and Beverages</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="menu" data-page="Promotions">
+                <div class="menu-title">
+                    <span class="material-symbols-outlined">sell</span>
+                    Promotions
+                </div>
+                <div class="submenu">
+                    <div class="vertical-line"></div>
+                    <div class="loader">
+                        <div class="loader-dot"></div>
+                        <div class="loader-dot"></div>
+                        <div class="loader-dot"></div>
+                    </div>
+                    <ul>
+                        <li><a asp-controller="Admin" asp-action="Promotions" asp-route-Page="PromotionManagement" data-page="PromotionManagement" draggable="true">Promotion Management</a></li>
+                        <li><a asp-controller="Admin" asp-action="Promotions" asp-route-Page="RewardManagement" data-page="Reward Management" draggable="true">Reward Management</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="menu-category">
+                Analytics
+            </div>
+
+            <div class="menu" data-page="Reports">
+                <div class="menu-title">
+                    <span class="material-symbols-outlined">bar_chart</span>
+                    Reports
+                </div>
+                <div class="submenu">
+                    <div class="vertical-line"></div>
+                    <div class="loader">
+                        <div class="loader-dot"></div>
+                        <div class="loader-dot"></div>
+                        <div class="loader-dot"></div>
+                    </div>
+                    <ul>
+                        <li><a asp-controller="Admin" asp-action="Report" asp-route-Page="ViewReport" data-page="ViewReport" draggable="true">View Report</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="menu-category">
+                Administrations
+            </div>
+
+            <div class="menu" data-page="Users">
+                <div class="menu-title">
+                    <span class="material-symbols-outlined">person</span>
+                    Users
+                </div>
+                <div class="submenu">
+                    <div class="vertical-line"></div>
+                    <div class="loader">
+                        <div class="loader-dot"></div>
+                        <div class="loader-dot"></div>
+                        <div class="loader-dot"></div>
+                    </div>
+                    <ul>
+                        <li><a asp-controller="Admin" asp-action="Users" asp-route-Page="CustomerManagement" data-page="ViewReport" draggable="true">User Management</a></li>
+                        <li><a asp-controller="Admin" asp-action="Users" asp-route-Page="StaffManagement" data-page="StaffManagement" draggable="true">Staff Management</a></li>
+                        <li><a asp-controller="Admin" asp-action="Users" asp-route-Page="AdminManagement" data-page="AdminManagement" draggable="true">Admin Management</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="sidebar-logout">
+        <div class="logout-btn">
+            <a asp-controller="Account" asp-action="Logout">
+                <span class="material-symbols-outlined">logout</span>
+                Logout
+            </a>
+        </div>
+    </div>
+
+    <div class="right">
+        <div class="navbar">
+            <div class="navbar-left">
+                <div class="search">
+                    <input type="text" class="search__input" placeholder="Search movies, users, bookings...">
+                    <button class="search__button">
+                        <svg class="search__icon" aria-hidden="true" viewBox="0 0 24 24">
+                            <g>
+                                <path d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z"></path>
+                            </g>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <div class="navbar-icons">
+                    <div class="icon-container">
+                        <span class="material-symbols-outlined">notifications</span>
+                        <div class="notification-badge">3</div>
+                    </div>
+                    <div class="icon-container theme-toggle">
+                        <span class="material-symbols-outlined theme-icon">clear_day</span>
+                    </div>
+                </div>
+                <div class="user-profile">
+                    <div class="user-avatar">JD</div>
+                    <div class="user-info">
+                        <div class="user-name">John Doe</div>
+                        <div class="user-role">Administrator</div>
+                    </div>
+                    <span class="material-symbols-outlined dropdown-arrow">expand_more</span>
+
+                    <div class="user-profile-dropdown">
+                        <a href="#" class="user-profile-dropdown-item">
+                            <span class="material-symbols-outlined">person</span>
+                            My Profile
+                        </a>
+                        <a href="#" class="user-profile-dropdown-item">
+                            <span class="material-symbols-outlined">settings</span>
+                            Account Settings
+                        </a>
+                        <div class="user-profile-divider"></div>
+                        <a asp-controller="Account" asp-action="Logout" class="user-profile-dropdown-item">
+                            <span class="material-symbols-outlined">logout</span>
+                            Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            @RenderBody()
+        </div>
+    </div>
+
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/js/jquery.validate.min.js"></script>
+    <script src="~/js/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/js/Admin View/AdminLayout.js"></script>
+    @RenderSection("Script", false)
+</body>
+</html>

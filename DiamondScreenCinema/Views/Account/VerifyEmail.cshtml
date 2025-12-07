@@ -1,0 +1,61 @@
+﻿@model EmailVerificationVM
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diamond Screen Cinema - Verify Account</title>
+    <link rel="icon" href="~/images/Slogan.png" />
+    <link rel="stylesheet" href="~/css/Customer View/Account/VerifyEmail.css" asp-append-version="true" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <h1><span>DIAMOND</span> SCREEN CINEMA</h1>
+            <p>Premium Cinema Experience</p>
+        </div>
+
+        <div class="header">
+            <h2>Verify Your Email</h2>
+            <p>We've sent a 6-digit verification code to your email address. Enter the code below to complete your registration.</p>
+        </div>
+
+        <div class="email-note">
+            <p>Verification code sent to: <strong>@Model.Email</strong></p>
+            <p style="margin-top: 5px; font-size: 20px;">Please check your spam folder if you don't see the email.</p>
+        </div>
+
+        <div class="code-container">
+            <form id="verificationForm" asp-action="Verify" method="post">
+                <input type="hidden" asp-for="SavedEmail" />
+                <input type="hidden" asp-for="SavedCode" />
+                <input type="hidden" asp-for="Email" />
+
+                <div asp-validation-summary="ModelOnly"></div>
+
+                <div class="code-inputs">
+                    <input type="text" asp-for="FirstDigit" class="code-input" maxlength="1" data-index="0" inputmode="numeric" pattern="[0-9]*" autocomplete="off" autocorrect="off">
+                    <input type="text" asp-for="SecondDigit" class="code-input" maxlength="1" data-index="1" inputmode="numeric" pattern="[0-9]*" autocomplete="off" autocorrect="off">
+                    <input type="text" asp-for="ThirdDigit" class="code-input" maxlength="1" data-index="2" inputmode="numeric" pattern="[0-9]*" autocomplete="off" autocorrect="off">
+                    <input type="text" asp-for="ForthDigit" class="code-input" maxlength="1" data-index="3" inputmode="numeric" pattern="[0-9]*" autocomplete="off" autocorrect="off">
+                    <input type="text" asp-for="FifthDigit" class="code-input" maxlength="1" data-index="4" inputmode="numeric" pattern="[0-9]*" autocomplete="off" autocorrect="off">
+                    <input type="text" asp-for="SixthDigit" class="code-input" maxlength="1" data-index="5" inputmode="numeric" pattern="[0-9]*" autocomplete="off" autocorrect="off">
+                </div>
+
+                <button type="submit" class="verify-button" id="verifyButton" disabled>
+                    Verify Account
+                </button>
+            </form>
+        </div>
+
+        <div class="footer">
+            <p>Need help? <a href="mailto:diamondscreencinema@gmail.com">Contact Support</a></p>
+            <p style="margin-top: 10px;">© 2025 Diamond Screen Cinema. All rights reserved.</p>
+        </div>
+    </div>
+
+    <script src="~/js/Customer View/Account/Verify.js"></script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+﻿@{
+    Layout = "_AdminLayout";
+}
+
+@section head {
+    <link href="~/css/Admin View/Users/CustomerManagement.css" rel="stylesheet" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Admin View/AdminLayout.css" asp-append-version="true" />
+}
+
+<div class="menu-container">
+    <div class="title-top">
+        <h1>User Management</h1>
+        <p>Manage all customers</p>
+    </div>
+
+    <partial name="Users/_CustomerOption" />
+</div>
+
+<div class="user-table-container">
+    <table class="user-table">
+        <thead>
+            <tr>
+                <th>User ID</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>DOB</th>
+                <th>Gender</th>
+                <th>Tier</th>
+                <th>Point</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>C0001</td>
+                <td>john_doe</td>
+                <td>john.doe@hotmail.com</td>
+                <td>012-6754453</td>
+                <td>2000/05/23</td>
+                <td>Male</td>
+                <td>Gold</td>
+                <td>150</td>
+                <td><span class="status-active">Active</span></td>
+                <td>
+                    <div class="action-buttons">
+                        <a asp-controller="Admin" asp-action="Users" asp-route-id="UpdateCustomer" class="action-btn action-edit" title="Edit">
+                            <span class="material-symbols-outlined" style="font-size: 16px;">edit</span>
+                        </a>
+                        <button class="action-btn action-disable" onclick=# title="Lock">
+                            <span class="material-symbols-outlined" style="font-size: 16px;">account_circle_off</span>
+                        </button>
+                        
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>C0002</td>
+                <td>kaixiangggg</td>
+                <td>kaixiang123@hotmail.com</td>
+                <td>016-6754453</td>
+                <td>1997/03/25</td>
+                <td>Male</td>
+                <td>Silver</td>
+                <td>430</td>
+                <td><span class="status-active">Active</span></td>
+                <td>
+                    <div class="action-buttons">
+                        <button class="action-btn action-edit" onclick=# title="Edit">
+                            <span class="material-symbols-outlined" style="font-size: 16px;">edit</span>
+                        </button>
+                        <button class="action-btn action-disable" onclick=# title="Lock">
+                            <span class="material-symbols-outlined" style="font-size: 16px;">account_circle_off</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>C0003</td>
+                <td>Melisea</td>
+                <td>melisea@gmail.com</td>
+                <td>014-9987665</td>
+                <td>1987/07/06</td>
+                <td>Female</td>
+                <td>Platinum</td>
+                <td>1150</td>
+                <td><span class="status-inactive">Inactive</span></td>
+                <td>
+                    <div class="action-buttons">
+                        <button class="action-btn action-edit" onclick=# title="Edit">
+                            <span class="material-symbols-outlined" style="font-size: 16px;">edit</span>
+                        </button>
+                        <button class="action-btn action-disable" onclick=# title="Lock">
+                            <span class="material-symbols-outlined" style="font-size: 16px;">account_circle_off</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+    </table>
+</div>

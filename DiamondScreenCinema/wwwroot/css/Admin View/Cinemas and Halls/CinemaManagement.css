@@ -1,0 +1,694 @@
+﻿.title-top h1 {
+    color: black;
+    font-family: var(--font);
+}
+
+.title-top p {
+    color: var(--grey);
+    font-size: 18px;
+    font-family: var(--font);
+}
+
+.menu-icon {
+    display: flex;
+    gap: 1rem;
+    margin: 25px 0 2rem 0;
+}
+
+
+.menu-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    width: 50px;
+    margin-top: 20px;
+    background-color: var(--grey-light);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    border: 1px solid transparent;
+}
+
+    .menu-item .material-symbols-outlined {
+        color: #555555;
+        font-size: 25px;
+        transition: all 0.3s ease;
+    }
+
+
+    .menu-item:hover {
+        background-color: var(--blue);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(59, 183, 229, 0.3);
+    }
+
+        .menu-item:hover .material-symbols-outlined {
+            color: white;
+        }
+
+/* Cinema Management CSS */
+
+/* Cinema Listing Container */
+.cinema-listing-container {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin-top: 20px;
+    font-family: var(--font);
+}
+
+/* Filter Bar */
+.cinema-filter-bar {
+    background-color: var(--grey-light);
+    padding: 20px 25px;
+    border-bottom: 1px solid var(--grey);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    font-family: var(--font);
+}
+
+.cinema-filter-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex: 1;
+}
+
+.cinema-filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.cinema-filter-label {
+    font-weight: 600;
+    color: var(--grey-darker);
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-family: var(--font);
+}
+
+.cinema-filter-select {
+    padding: 10px 15px;
+    border: 2px solid var(--grey-light);
+    border-radius: 8px;
+    font-family: var(--font);
+    font-size: 14px;
+    background-color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 180px;
+}
+
+    .cinema-filter-select:focus {
+        outline: none;
+        border-color: var(--blue);
+        box-shadow: 0 0 0 2px rgba(59, 183, 229, 0.2);
+    }
+
+.cinema-filter-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-family: var(--font);
+}
+
+.cinema-search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    max-width: 300px;
+}
+
+.cinema-search-input {
+    background-color: white;
+    border: 2px solid var(--grey-light);
+    border-radius: 8px;
+    padding: 10px 15px 10px 40px;
+    color: var(--grey-darker);
+    font-family: var(--font);
+    font-size: 14px;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+    .cinema-search-input:focus {
+        outline: none;
+        border-color: var(--blue);
+        box-shadow: 0 0 0 2px rgba(59, 183, 229, 0.2);
+    }
+
+.cinema-search-icon {
+    position: absolute;
+    left: 15px;
+    color: var(--grey);
+    pointer-events: none;
+    font-size: 16px;
+}
+
+.cinema-clear-filters {
+    background: none;
+    border: 1px solid var(--grey);
+    color: var(--grey-dark);
+    padding: 10px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    font-family: var(--font);
+    white-space: nowrap;
+}
+
+    .cinema-clear-filters:hover {
+        background-color: var(--grey-light);
+        border-color: var(--grey-dark);
+    }
+
+/* Results Count */
+.cinema-results-count {
+    font-size: 14px;
+    color: var(--grey);
+    font-weight: 500;
+    font-family: var(--font);
+    padding: 15px 25px;
+    background-color: var(--grey-light);
+    border-bottom: 1px solid var(--grey);
+}
+
+/* Cinema Grid */
+.cinema-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 25px;
+    padding: 25px;
+}
+
+/* Cinema Card */
+.cinema-card {
+    background-color: white;
+    border: 1px solid var(--grey-light);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+    .cinema-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        border-color: var(--blue-light);
+    }
+
+.cinema-checkbox {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: 20px;
+    height: 20px;
+    accent-color: var(--blue);
+    z-index: 2;
+    cursor: pointer;
+}
+
+.cinema-image {
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+    position: relative;
+}
+
+    .cinema-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+
+.cinema-card:hover .cinema-image img {
+    transform: scale(1.05);
+}
+
+.cinema-content {
+    padding: 20px;
+}
+
+.cinema-name {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--grey-darker);
+    margin-bottom: 12px;
+    font-family: var(--font);
+    line-height: 1.3;
+}
+
+.cinema-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.cinema-id,
+.cinema-phone,
+.cinema-city,
+.cinema-state {
+    background-color: var(--grey-light);
+    color: var(--grey-dark);
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    font-family: var(--font);
+}
+
+.cinema-id {
+    background-color: var(--blue-lighter);
+    color: var(--blue-dark);
+    font-weight: 600;
+}
+
+.cinema-phone {
+    background-color: var(--green-light);
+    color: var(--green-dark);
+}
+
+.cinema-city {
+    background-color: var(--purple-light);
+    color: var(--purple-dark);
+}
+
+.cinema-state {
+    background-color: var(--orange-light);
+    color: var(--orange-dark);
+}
+
+.cinema-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Status Toggle */
+.status-toggle {
+    flex-shrink: 0;
+}
+
+.status-btn {
+    padding: 6px 12px;
+    border-radius: 20px;
+    border: none;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-family: var(--font);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+    .status-btn.status-active {
+        background-color: var(--green-light);
+        color: var(--green-dark);
+    }
+
+        .status-btn.status-active:hover {
+            background-color: var(--green);
+            color: white;
+        }
+
+    .status-btn.status-inactive {
+        background-color: var(--red-light);
+        color: var(--red-dark);
+    }
+
+        .status-btn.status-inactive:hover {
+            background-color: var(--red);
+            color: white;
+        }
+
+    .status-btn .fas {
+        font-size: 10px;
+    }
+
+/* Action Buttons */
+.action-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.action-btn {
+    padding: 0.5px;
+    border-radius: 6px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    width: 40px;
+    height: 36px;
+}
+
+.action-view {
+    background-color: var(--blue);
+    color: var(--blue-dark);
+}
+
+    .action-view:hover {
+        background-color: var(--blue-dark);
+        color: white;
+        transform: translateY(-2px);
+    }
+
+.action-edit {
+    background-color: var(--green);
+    color: var(--green-dark);
+}
+
+    .action-edit:hover {
+        background-color: var(--green-dark);
+        color: white;
+        transform: translateY(-2px);
+    }
+
+.action-delete {
+    background-color: var(--red);
+    color: var(--red-dark);
+}
+
+    .action-delete:hover {
+        background-color: var(--red-dark);
+        color: white;
+        transform: translateY(-2px);
+    }
+
+.action-btn .material-symbols-outlined {
+    font-size: 16px;
+}
+
+/* Bulk Actions Bar */
+.cinema-bulk-actions {
+    background-color: var(--blue-lighter);
+    padding: 15px 25px;
+    border-top: 1px solid var(--blue-light);
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+    .cinema-bulk-actions.show {
+        display: flex;
+    }
+
+.bulk-selected-count {
+    font-size: 14px;
+    color: var(--blue-dark);
+    font-weight: 600;
+    font-family: var(--font);
+}
+
+.bulk-action-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.bulk-action-btn {
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: none;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: var(--font);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.bulk-delete-btn {
+    background-color: var(--red-light);
+    color: var(--red-dark);
+    border: 1px solid var(--red-light);
+}
+
+    .bulk-delete-btn:hover {
+        background-color: var(--red);
+        color: white;
+    }
+
+.bulk-activate-btn {
+    background-color: var(--green-light);
+    color: var(--green-dark);
+    border: 1px solid var(--green-light);
+}
+
+    .bulk-activate-btn:hover {
+        background-color: var(--green);
+        color: white;
+    }
+
+.bulk-deactivate-btn {
+    background-color: var(--orange-light);
+    color: var(--orange-dark);
+    border: 1px solid var(--orange-light);
+}
+
+    .bulk-deactivate-btn:hover {
+        background-color: var(--orange);
+        color: white;
+    }
+
+/* No Results */
+.cinema-no-results {
+    text-align: center;
+    padding: 60px 25px;
+    color: var(--grey);
+    font-style: italic;
+    font-family: var(--font);
+    grid-column: 1 / -1;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .cinema-filter-bar {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px 20px;
+    }
+
+    .cinema-filter-left {
+        flex-direction: column;
+        width: 100%;
+        gap: 12px;
+    }
+
+    .cinema-filter-group {
+        width: 100%;
+    }
+
+    .cinema-filter-select {
+        min-width: 100%;
+    }
+
+    /* Cinema Filter Right Section */
+    .cinema-filter-right {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        font-family: var(--font);
+    }
+
+    .cinema-search-container {
+        position: relative;
+        display: flex;
+        align-items: center;
+        max-width: 300px;
+    }
+
+        .cinema-search-container:focus-within {
+            border-color: var(--blue);
+            box-shadow: 0 0 0 2px rgba(59, 183, 229, 0.2);
+        }
+
+    .cinema-search-input {
+        background-color: white;
+        border: 2px solid var(--grey-light);
+        border-radius: 8px;
+        padding: 10px 15px 10px 40px;
+        color: var(--grey-darker);
+        font-family: var(--font);
+        font-size: 14px;
+        width: 100%;
+        transition: all 0.3s ease;
+    }
+
+        .cinema-search-input::placeholder {
+            color: var(--grey);
+            font-weight: 400;
+        }
+
+        .cinema-search-input:focus {
+            outline: none;
+            border-color: var(--blue);
+            box-shadow: 0 0 0 2px rgba(59, 183, 229, 0.2);
+        }
+
+    .cinema-clear-filters {
+        background-color: transparent;
+        border: 2px solid var(--grey);
+        color: var(--grey-dark);
+        padding: 10px 20px;
+        border-radius: 8px;
+        font-family: var(--font);
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+        .cinema-clear-filters:hover {
+            background-color: var(--grey-darker);
+            border-color: var(--grey-dark);
+            color: var(--grey);
+            transform: translateY(-2px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .cinema-clear-filters:active {
+            transform: translateY(0);
+            box-shadow: none;
+        }
+
+
+    .cinema-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .cinema-actions {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+
+    .status-toggle {
+        align-self: flex-start;
+    }
+
+    .action-buttons {
+        align-self: flex-end;
+    }
+
+    .cinema-bulk-actions {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+
+    .bulk-action-buttons {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .cinema-filter-right {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .cinema-search-container {
+        max-width: 100%;
+    }
+
+    .cinema-clear-filters {
+        width: 100%;
+        text-align: center;
+    }
+
+    .cinema-content {
+        padding: 15px;
+    }
+
+    .cinema-name {
+        font-size: 16px;
+    }
+
+    .cinema-info {
+        gap: 6px;
+    }
+
+    .cinema-id,
+    .cinema-phone,
+    .cinema-city,
+    .cinema-state {
+        font-size: 11px;
+        padding: 3px 6px;
+    }
+}
+
+/* Loading State */
+.cinema-card.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+    .cinema-card.loading::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+        animation: loading 1.5s infinite;
+    }
+
+@keyframes loading {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* Selection State */
+.cinema-card.selected {
+    border-color: var(--blue);
+    box-shadow: 0 4px 15px rgba(59, 183, 229, 0.3);
+}
+
+    .cinema-card.selected::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background-color: var(--blue);
+    }

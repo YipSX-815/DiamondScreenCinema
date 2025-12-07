@@ -1,0 +1,74 @@
+﻿@{
+    Layout = "_AdminLayout";
+}
+
+@section head {
+    <link href="~/css/Admin View/Users/CustomerManagement.css" rel="stylesheet" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Admin View/AdminLayout.css" asp-append-version="true" />
+}
+
+<div class="menu-container">
+    <div class="title-top">
+        <h1>Admin Management</h1>
+        <p>Manage all admins</p>
+    </div>
+
+    <partial name="Users/_AdminOption" />
+</div>
+
+<div class="user-table-container">
+    <table class="user-table">
+        <thead>
+            <tr>
+                <th>Admin ID</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Gender</th>
+                <th>Position</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>A0001</td>
+                <td>Wong Wai Zhong</td>
+                <td>wongwz@hotmail.com</td>
+                <td>012-7886543</td>
+                <td>Male</td>
+                <td>CEO</td>
+                <td><span class="status-active">Active</span></td>
+                <td>
+                    <div class="action-buttons">
+                        <a asp-controller="Admin" asp-action="Users" asp-route-id="UpdateAdmin" class="action-btn action-edit" title="Edit Admin Detail">
+                            <span class="material-symbols-outlined" style="font-size: 16px;">edit</span>
+                        </a>
+                        <button class="action-btn action-disable" onclick=# title="Lock">
+                            <span class="material-symbols-outlined" style="font-size: 16px;">account_circle_off</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>A0002</td>
+                <td>Joan Hau</td>
+                <td>joanhau@hotmail.com</td>
+                <td>012-2334554</td>
+                <td>Female</td>
+                <td>COO</td>
+                <td><span class="status-inactive">Inactive</span></td>
+                <td>
+                    <div class="action-buttons">
+                        <button class="action-btn action-edit" onclick=# title="Edit Admin Detail">
+                            <span class="material-symbols-outlined" style="font-size: 16px;">edit</span>
+                        </button>
+                        <button class="action-btn action-disable" onclick=# title="Lock">
+                            <span class="material-symbols-outlined" style="font-size: 16px;">account_circle_off</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div> 

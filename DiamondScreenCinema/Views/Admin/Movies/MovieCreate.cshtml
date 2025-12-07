@@ -1,0 +1,188 @@
+﻿@model MovieVM
+
+@{
+    Layout = "_AdminLayout";
+}
+
+@section head {
+    <link rel="stylesheet" href="~/css/Admin View/Movies/MovieCreate.css" asp-append-version="true" />
+}
+
+<div class="form-container">
+    <h2 class="form-title">Movie Information - Create New Movie</h2>
+    <form asp-action="MovieCreate" asp-controller="Admin" method="post" enctype="multipart/form-data">
+        <div class="form-layout">
+            <div class="poster-section">
+                <label>Poster <span style="color: red;">*</span></label>
+                <label class="file-upload-label poster-upload" for="PosterFile">
+                    <img id="posterPreview" class="preview-image" />
+                    <span id="uploadText" class="upload-text">
+                        Click to Upload Poster<br>(Recommended: 300×450px)<br><br>
+                    </span>
+                </label>
+                <input asp-for="PosterFile" type="file" accept="image/*" hidden id="PosterFile" />
+                <button type="button" id="removePoster" class="remove-btn" style="display:none;">
+                    Remove Poster
+                </button>
+            </div>
+
+            <div class="form-fields">
+                <div class="form-group">
+                    <label>Title <span style="color: red;">*</span></label>
+                    <input asp-for="Title" required />
+                </div>
+
+                <div class="form-group">
+                    <label>Genre <span style="color: red;">*</span></label>
+                    <select asp-for="Genre" required>
+                        <option value="">Select Genre</option>
+                        <option>Action</option>
+                        <option>Adventure</option>
+                        <option>Animation</option>
+                        <option>Comedy</option>
+                        <option>Crime</option>
+                        <option>Drama</option>
+                        <option>Documentary</option>
+                        <option>Fantasy</option>
+                        <option>Historical</option>
+                        <option>Horror</option>
+                        <option>Mystery</option>
+                        <option>Romance</option>
+                        <option>Science Fiction</option>
+                        <option>Sports</option>
+                        <option>Thriller</option>
+                        <option>War</option>
+                        <option>Western</option>
+                        <option>Family</option>
+                        <option>Musical</option>
+                        <option>Biography</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Duration (minutes) <span style="color: red;">*</span></label>
+                    <input asp-for="Duration" type="number" min="1" required />
+                </div>
+
+                <div class="form-group">
+                    <label>Language <span style="color: red;">*</span></label>
+                    <select asp-for="Language" required>
+                        <option value="">Select Language</option>
+                        <option>English</option>
+                        <option>Mandarin</option>
+                        <option>Malay</option>
+                        <option>Tamil</option>
+                        <option>Korean</option>
+                        <option>Japanese</option>
+                        <option>Thai</option>
+                        <option>Hindi</option>
+                        <option>Spanish</option>
+                        <option>French</option>
+                        <option>German</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Director <span style="color: red;">*</span></label>
+                    <input asp-for="Director" required />
+                </div>
+
+                <div class="form-group">
+                    <label>Cast <span style="color: red;">*</span></label>
+                    <input asp-for="Cast" required />
+                </div>
+
+                <div class="form-group">
+                    <label>Classification <span style="color: red;">*</span></label>
+                    <select asp-for="Classification" required>
+                        <option value="">Select Classification</option>
+                        <option value="U">U — General</option>
+                        <option value="PG">PG — Parental Guidance</option>
+                        <option value="PG-13">PG-13 — Parental Caution</option>
+                        <option value="16+">16+ — Teens & Adults</option>
+                        <option value="18+">18+ — Adults Only</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Subtitle <span style="color: red;">*</span></label>
+                    <select asp-for="Subtitle" required>
+                        <option value="">Select</option>
+                        <option>None</option>
+                        <option>English</option>
+                        <option>Multiple</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Release Date <span style="color: red;">*</span></label>
+                    <input asp-for="ReleaseDate" type="date" min="2020-01-01" required />
+                </div>
+
+                <div class="form-group">
+                    <label>Status <span style="color: red;">*</span></label>
+                    <select asp-for="Status" required>
+                        <option value="">Select Status</option>
+                        <option>Upcoming</option>
+                        <option>Showing</option>
+                        <option>Cancelled</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group full-width">
+            <label>Synopsis</label>
+            <textarea asp-for="Synopsis" required></textarea>
+        </div>
+
+        <div class="poster-section">
+            <label class="horizontalPoster-Label">Horizontal Poster<span style="color: red;">*</span></label>
+
+            <label class="file-upload-label horizontal-upload" for="HorizontalPosterFile">
+                <img id="horizontalPosterPreview" class="preview-horizontal" />
+
+                <span id="horizontalUploadText" class="upload-text">
+                    Click to Upload Horizontal Poster<br>(Recommended: 1280×720 or 1920×1080)
+                </span>
+            </label>
+
+            <input asp-for="HorizontalPosterFile" type="file" accept="image/*" hidden id="HorizontalPosterFile" required/>
+
+            <button type="button" id="removeHorizontalPoster" class="remove-btn" style="display:none;">
+                Remove Horizontal Poster
+            </button>
+        </div>
+
+        <div class="trailer-section">
+            <label>Trailer<span style="color: red;">*</span></label>
+            <label class="file-upload-label trailer-upload" for="TrailerFile">
+                <video id="trailerPreview" class="preview-video" controls style="display:none;"></video>
+                <span id="trailerUploadText" class="upload-text">
+                    Click to Upload Trailer Video<br>(Recommended: MP4)
+                </span>
+            </label>
+            <input asp-for="TrailerFile" id="TrailerFile" type="file" accept="video/*" hidden />
+            <button type="button" id="removeTrailer" class="remove-btn" style="display:none;">
+                Remove Trailer
+            </button>
+        </div>
+
+        <div class="form-actions">
+            <a asp-controller="Admin" asp-action="Movies" asp-route-Page="MovieManagement" class="btn btn-cancel">Cancel</a>
+            <button type="submit" class="createBtn">Create</button>
+        </div>
+    </form>
+</div>
+
+@section Script {
+    <script src="~/js/Admin View/Movies/MovieCreate.js"></script>
+    <script>
+        @if (TempData["NotificationMessage"] != null)
+        {
+                <text>
+                showNotification('@TempData["NotificationMessage"]', '@TempData["NotificationType"]');
+                </text>
+        }
+    </script>
+}

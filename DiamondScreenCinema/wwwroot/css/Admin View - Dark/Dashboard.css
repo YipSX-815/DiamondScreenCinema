@@ -1,0 +1,249 @@
+﻿body.dark .dashboard-top .title h1 {
+    color: white;
+}
+
+body.dark .dashboard-top .title p {
+    color: var(--grey);
+}
+
+body.dark .dashboard-top .buttons .btn-dark {
+    background-color: #222;
+    border-color: #333;
+}
+
+body.dark .dashboard-top .buttons .btn-dark:hover {
+    background-color: var(--blue);
+    border-color: var(--blue);
+}
+
+body.dark .stat-card {
+    background: #1a1a1a;
+    border-color: #2a2a2a;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+body.dark .stat-card:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+}
+
+body.dark .stat-title p {
+    color: #a0a0a0;
+}
+
+body.dark .stat-title h1 {
+    color: white;
+}
+
+body.dark .stat-icon {
+    background: rgba(14, 165, 233, 0.08);
+    border-color: rgba(14, 165, 233, 0.2);
+}
+
+body.dark .stat-icon .material-symbols-outlined {
+    color: var(--blue-light);
+}
+
+body.dark .stat-icon.revenue {
+    background: rgba(168, 85, 247, 0.08);
+    border-color: rgba(168, 85, 247, 0.2);
+}
+
+body.dark .stat-icon.revenue .material-symbols-outlined {
+    color: var(--purple);
+}
+
+body.dark .stat-icon.occupancy {
+    background: rgba(234, 88, 12, 0.08);
+    border-color: rgba(234, 88, 12, 0.2);
+}
+
+body.dark .stat-icon.occupancy .material-symbols-outlined {
+    color: var(--orange);
+}
+
+body.dark .stat-icon.satisfaction {
+    background: rgba(34, 197, 94, 0.08);
+    border-color: rgba(34, 197, 94, 0.2);
+}
+
+body.dark .stat-icon.satisfaction .material-symbols-outlined {
+    color: var(--green);
+}
+
+body.dark .stat-icon.refund {
+    background: rgba(220, 38, 38, 0.08);
+    border-color: rgba(220, 38, 38, 0.2);
+}
+
+body.dark .stat-icon.refund .material-symbols-outlined {
+    color: var(--red);
+}
+
+body.dark .stat-trend {
+    border-top-color: #2a2a2a;
+}
+
+body.dark .stat-trend.up .trend-indicator {
+    background: rgba(34, 197, 94, 0.08);
+    border-color: rgba(34, 197, 94, 0.15);
+    color: var(--green);
+}
+
+body.dark .stat-trend.down .trend-indicator {
+    background: rgba(220, 38, 38, 0.08);
+    border-color: rgba(220, 38, 38, 0.15);
+    color: var(--red);
+}
+
+body.dark .trend-text {
+    color: #a0a0a0;
+}
+
+body.dark .chart-wrapper,
+body.dark .chart-sidebar {
+    background: #1a1a1a;
+    border-color: #2a2a2a;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+body.dark .chart-title h2 {
+    color: white;
+}
+
+body.dark .chart-title p {
+    color: #a0a0a0;
+}
+
+body.dark .chart-stats {
+    border-top-color: #2a2a2a;
+}
+
+body.dark .chart-stats .stat-value {
+    color: white;
+}
+
+body.dark .chart-stats .stat-label {
+    color: #a0a0a0;
+}
+
+body.dark .placeholder-content h3 {
+    color: white;
+}
+
+body.dark .placeholder-content p {
+    color: #a0a0a0;
+}
+
+body.dark #salesChart {
+    filter: brightness(0.9) contrast(1.1);
+}
+
+body.dark .chartjs-tooltip {
+    background: rgba(20, 20, 20, 0.95) !important;
+    border: 1px solid rgba(59, 183, 229, 0.3) !important;
+    color: white !important;
+    backdrop-filter: blur(8px);
+}
+
+body.dark .chartjs-tooltip .tooltip-header {
+    color: white !important;
+}
+
+body.dark .chartjs-tooltip .tooltip-body {
+    color: var(--green) !important;
+}
+
+body.dark .chart-dropdown .dropdown-header {
+    background: #1a1a1a;
+    border-color: #333;
+    color: #e0e0e0;
+}
+
+body.dark .chart-dropdown .dropdown-list {
+    background: #1a1a1a;
+    border-color: var(--blue);
+}
+
+body.dark .chart-dropdown .dropdown-item {
+    color: #d0d0d0;
+    border-bottom-color: #2a2a2a;
+    background: #1a1a1a;
+}
+
+body.dark .chart-dropdown .dropdown-item:hover {
+    background: #222;
+}
+
+body.dark .chart-dropdown .dropdown-item.selected {
+    background: rgba(59, 183, 229, 0.15);
+    color: var(--blue-light);
+}
+
+body.dark .chart-container {
+    background: transparent;
+}
+
+body.dark .stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
+}
+
+@media (max-width: 768px) {
+    body.dark .stat-card {
+        background: #1a1a1a;
+    }
+    
+    body.dark .chart-wrapper {
+        background: #1a1a1a;
+    }
+}
+
+.stat-card,
+.chart-wrapper,
+.chart-sidebar,
+.custom-dropdown .dropdown-header,
+.chart-dropdown .dropdown-header {
+    transition: all 0.3s ease;
+}
+
+body.dark .item-text {
+    color: #d0d0d0;
+    font-weight: 500;
+}
+
+body.dark .dropdown-arrow {
+    color: #888888;
+}
+
+body.dark .dropdown-header.active .dropdown-arrow {
+    color: var(--blue-light);
+}
+
+body.dark .shortcut-item {
+    background: #2d2d2d;
+    border-color: #404040;
+}
+
+body.dark .shortcut-title {
+    color: #e0e0e0;
+}
+
+body.dark .shortcut-icon {
+    background-color: var(--grey-darker);
+}
+
+body.dark .shortcut-item:hover {
+    background: rgba(59, 183, 229, 0.15);
+    border-color: var(--blue);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 12px rgba(59, 183, 229, 0.3);
+}
+
+body.dark .remove-shortcut {
+    border-color: #2d2d2d;
+}
+
+body.dark .chart-dropdown .dropdown-header .selected-value {
+    margin-right: 10px;
+    color: white;
+}

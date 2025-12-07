@@ -1,0 +1,100 @@
+﻿@{
+    Layout = "_AdminLayout";
+}
+
+@section head {
+    <link href="~/css/Admin View/Cinemas and Halls/UpdateHall.css" rel="stylesheet" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Admin View/AdminLayout.css" asp-append-version="true" />
+}
+
+<div class="update-container">
+    <div class="update-hall-container">
+        <div class="update-hall-header">
+            <h1>
+                <span class="material-symbols-outlined">door_sliding</span>
+                Update Hall
+            </h1>
+            <p class="subtitle">Modify hall information</p>
+        </div>
+
+        <form class="update-hall-form" id="updateHallForm">
+            <div class="update-hall-content">
+                <!-- Hall Information Section -->
+                <div class="update-hall-section">
+                    <div class="update-hall-section-title">HALL INFORMATION</div>
+
+                    <div class="update-hall-form-grid">
+                        <div class="update-hall-form-group">
+                            <label class="update-hall-form-label">Hall ID</label>
+                            <input type="text" class="update-hall-form-control readonly-field" value="H0001" readonly>
+                        </div>
+
+                        <div class="update-hall-form-group">
+                            <label for="updateHallName" class="update-hall-form-label required">Hall Name</label>
+                            <input type="text" id="updateHallName" name="hallName" class="update-hall-form-control" value="Hall 1" required>
+                        </div>
+
+                        <div class="update-hall-form-group">
+                            <label for="updateHallType" class="update-hall-form-label required">Hall Type</label>
+                            <select id="updateHallType" name="hallType" class="update-hall-form-control" required>
+                                <option value="standard" selected>Standard</option>
+                                <option value="premium">Premium</option>
+                                <option value="imax">IMAX</option>
+                                <option value="4dx">4DX</option>
+                                <option value="vip">VIP</option>
+                                <option value="deluxe">Deluxe</option>
+                            </select>
+                        </div>
+
+                        <div class="update-hall-form-group">
+                            <label for="updateStatus" class="update-hall-form-label required">Status</label>
+                            <select id="updateStatus" name="status" class="update-hall-form-control" required>
+                                <option value="active" selected>Active</option>
+                                <option value="inactive">Inactive</option>
+                                <option value="maintenance">Maintenance</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cinema Information Section -->
+                <div class="update-hall-section">
+                    <div class="update-hall-section-title">CINEMA INFORMATION</div>
+
+                    <div class="update-hall-form-grid">
+                        <div class="update-hall-form-group">
+                            <label class="update-hall-form-label">Cinema ID</label>
+                            <input type="text" class="update-hall-form-control readonly-field" value="C0001" readonly>
+                        </div>
+
+                        <div class="update-hall-form-group">
+                            <label class="update-hall-form-label">Cinema Name</label>
+                            <input type="text" class="update-hall-form-control readonly-field" value="GSC One Utama" readonly>
+                        </div>
+
+                        <div class="update-hall-form-group full-width">
+                            <label class="update-hall-form-label">Cinema Address</label>
+                            <input type="text" class="update-hall-form-control readonly-field" value="1 Utama Shopping Centre, Lebuh Bandar Utama, 47800 Petaling Jaya, Selangor" readonly>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="update-hall-button-group">
+                <a asp-controller="Admin" asp-action="ViewHall" asp-route-id="#" class="btn btn-cancel">
+                    <span class="material-symbols-outlined">close</span>
+                    CANCEL
+                </a>
+                <button type="reset" class="btn btn-reset">
+                    <span class="material-symbols-outlined">restart_alt</span>
+                    RESET CHANGES
+                </button>
+                <button type="submit" class="btn btn-update">
+                    <span class="material-symbols-outlined">save</span>
+                    UPDATE HALL
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

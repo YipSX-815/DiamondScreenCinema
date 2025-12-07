@@ -1,0 +1,78 @@
+﻿@{
+    Layout = "_AdminLayout";
+}
+
+@section head {
+    <link href="~/css/Admin View/Users/CustomerManagement.css" rel="stylesheet" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Admin View/AdminLayout.css" asp-append-version="true" />
+}
+
+<div class="menu-container">
+    <div class="title-top">
+        <h1>Staff Management</h1>
+        <p>Manage all staffs</p>
+    </div>
+
+    <partial name="Users/_StaffOption" />
+</div>
+
+
+<div class="user-table-container">
+    <table class="user-table">
+        <thead>
+            <tr>
+                <th>Staff ID</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Gender</th>
+                <th>Cinema ID</th>
+                <th>Cinema Name</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>S0001</td>
+                <td>Daniel Lee</td>
+                <td>daniel.lee13@hotmail.com</td>
+                <td>012-6753544</td>
+                <td>Male</td>
+                <td>C0002</td>
+                <td>GSC Pavillion Bukit Jalil</td>
+                <td><span class="status-active">Active</span></td>
+                <td>
+                    <div class="action-buttons">
+                        <a asp-controller="Admin" asp-action="Users" asp-route-id="UpdateStaff" class="action-btn action-edit" title="Edit Staff">
+                            <span class="material-symbols-outlined" style="font-size: 16px;">edit</span>
+                        </a>
+                        <button class="action-btn action-disable" onclick=# title="Lock">
+                            <span class="material-symbols-outlined" style="font-size: 16px;">account_circle_off</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>S0002</td>
+                <td>Mohd Iskandar Puteri</td>
+                <td>iskandar@hotmail.com</td>
+                <td>017-6753544</td>
+                <td>Male</td>
+                <td>C0001</td>
+                <td>GSC One Utama</td>
+                <td><span class="status-inactive">Inactive</span></td>
+                <td>
+                    <div class="action-buttons">
+                        <button class="action-btn action-edit" onclick=# title="Edit">
+                            <span class="material-symbols-outlined" style="font-size: 16px;">edit</span>
+                        </button>
+                        <button class="action-btn action-disable" onclick=# title="Lock">
+                            <span class="material-symbols-outlined" style="font-size: 16px;">account_circle_off</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewBag.title</title>
+    <link rel="icon" href="~/images/Slogan.png" />
+    <link rel="stylesheet" href="~/css/Customer View/Layout.css" asp-append-version="true" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat" rel="stylesheet">
+    @RenderSection("Head", false)
+</head>
+
+<body>
+    <header>
+        <div class="brand">
+            <a asp-controller="Home" asp-action="Index">
+                <img src="~/images/Icon.png" class="logo-img" />
+                <h1>Diamond Screen Cinema</h1>
+            </a>      
+        </div>
+        <nav>
+            <a asp-controller="Home" asp-action="MovieMenu">MOVIE</a>
+            <a href="#cinema">CINEMA</a>
+            <a href="#rewards">REWARD</a>
+            <a href="#fnb">FOOD AND DRINK</a>
+            <a href="#promos">PROMOTION</a>
+            @if (User.Identity!.IsAuthenticated)
+            {
+                <a asp-controller="Account" asp-action="Logout" style="background: transparent; border: 2px solid var(--blue); color: white; padding: 10px 20px;">LOGOUT</a>
+            } else {
+                <a asp-controller="Account" asp-action="Authenticate" style="background: var(--blue); color: #041f29; padding: 10px 20px;">LOGIN</a>
+            }
+        </nav>
+    </header>
+
+    @RenderBody()
+   
+   <footer>
+        <div class="footer-section">
+            <img src="~/images/Logo.png" alt="DSC Cinema Logo" class="footer-logo">
+            <p class="footer-tagline">Experience Movies. Redefined.</p>
+        </div>
+
+        <div id="stopTrigger"></div>
+        <div id="backToTop"><span class="material-symbols-outlined">arrow_upward</span></div>
+
+        <div class="footer-links-container">
+
+            <div class="footer-column">
+                <h4>Explore</h4>
+                <a href="#">Movies</a>
+                <a href="#">Cinemas</a>
+                <a href="#">Food & Beverages</a>
+                <a href="#">Experiences</a>
+                <a href="#">Promotions</a>
+            </div>
+
+            <div class="footer-column">
+                <h4>Company</h4>
+                <a href="#">About Us</a>
+                <a href="#">Contact Us</a>
+                <a href="#">Support</a>
+            </div>
+
+            <div class="footer-column">
+                <h4>Location</h4>
+                <p class="address">
+                    DSC Cinemas Sdn. Bhd.<br>
+                    15, Jalan City Avenue,<br>
+                    Kuala Lumpur, Malaysia, 53300
+                </p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="footer-links">
+                <a href="#">Terms & Conditions</a> |
+                <a href="#">Privacy & PDPA Notice</a> |
+                <a href="#">Refund Policy</a> |
+                <a href="#">Whistleblowing Policy</a>
+            </div>
+
+            <p class="legal">
+                © 2025 DSC Cinemas Sdn. Bhd. All Rights Reserved.
+            </p>
+        </div>
+    </footer>
+
+   <script src="~/js/jquery.min.js"></script>
+   <script src="~/js/jquery.unobtrusive-ajax.min.js"></script>
+   <script src="~/js/jquery.validate.min.js"></script>
+   <script src="~/js/jquery.validate.unobtrusive.min.js"></script>
+   <script src="~/js/Customer View/Layout.js"></script>
+    @RenderSection("Script", false)
+
+
+</body>
+</html>
+
+
+

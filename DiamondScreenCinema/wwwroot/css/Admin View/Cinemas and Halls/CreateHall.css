@@ -1,0 +1,353 @@
+﻿/* -------------- Create Hall CSS --------------------- */
+
+.create-container {
+    max-width: 1000px;
+    margin: 30px auto;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    font-family: var(--font);
+}
+
+.create-hall-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.create-hall-header {
+    background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue) 100%);
+    color: white;
+    padding: 30px 40px;
+}
+
+    .create-hall-header h1 {
+        font-size: 28px;
+        font-weight: 700;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .create-hall-header .material-symbols-outlined {
+        font-size: 32px;
+    }
+
+.subtitle {
+    font-size: 16px;
+    font-weight: 400;
+    opacity: 0.9;
+    margin-left: 44px;
+}
+
+.hall-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.create-hall-content {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.create-hall-section {
+    background-color: white;
+    border: 1px solid var(--grey-light);
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.create-hall-section-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    color: var(--blue-dark);
+    border-bottom: 2px solid var(--blue-light);
+    padding-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-family: var(--font);
+}
+
+.create-hall-form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+.create-hall-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+    .create-hall-form-group.full-width {
+        grid-column: 1 / -1;
+    }
+
+.create-hall-form-label {
+    font-weight: 600;
+    color: var(--grey-darker);
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-family: var(--font);
+}
+
+    .create-hall-form-label.required::after {
+        content: " *";
+        color: var(--red);
+    }
+
+.create-hall-form-control {
+    padding: 14px 16px;
+    border: 2px solid var(--grey-light);
+    border-radius: 8px;
+    font-family: var(--font);
+    font-size: 15px;
+    transition: all 0.3s ease;
+    background-color: white;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+    .create-hall-form-control:focus {
+        outline: none;
+        border-color: var(--blue);
+        box-shadow: 0 0 0 3px rgba(59, 183, 229, 0.15);
+        transform: translateY(-1px);
+    }
+
+    .create-hall-form-control::placeholder {
+        color: var(--grey);
+    }
+
+    .create-hall-form-control.textarea {
+        resize: vertical;
+        min-height: 80px;
+        font-family: var(--font);
+    }
+
+    .create-hall-form-control.readonly-field {
+        background-color: var(--grey-light);
+        color: var(--grey-dark);
+        cursor: not-allowed;
+        border-color: var(--grey);
+    }
+
+.create-hall-form-hint {
+    font-size: 12px;
+    color: var(--grey);
+    font-style: italic;
+    margin-top: 4px;
+    font-family: var(--font);
+}
+
+/* Select dropdown styling */
+.create-hall-form-control[type="select"] {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23555' viewBox='0 0 24 24'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
+    padding-right: 40px;
+}
+
+/* Button Group */
+.create-hall-button-group {
+    display: flex;
+    padding: 25px 40px;
+    background-color: var(--grey-light);
+    border-top: 1px solid var(--grey);
+    gap: 15px;
+    justify-content: center;
+}
+
+.btn {
+    padding: 14px 25px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font);
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    justify-content: center;
+}
+
+.btn-cancel {
+    background-color: var(--grey);
+    color: white;
+}
+
+    .btn-cancel:hover {
+        background-color: var(--grey-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+.create-hall-button-group .btn-reset {
+    background-color: var(--orange);
+    color: white;
+    border: 1px solid var(--orange);
+}
+
+    .create-hall-button-group .btn-reset:hover {
+        background-color: var(--orange-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(234, 88, 12, 0.3);
+    }
+
+.btn-create {
+    background-color: var(--green);
+    color: white;
+}
+
+    .btn-create:hover {
+        background-color: var(--green-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+    }
+
+/* Additional Information Section Grid Fix */
+.create-hall-section:last-child .create-hall-form-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .create-container {
+        margin: 15px;
+        border-radius: 8px;
+    }
+
+    .create-hall-content {
+        padding: 25px;
+        gap: 20px;
+    }
+
+    .create-hall-section {
+        padding: 20px;
+    }
+
+    .create-hall-form-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .create-hall-button-group {
+        flex-direction: column;
+        padding: 20px 25px;
+    }
+
+    .btn {
+        width: 100%;
+    }
+
+    .create-hall-header {
+        padding: 20px 25px;
+    }
+
+        .create-hall-header h1 {
+            font-size: 24px;
+        }
+
+    .subtitle {
+        margin-left: 0;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .create-hall-header {
+        padding: 15px 20px;
+    }
+
+        .create-hall-header h1 {
+            font-size: 22px;
+        }
+
+        .create-hall-header .material-symbols-outlined {
+            font-size: 28px;
+        }
+
+    .create-hall-content {
+        padding: 20px;
+    }
+
+    .create-hall-section {
+        padding: 15px;
+    }
+
+    .create-hall-section-title {
+        font-size: 16px;
+    }
+
+    .create-hall-form-control {
+        padding: 12px 14px;
+        font-size: 14px;
+    }
+}
+
+/* Form validation styles */
+.create-hall-form-control:invalid:not(:focus):not(:placeholder-shown) {
+    border-color: var(--red-light);
+}
+
+.create-hall-form-control:valid:not(:focus):not(:placeholder-shown) {
+    border-color: var(--green-light);
+}
+
+/* Focus states for accessibility */
+.btn:focus,
+.create-hall-form-control:focus {
+    outline: 2px solid var(--blue);
+    outline-offset: 2px;
+}
+
+/* Animation for form interactions */
+.create-hall-form-control:not([readonly]):hover {
+    border-color: var(--blue-light);
+}
+
+/* Capacity calculation styling */
+.capacity-calculator {
+    display: flex;
+    gap: 15px;
+    align-items: end;
+}
+
+.capacity-result {
+    background-color: var(--green-light);
+    color: var(--green-dark);
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    border: 2px solid var(--green);
+    min-width: 120px;
+    text-align: center;
+}
+
+/* Auto-calculation hint */
+.auto-calculation-hint {
+    font-size: 11px;
+    color: var(--blue);
+    font-weight: 500;
+    margin-top: 5px;
+}
+
+/* Material icons sizing */
+.material-symbols-outlined {
+    font-size: 20px;
+}

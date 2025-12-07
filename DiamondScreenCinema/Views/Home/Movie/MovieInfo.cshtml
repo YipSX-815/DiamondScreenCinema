@@ -1,0 +1,277 @@
+﻿@model MovieVM
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Diamond Screen Cinema - " + Model.Title;
+}
+
+@section Head {
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/Customer View/Home/Movie/MovieInfo.css" asp-append-version="true" />
+}
+
+<div class="movie-info-container">
+
+    <button class="back-btn" onclick="window.history.back()">
+        <span class="material-symbols-outlined">arrow_back</span>
+        Back
+    </button>
+ 
+    <div class="movie-header">
+        
+        <div class="movie-poster">
+            @if (!string.IsNullOrEmpty(Model.Poster))
+            {
+                
+                @if (Model.Status == "Showing" && !string.IsNullOrEmpty(Model.Classification))
+                {
+                    <span class="classification-badge">
+                        @Model.Classification
+                    </span>
+                }
+
+               
+                @if (Model.Status == "Upcoming")
+                {
+                    <span class="coming-soon-badge-movieinfo">Coming Soon</span>
+                }
+
+                @if (Model.Poster.Contains("themoviedb.org"))
+                {
+                    var optimizedPoster = Model.Poster.Replace("/t/p/original/", "/t/p/w500/");
+                    <img src="@optimizedPoster" alt="@Model.Title" class="poster-img">
+                }
+                else if (Model.Poster.StartsWith("/") || Model.Poster.StartsWith("~"))
+                {
+                    <img src="@Url.Content(Model.Poster)" alt="@Model.Title" class="poster-img">
+                }
+                else
+                {
+                    <img src="@Url.Content("~/MovieUpload/poster/" + Model.Poster)" alt="@Model.Title" class="poster-img">
+                }
+            }
+            else
+            {
+                <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                     alt="@Model.Title" class="poster-img">
+            }
+        </div>
+
+      
+        <div class="movie-details">
+            
+            <div class="movie-title-btn">
+                <h1 class="movie-title">@Model.Title</h1>
+
+              
+                <div class="action-buttons">
+                    <button class="action-btn" id="playTrailerBtn">
+                        <span class="material-symbols-outlined">play_circle</span>
+                    </button>
+                    <button class="action-btn">
+                        <span class="material-symbols-outlined">rate_review</span>
+                    </button>
+                </div>
+
+                
+                @if (Model.Status == "Showing")
+                {
+                    <button class="btn btn-primary buy-btn" onclick="location.href='/Home/Showtime?movieId=@Model.MovieId'">
+                        <span class="material-symbols-outlined">local_movies</span>
+                        Book Now
+                    </button>
+                }
+
+               
+                @if (Model.Status == "Upcoming")
+                {
+                    <button class="btn btn-primary prebook-btn">
+                        <span class="material-symbols-outlined">notifications</span>
+                        Pre-Book
+                    </button>
+                }
+            </div>
+
+        
+            <div class="info-grid">
+                <div class="info-row">
+                    <span class="info-label">Genre</span>
+                    <span class="info-value">@Model.Genre</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Spoken Language</span>
+                    <span class="info-value">@Model.Language</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Duration</span>
+                    <span class="info-value">@Model.Duration min</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Subtitles</span>
+                    <span class="info-value">@Model.Subtitle</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Release Date</span>
+                    <span class="info-value">@Model.ReleaseDate.ToString("MMM dd, yyyy")</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Reviews:</span>
+                    <span class="info-value">
+                        ★★★★★ 4.5/5
+                    </span>
+                </div>
+            </div>
+
+            
+            <div class="cast-director">
+                <div class="cast-item">
+                    <span class="cast-label">Cast</span>
+                    <p class="cast-value">@Model.Cast</p>
+                </div>
+                <div class="cast-item">
+                    <span class="cast-label">Director</span>
+                    <p class="cast-value">@Model.Director</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="synopsis-section">
+        <h2 class="section-title">Synopsis</h2>
+        <p class="synopsis-text">@Model.Synopsis</p>
+    </div>
+
+   
+    <div class="trailer-section">
+        <h2 class="section-title">Trailer</h2>
+        <div class="trailer-container" id="trailerContainer" data-trailer="@Model.Trailer">
+            @if (!string.IsNullOrEmpty(Model.Trailer))
+            {
+                
+                <div class="trailer-placeholder" id="trailerPlaceholder">
+                    @if (Model.Trailer.Contains("youtube.com") || Model.Trailer.Contains("youtu.be"))
+                    {
+                        var youtubeId = GetYouTubeId(Model.Trailer);
+                        if (!string.IsNullOrEmpty(youtubeId))
+                        {
+                            <img src="https://img.youtube.com/vi/@youtubeId/maxresdefault.jpg"
+                                 alt="@Model.Title Trailer"
+                                 class="trailer-thumbnail"
+                                 onerror="this.src='https://img.youtube.com/vi/@youtubeId/hqdefault.jpg'">
+                        }
+                    }
+                    else if (!string.IsNullOrEmpty(Model.Poster))
+                    {
+                        @if (Model.Poster.Contains("themoviedb.org"))
+                        {
+                            var optimizedPoster = Model.Poster.Replace("/t/p/original/", "/t/p/w1280/");
+                            <img src="@optimizedPoster" alt="@Model.Title" class="trailer-thumbnail">
+                        }
+                        else if (Model.Poster.StartsWith("/") || Model.Poster.StartsWith("~"))
+                        {
+                            <img src="@Url.Content(Model.Poster)" alt="@Model.Title" class="trailer-thumbnail">
+                        }
+                        else
+                        {
+                            <img src="@Url.Content("~/MovieUpload/poster/" + Model.Poster)" alt="@Model.Title" class="trailer-thumbnail">
+                        }
+                    }
+
+                   
+                    <div class="trailer-timer-bar"></div>
+                </div>
+
+               
+                <div class="trailer-player" id="trailerPlayer">
+                    @if (Model.Trailer.Contains("youtube.com") || Model.Trailer.Contains("youtu.be"))
+                    {
+                        var youtubeId = GetYouTubeId(Model.Trailer);
+                        if (!string.IsNullOrEmpty(youtubeId))
+                        {
+                            <iframe class="trailer-iframe"
+                                    id="trailerIframe"
+                                    width="100%"
+                                    height="600"
+                                    src=""
+                                    data-src="https://www.youtube.com/embed/@youtubeId?autoplay=1&controls=1&modestbranding=1&rel=0&fs=1"
+                                    frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+                                    allowfullscreen>
+                            </iframe>
+                        }
+                    }
+                    else
+                    {
+                        <video id="trailerVideo"
+                               class="trailer-video"
+                               controls
+                               controlslist="nodownload nofullscreen noremoteplayback"
+                               disablepictureinpicture
+                               width="100%"
+                               height="600">
+                            <source src="@Url.Content("~/MovieUpload/trailer/" + Model.Trailer)" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    }
+
+                  
+                    <button class="trailer-close-btn" id="trailerCloseBtn">
+                        <span class="material-symbols-outlined">close</span>
+                    </button>
+                </div>
+            }
+            else
+            {
+                <div class="no-trailer">
+                    <span class="material-symbols-outlined">videocam_off</span>
+                    <p>No trailer available</p>
+                </div>
+            }
+        </div>
+    </div>
+
+   
+    <div class="review-section">
+        <h2 class="section-title">Review & Comment</h2>
+        <p class="review-note">Be the first to review this movie!</p>
+
+        <div class="reviews-container">
+            <div class="no-reviews">
+                <span class="material-symbols-outlined">rate_review</span>
+                <p>No reviews yet. Be the first to review this movie!</p>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+@section Script {
+    <script src="~/js/Customer View/Movie/MovieInfo.js"></script>
+
+
+}
+
+@functions {
+    string GetYouTubeId(string url)
+    {
+        if (string.IsNullOrEmpty(url)) return null;
+
+        var patterns = new[]
+        {
+            @"(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\?\/]+)",
+            @"youtube\.com\/embed\/([^&\?\/]+)"
+        };
+
+        foreach (var pattern in patterns)
+        {
+            var match = System.Text.RegularExpressions.Regex.Match(url, pattern);
+            if (match.Success)
+            {
+                return match.Groups[1].Value;
+            }
+        }
+
+        return null;
+    }
+}

@@ -1,0 +1,168 @@
+﻿@{
+    Layout = "_AdminLayout";
+}
+
+@section head {
+    <link href="~/css/Admin View/Cinemas and Halls/UpdateCinema.css" rel="stylesheet" asp-append-version="true" />
+}
+
+<div class="edit-container">
+    <div class="edit-cinema-container">
+        <div class="update-cinema-header">
+            <h1>
+                <span class="material-symbols-outlined">theaters</span>
+                Update Cinema Details
+            </h1>
+            <p class="subtitle">Edit Cinema Information</p>
+        </div>
+
+        <form asp-controller="Admin" asp-action="UpdateCinema" method="post" enctype="multipart/form-data">
+
+            <div class="edit-content">
+                <!-- Cinema Image Section -->
+                <div class="edit-section">
+                    <div class="section-title">CINEMA IMAGE</div>
+
+                    <div class="image-edit-section">
+                        <div class="current-image-container">
+                            <img src="https://asset.gsc.com.my/dsites/cinema/cover/1U-23.jpg?VersionId=2b.bAcJQ4UvyjFtmqY5spxwTJW9pxPpK&quot" alt="Current Cinema Image" class="current-cinema-image">
+                            <div class="current-image-label">CURRENT IMAGE</div>
+                        </div>
+
+                        <div class="image-upload-section">
+                            <label class="file-upload-label" for="newCinemaImage">
+                                <img id="newImagePreview" class="preview-image" style="display:none;" />
+                                <span id="uploadText" class="upload-text">
+                                    <span class="material-symbols-outlined">add_photo_alternate</span>
+                                    Click to Change Image<br>
+                                    <span class="upload-subtext">Recommended: 1200×800</span>
+                                </span>
+                            </label>
+                            <input type="file" id="newCinemaImage" name="NewCinemaImage" accept="image/*" hidden />
+
+                            <div class="image-actions">
+                                <button type="button" class="btn-remove-image">
+                                    <span class="material-symbols-outlined">delete</span>
+                                    Remove Image
+                                </button>
+                                <div class="image-info">
+                                    <p>Max file size: 5MB</p>
+                                    <p>Supported formats: JPG, PNG, JPEG</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cinema Information Section -->
+                <div class="edit-section">
+                    <div class="section-title">CINEMA INFORMATION</div>
+
+                    <div class="edit-form-grid">
+                        <div class="form-group">
+                            <label class="form-label required">Cinema ID</label>
+                            <input type="text" name="CinemaId" value="C0001" class="form-control readonly-field" readonly>
+                            <div class="form-hint">Cinema ID cannot be changed</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cinemaName" class="form-label required">Name</label>
+                            <input type="text" id="cinemaName" name="Name" value="GSC One Utama" class="form-control" required>
+                            <div class="form-hint">Enter cinema name</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contactNumber" class="form-label required">Contact Number</label>
+                            <input type="tel" id="contactNumber" name="ContactNumber" value="03-1234 5678" class="form-control" required>
+                            <div class="form-hint">Format: 03-XXXX XXXX or 0X-XXXX XXXX</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="locationState" class="form-label required">Location State</label>
+                            <select id="locationState" name="LocationState" class="form-control" required>
+                                <option value="">Select State</option>
+                                <option value="Kuala Lumpur" selected>Kuala Lumpur</option>
+                                <option value="Selangor">Selangor</option>
+                                <option value="Johor">Johor</option>
+                                <option value="Penang">Pulau Pinang</option>
+                                <option value="Perak">Perak</option>
+                                <option value="Melaka">Melaka</option>
+                                <option value="Negeri Sembilan">Negeri Sembilan</option>
+                                <option value="Pahang">Pahang</option>
+                                <option value="Kelantan">Kelantan</option>
+                                <option value="Terengganu">Terengganu</option>
+                                <option value="Kedah">Kedah</option>
+                                <option value="Perlis">Perlis</option>
+                                <option value="Sabah">Sabah</option>
+                                <option value="Sarawak">Sarawak</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="locationCity" class="form-label required">Location City</label>
+                            <select id="locationCity" name="LocationCity" class="form-control" required>
+                                <option value="">Select City</option>
+                                <option value="Petaling Jaya" selected>Petaling Jaya</option>
+                                <option value="Kuala Lumpur">Kuala Lumpur</option>
+                                <option value="Shah Alam">Shah Alam</option>
+                                <option value="Subang Jaya">Subang Jaya</option>
+                                <option value="Klang">Klang</option>
+                                <option value="Puchong">Puchong</option>
+                                <option value="Johor Bahru">Johor Bahru</option>
+                                <option value="Georgetown">Georgetown</option>
+                                <option value="Ipoh">Ipoh</option>
+                                <option value="Melaka City">Melaka City</option>
+                                <option value="Seremban">Seremban</option>
+                                <option value="Kuantan">Kuantan</option>
+                                <option value="Kota Bharu">Kota Bharu</option>
+                                <option value="Kuala Terengganu">Kuala Terengganu</option>
+                                <option value="Alor Setar">Alor Setar</option>
+                                <option value="Kangar">Kangar</option>
+                                <option value="Kota Kinabalu">Kota Kinabalu</option>
+                                <option value="Kuching">Kuching</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cinemaStatus" class="form-label required">Status</label>
+                            <select id="cinemaStatus" name="Status" class="form-control" required>
+                                <option value="active" selected>Active</option>
+                                <option value="inactive">Inactive</option>
+                                <option value="maintenance">Maintenance</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Address Section -->
+                <div class="edit-section">
+                    <div class="section-title">ADDRESS</div>
+
+                    <div class="form-group full-width">
+                        <label for="address" class="form-label required">Full Address</label>
+                        <textarea id="address" name="Address" class="form-control textarea" rows="4" required>1 Utama Shopping Centre, Lebuh Bandar Utama, 47800 Petaling Jaya, Selangor Darul Ehsan</textarea>
+                        <div class="form-hint">Include building name, floor, and full address details</div>
+                    </div>
+                </div>
+
+            <!-- Action Buttons -->
+            <div class="edit-actions">
+                <a asp-controller="Admin" asp-action="Cinemas" asp-route-Page="CinemaManagement" class="btn btn-cancel">
+                <span class="material-symbols-outlined">close</span>
+                CANCEL
+                </a>
+
+                <button type="reset" class="btn btn-reset">
+                    <span class="material-symbols-outlined">restart_alt</span>
+                    RESET
+                </button>
+
+                <button type="submit" class="btn btn-update">
+                    <span class="material-symbols-outlined">save</span>
+                    UPDATE CINEMA
+                </button>
+            </div>
+        </div>
+        </form>
+    </div>
+</div>

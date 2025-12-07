@@ -1,0 +1,100 @@
+﻿@{
+    Layout = "_AdminLayout";
+}
+
+@section head {
+    <link href="~/css/Admin View/Cinemas and Halls/ViewCinema.css" rel="stylesheet" asp-append-version="true" />
+}
+
+<div class="view-container">
+    <div class="view-cinema-container">
+        <div class="view-cinema-header">
+            <h1>
+                <span class="material-symbols-outlined">theaters</span>
+                View Cinema Details
+            </h1>
+            <p class="subtitle">Cinema Information</p>
+        </div>
+
+        <div class="view-content">
+            <!-- Cinema Image & Basic Info Section -->
+            <div class="view-section">
+                <div class="cinema-image-section">
+                    <div class="cinema-image-container">
+                        <img src="https://asset.gsc.com.my/dsites/cinema/cover/1U-23.jpg?VersionId=2b.bAcJQ4UvyjFtmqY5spxwTJW9pxPpK&quot" alt="Cinema Image" class="cinema-main-image">
+                        <div class="image-label">CINEMA IMAGE</div>
+                    </div>
+
+                    <div class="cinema-basic-info">
+                        <div class="cinema-id-display">C0001</div>
+                        <h2 class="cinema-name">GSC Mid Valley</h2>
+                        <div class="cinema-status-badge active">
+                            <span class="material-symbols-outlined">check_circle</span>
+                            Active
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cinema Information Section -->
+            <div class="view-section">
+                <div class="section-title">CINEMA INFORMATION</div>
+
+                <div class="info-grid">
+                    <div class="info-group">
+                        <label class="info-label">Name</label>
+                        <div class="info-value">GSC Mid Valley</div>
+                    </div>
+
+                    <div class="info-group">
+                        <label class="info-label">Contact Number</label>
+                        <div class="info-value">03-1234 5678</div>
+                    </div>
+
+                    <div class="info-group">
+                        <label class="info-label">Location State</label>
+                        <div class="info-value">
+                            <span class="location-badge-state">Kuala Lumpur</span>
+                        </div>
+                    </div>
+
+                    <div class="info-group">
+                        <label class="info-label">Location City</label>
+                        <div class="info-value">
+                            <span class="location-badge-city">Bangsar</span>
+                        </div>
+                    </div>
+
+                    <div class="info-group full-width">
+                        <label class="info-label">Address</label>
+                        <div class="info-value address-value">
+                            Lot T-001, 3rd Floor, The Boulevard Office Mid Valley City, 
+                            Lingkaran Syed Putra, Mid Valley City, 58000 Kuala Lumpur, 
+                            Wilayah Persekutuan Kuala Lumpur.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="view-actions">
+            <a asp-controller="Admin" asp-action="Cinemas" asp-route-Page="CinemaManagement" class="btn btn-back">
+                <span class="material-symbols-outlined">arrow_back</span>
+                BACK TO LIST
+            </a>
+
+            <div class="action-buttons">
+                <a asp-controller="Admin" asp-action="UpdateCinema" asp-route-id="C0001" class="btn btn-edit">
+                    <span class="material-symbols-outlined">edit</span>
+                    EDIT CINEMA
+                </a>
+
+                <button class="btn btn-delete">
+                    <span class="material-symbols-outlined">delete</span>
+                    DELETE CINEMA
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

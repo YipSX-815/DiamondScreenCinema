@@ -1,0 +1,120 @@
+﻿@{
+    Layout = "_AdminLayout";
+}
+
+@section head {
+    <link href="~/css/Admin View/Users/CustomerManagement.css" rel="stylesheet" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Admin View/AdminLayout.css" asp-append-version="true" />
+}
+
+<div class="update-container">
+    <div class="update-header">
+        <h1>👤 Update Customer</h1>
+    </div>
+
+    <div class="content">
+        <!-- Profile Section -->
+        <div class="profile-section">
+            <div class="profile-picture-section">
+                <img src="~/images/default_logo.png" alt="Profile Picture" class="profile-picture" id="profile-picture">
+                <div class="profile-picture-text">PROFILE PICTURE</div>
+                <div class="profile-picture-subtext">CLICK IMAGE TO CHANGE</div>
+                <input type="file" id="profile-picture-input" accept="image/*">
+            </div>
+
+            <div class="user-info-display">
+                <div class="user-id-display">U001</div>
+                <div class="email-display">john.doe@hotmail.com</div>
+            </div>
+        </div>
+
+        <!-- Personal Information Section -->
+        <div class="form-section">
+            <div class="section-title">PERSONAL INFORMATION</div>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label class="form-label">Username</label>
+                    <input type="text" class="form-control" value="john_doe">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Phone Number</label>
+                    <input type="text" class="form-control" value="0131724113">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Date of Birth</label>
+                    <input type="date" class="form-control" value="2000/05/23">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Gender</label>
+                    <select class="form-control">
+                        <option value="male" selected>Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <div class="section-title">ACCOUNT STATUS</div>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="status" class="form-label">Status</label>
+                    <select class="form-control" id="status">
+                        <option value="active" selected>Active</option>
+                        <option value="inactive">Inactive</option>
+                    </select>
+                 </div>
+            </div>
+        </div>
+
+        <!-- Membership Information Section -->
+        <div class="form-section">
+            <div class="section-title">MEMBERSHIP INFORMATION</div>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label class="form-label">Membership Tier</label>
+                    <select class="form-control" id="membershipTier">
+                        <option value="bronze">Bronze</option>
+                        <option value="silver">Silver</option>
+                        <option value="gold" selected>Gold</option>
+                        <option value="platinum">Platinum</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Points</label>
+                    <input type="number" class="form-control readonly-field" value="150" readonly>
+                </div>
+            </div>
+
+            <!-- Membership Display -->
+            <div class="membership-info">
+                <div class="tier-badge tier-gold" id="currentTier">GOLD</div>
+                <div class="points-display" id="currentPoints">150 POINTS</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="button-group">
+        <a asp-controller="Admin" asp-action="Users" asp-route-Page="CustomerManagement" class="btn btn-back">
+            <span class="material-symbols-outlined">arrow_back</span>
+            BACK
+        </a>
+        <button class="btn btn-update">
+            <span class="material-symbols-outlined">save</span>
+            UPDATE
+        </button>
+    </div>
+</div>
+
+@section Script {
+    <script src="~/js/Admin View/User/.js">
+
+    </script>
+}

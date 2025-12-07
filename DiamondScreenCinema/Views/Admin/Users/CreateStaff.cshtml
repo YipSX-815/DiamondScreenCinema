@@ -1,0 +1,187 @@
+﻿@{
+    Layout = "_AdminLayout";
+}
+
+@section head {
+    <link href="~/css/Admin View/Users/CreateUser.css" rel="stylesheet" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Admin View/AdminLayout.css" asp-append-version="true" />
+}
+
+<div class="create-container">
+    <div class="create-header">
+        <h1>👤 Create New Staff</h1>
+        <p class="subtitle">Add a new staff to the system</p>
+    </div>
+
+    <form class="customer-form" id="createCustomerForm">
+        <div class="create-form-content">
+            <!-- Profile Picture Section -->
+            <div class="create-form-section">
+                <div class="create-section-title">PROFILE PICTURE</div>
+                <div class="create-profile-upload-section">
+                    <div class="create-profile-preview">
+                        <img src="~/images/default_logo.png" alt="Profile Preview" class="create-profile-picture" id="profilePreview">
+                        <div class="create-upload-overlay">
+                            <span class="material-symbols-outlined">photo_camera</span>
+                            <span>Click to Upload</span>
+                        </div>
+                    </div>
+                    <input type="file" id="profilePicture" name="profilePicture" accept="image/*" class="create-file-input">
+                    <div class="create-upload-info">
+                        <p class="create-upload-text">Recommended: Square image, 500x500 pixels</p>
+                        <p class="create-upload-subtext">Max file size: 5MB</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Personal Information Section -->
+            <div class="create-form-section">
+                <div class="create-section-title">PERSONAL INFORMATION</div>
+
+                <div class="create-form-grid">
+                    <div class="create-form-group">
+                        <label for="username" class="create-form-label required">Username</label>
+                        <input type="text" id="username" name="username" class="create-form-control" placeholder="Enter username" required>
+                        <div class="create-form-hint">Minimum 6 characters, letters and numbers only</div>
+                    </div>
+
+                    <div class="create-form-group">
+                        <label for="email" class="create-form-label required">Email Address</label>
+                        <input type="email" id="email" name="email" class="create-form-control" placeholder="Enter email address" required>
+                        <div class="create-form-hint">Valid email format required</div>
+                    </div>
+
+                    <div class="create-form-group">
+                        <label for="phone" class="create-form-label required">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" class="create-form-control" placeholder="E.g: 012-3456789" required>
+                        <div class="create-form-hint">Format: 012-3456789</div>
+                    </div>
+
+                    <div class="create-form-group">
+                        <label for="gender" class="create-form-label required">Gender</label>
+                        <select id="gender" name="gender" class="create-form-control" required>
+                            <option value="">Select Gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Account Settings Section -->
+            <div class="create-form-section">
+                <div class="create-section-title">ACCOUNT SETTINGS</div>
+
+                <div class="create-form-grid">
+                    <div class="create-form-group">
+                        <label for="password" class="create-form-label required">Password</label>
+                        <input type="password" id="password" name="password" class="create-form-control" placeholder="Enter password" required>
+                        <div class="create-form-hint">Minimum 8 characters</div>
+                    </div>
+
+                    <div class="create-form-group">
+                        <label for="confirmPassword" class="create-form-label required">Confirm Password</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" class="create-form-control" placeholder="Confirm password" required>
+                        <div class="create-form-hint">Must match password</div>
+                    </div>
+
+                    <div class="create-form-group">
+                        <label for="status" class="create-form-label">Account Status</label>
+                        <select id="status" name="status" class="create-form-control">
+                            <option value="active" selected>Active</option>
+                            <option value="inactive">Inactive</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Terms and Conditions -->
+            <div class="create-form-section">
+                <div class="create-checkbox-group">
+                    <input type="checkbox" id="terms" name="terms" class="checkbox" required>
+                    <label for="terms" class="checkbox-label">
+                        I confirm that the information provided is accurate and I have obtained consent to create this staff account.
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="button-group">
+            <a asp-controller="Admin" asp-action="Users" asp-route-Page="StaffManagement" data-page="StaffManagement" class="btn btn-cancel" title="Back">
+                <span class="material-symbols-outlined">close</span>
+                CANCEL
+            </a>
+            <button type="reset" class="btn btn-reset">
+                <span class="material-symbols-outlined">restart_alt</span>
+                RESET
+            </button>
+            <button type="submit" class="btn btn-create">
+                <span class="material-symbols-outlined">person_add</span>
+                CREATE STAFF
+            </button>
+        </div>
+    </form>
+</div>
+
+<script>
+    // Profile picture upload functionality
+    document.getElementById('profilePreview').addEventListener('click', function() {
+        document.getElementById('profilePicture').click();
+    });
+
+    document.getElementById('profilePicture').addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        if (file) {
+            // Check file size (5MB limit)
+            if (file.size > 5 * 1024 * 1024) {
+                alert('File size must be less than 5MB');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('profilePreview').src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    // Form submission
+    document.getElementById('createCustomerForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        // Basic validation
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+
+        if (password !== confirmPassword) {
+            alert('Passwords do not match!');
+            return;
+        }
+
+        if (password.length < 8) {
+            alert('Password must be at least 8 characters long!');
+            return;
+        }
+
+        // In a real application, you would submit the form to the server here
+        alert('Staff created successfully!');
+        // this.submit(); // Uncomment for actual form submission
+    });
+
+    // Reset form
+    document.querySelector('.btn-reset').addEventListener('click', function() {
+        if (confirm('Are you sure you want to reset all fields?')) {
+            document.getElementById('createCustomerForm').reset();
+            document.getElementById('profilePreview').src = 'https://via.placeholder.com/150/3BB7E5/FFFFFF?text=UPLOAD';
+        }
+    });
+
+    // Cancel button
+    document.querySelector('.btn-cancel').addEventListener('click', function() {
+        if (confirm('Are you sure you want to cancel? All unsaved changes will be lost.')) {
+            window.history.back();
+        }
+    });
+</script>

@@ -1,0 +1,87 @@
+﻿@{
+    Layout = "_AdminLayout";
+}
+
+@section head {
+    <link href="~/css/Admin View/Cinemas and Halls/ViewHall.css" rel="stylesheet" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Admin View/AdminLayout.css" asp-append-version="true" />
+}
+
+<div class="view-container">
+    <div class="view-hall-container">
+        <div class="view-hall-header">
+            <h1>
+                <span class="material-symbols-outlined">door_sliding</span>
+                View Hall Details
+            </h1>
+            <p class="subtitle">Hall Information</p>
+        </div>
+
+        <div class="view-hall-content">
+            <!-- Hall Information Section -->
+            <div class="view-hall-section">
+                <div class="view-hall-section-title">HALL INFORMATION</div>
+
+                <div class="view-hall-details-grid">
+                    <div class="view-hall-detail-group">
+                        <label class="view-hall-detail-label">Hall ID</label>
+                        <div class="view-hall-detail-value">H0001</div>
+                    </div>
+
+                    <div class="view-hall-detail-group">
+                        <label class="view-hall-detail-label">Hall Name</label>
+                        <div class="view-hall-detail-value">Hall 1</div>
+                    </div>
+
+                    <div class="view-hall-detail-group">
+                        <label class="view-hall-detail-label">Hall Type</label>
+                        <div class="view-hall-detail-value">
+                            <span class="hall-type-badge standard">Standard</span>
+                        </div>
+                    </div>
+
+                    <div class="view-hall-detail-group">
+                        <label class="view-hall-detail-label">Status</label>
+                        <div class="view-hall-detail-value">
+                            <span class="status-badge active">Active</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cinema Information Section -->
+            <div class="view-hall-section">
+                <div class="view-hall-section-title">CINEMA INFORMATION</div>
+
+                <div class="view-hall-details-grid">
+                    <div class="view-hall-detail-group">
+                        <label class="view-hall-detail-label">Cinema ID</label>
+                        <div class="view-hall-detail-value">C0001</div>
+                    </div>
+
+                    <div class="view-hall-detail-group">
+                        <label class="view-hall-detail-label">Cinema Name</label>
+                        <div class="view-hall-detail-value">GSC One Utama</div>
+                    </div>
+
+                    <div class="view-hall-detail-group full-width">
+                        <label class="view-hall-detail-label">Cinema Address</label>
+                        <div class="view-hall-detail-value">1 Utama Shopping Centre, Lebuh Bandar Utama, 47800 Petaling Jaya, Selangor</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="view-hall-button-group">
+            <a asp-controller="Admin" asp-action="Cinemas" asp-route-Page="HallManagement" class="btn btn-back">
+                <span class="material-symbols-outlined">arrow_back</span>
+                BACK TO LIST
+            </a>
+            <a asp-controller="Admin" asp-action="UpdateHall" class="btn btn-edit">
+                <span class="material-symbols-outlined">edit</span>
+                EDIT HALL
+            </a>
+        </div>
+    </div>
+</div>

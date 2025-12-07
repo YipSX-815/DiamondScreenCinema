@@ -1,0 +1,433 @@
+﻿@model MovieMenuViewModel
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Diamond Screen Cinema - All Movies";
+}
+
+@section Head {
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/Customer View/Home/Movie/MovieMenu.css" asp-append-version="true" />
+}
+
+
+<section class="movie-menu-header">
+    <div class="header-content">
+        <h1>ALL MOVIES</h1>
+        <p>Discover your next cinematic adventure</p>
+    </div>
+</section>
+
+
+<section class="filters-section">
+    <div class="filters-container">
+       
+        <div class="tabs-nav">
+            <button class="tab-link active" data-tab="showing-now">Showing Now</button>
+            <button class="tab-link" data-tab="coming-soon">Coming Soon</button>
+            <button class="tab-link" data-tab="top-rated">Top Rated</button>
+        </div>
+
+        
+        <div class="search-filter-group">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Search movies..." />
+                <button class="search-clear" id="clearSearch">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+
+            <button class="filter-btn" id="filterToggle">
+                Filter By
+                <span class="material-symbols-outlined">filter_list</span>
+            </button>
+        </div>
+    </div>
+
+   
+    <div class="filter-panel" id="filterPanel">
+        <div class="filter-panel-content">
+            <div class="filter-group">
+                <label>Genre</label>
+                <select id="genreFilter" class="filter-select">
+                    <option value="">All Genres</option>
+                    <option value="Action">Action</option>
+                    <option value="Adventure">Adventure</option>
+                    <option value="Animation">Animation</option>
+                    <option value="Comedy">Comedy</option>
+                    <option value="Crime">Crime</option>
+                    <option value="Drama">Drama</option>
+                    <option value="Documentary">Documentary</option>
+                    <option value="Fantasy">Fantasy</option>
+                    <option value="Historical">Historical</option>
+                    <option value="Horror">Horror</option>
+                    <option value="Mystery">Mystery</option>
+                    <option value="Romance">Romance</option>
+                    <option value="Sci-Fi">Sci-Fi</option>
+                    <option value="Thriller">Thriller</option>
+                    <option value="War">War</option>
+                    <option value="Family">Family</option>
+                    <option value="Musical">Musical</option>
+                    <option value="Biography">Biography</option>
+                    <option value="Sports">Sports</option>
+                    <option value="Western">Western</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label>Language</label>
+                <select id="languageFilter" class="filter-select">
+                    <option value="">All Languages</option>
+                    <option value="English">English</option>
+                    <option value="Mandarin">Mandarin</option>
+                    <option value="Malay">Malay</option>
+                    <option value="Tamil">Tamil</option>
+                    <option value="Korean">Korean</option>
+                    <option value="Japanese">Japanese</option>
+                    <option value="Thai">Thai</option>
+                    <option value="Hindi">Hindi</option>
+                    <option value="Spanish">Spanish</option>
+                    <option value="German">German</option>
+                    <option value="French">French</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label>Classification</label>
+                <select id="classificationFilter" class="filter-select">
+                    <option value="">All Ratings</option>
+                    <option value="U">U - General</option>
+                    <option value="P13">P13 - Parental Guidance 13</option>
+                    <option value="16">16 - 16 Years & Above</option>
+                    <option value="18">18 - 18 Years & Above</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label>Release Date</label>
+                <select id="releaseDateFilter" class="filter-select">
+                    <option value="">All Time</option>
+                    <option value="this-month">This Month</option>
+                    <option value="last-month">Last Month</option>
+                    <option value="last-3-months">Last 3 Months</option>
+                    <option value="last-6-months">Last 6 Months</option>
+                    <option value="older">Older</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label>Duration</label>
+                <select id="durationFilter" class="filter-select">
+                    <option value="">Any Duration</option>
+                    <option value="0-90">Under 90 min</option>
+                    <option value="90-120">90-120 min</option>
+                    <option value="120-150">120-150 min</option>
+                    <option value="150+">Over 150 min</option>
+                </select>
+            </div>
+
+            <button class="btn btn-primary" id="applyFilters">Apply Filters</button>
+            <button class="btn btn-outline" id="resetFilters">Reset</button>
+        </div>
+    </div>
+</section>
+
+
+<section class="movies-grid-section">
+    <div class="tab-content active" id="showing-now">
+        @if (Model.ShowingNowMovies != null && Model.ShowingNowMovies.Any())
+        {
+            <div class="movies-grid" id="showingNowGrid">
+                @foreach (var movie in Model.ShowingNowMovies)
+                {
+                    <div class="movie-card"
+                         data-genre="@movie.Genre"
+                         data-classification="@movie.Classification"
+                         data-duration="@movie.Duration"
+                         data-language="@movie.Language"
+                         data-release-date="@movie.ReleaseDate.ToString("yyyy-MM-dd")"
+                         data-title="@movie.Title.ToLower()"
+                         data-movie-id="@movie.MovieId">
+
+                        <div class="movie-card-image">
+                            @if (!string.IsNullOrEmpty(movie.Poster))
+                            {
+                                @if (movie.Poster.Contains("themoviedb.org"))
+                                {
+                                    var optimizedPoster = movie.Poster.Replace("/t/p/original/", "/t/p/w500/");
+                                    <img src="@optimizedPoster" alt="@movie.Title" loading="lazy">
+                                }
+                                else if (movie.Poster.StartsWith("/") || movie.Poster.StartsWith("~"))
+                                {
+                                    <img src="@Url.Content(movie.Poster)" alt="@movie.Title" loading="lazy">
+                                }
+                                else
+                                {
+                                    <img src="@Url.Content("~/MovieUpload/poster/" + movie.Poster)" alt="@movie.Title" loading="lazy">
+                                }
+                            }
+                            else
+                            {
+                                <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                                     alt="@movie.Title">
+                            }
+
+                           
+                            @if (!string.IsNullOrEmpty(movie.Classification))
+                            {
+                                <span class="classification-badge">@movie.Classification</span>
+                            }
+
+                          
+                            <div class="movie-card-title-overlay">
+                                <h3 class="movie-title">@movie.Title</h3>
+                            </div>
+
+                            
+                            <div class="movie-card-content">
+                                <h3 class="movie-title">@movie.Title</h3>
+
+                                <div class="movie-meta">
+                                    <div class="movie-meta-item">
+                                        <span class="movie-meta-label">Genre</span>
+                                        <span>@movie.Genre</span>
+                                    </div>
+                                    <div class="movie-meta-item">
+                                        <span class="movie-meta-label">Duration</span>
+                                        <span>@movie.Duration min</span>
+                                    </div>
+                                    <div class="movie-meta-item">
+                                        <span class="movie-meta-label">Language</span>
+                                        <span>@movie.Language</span>
+                                    </div>
+                                    <div class="movie-meta-item">
+                                        <span class="movie-meta-label">Review</span>
+                                        <span>★★★★★</span>
+                                    </div>
+                                </div>
+
+                                <div class="movie-card-actions">
+                                    <button class="btn btn-primary btn-buy" onclick="location.href='/Home/Movie/Showtime?movieId=@movie.MovieId'">
+                                        <span class="material-symbols-outlined">local_movies</span>
+                                        Book Now
+                                    </button>
+                                    <button class="btn btn-outline btn-info" onclick="location.href='/Home/Movie?Page=MovieInfo&id=@movie.MovieId'">
+                                        <span class="material-symbols-outlined">info</span>
+                                        More Info
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="empty-state">
+                <span class="material-symbols-outlined empty-icon">movie</span>
+                <h3>No Movies Currently Showing</h3>
+                <p>Check back soon for new releases!</p>
+            </div>
+        }
+
+      
+        <div class="pagination"></div>
+    </div>
+
+    <div class="tab-content" id="coming-soon">
+        @if (Model.ComingSoonMovies != null && Model.ComingSoonMovies.Any())
+        {
+            <div class="movies-grid" id="comingSoonGrid">
+                @foreach (var movie in Model.ComingSoonMovies)
+                {
+                    <div class="movie-card coming-soon-card"
+                         data-genre="@movie.Genre"
+                         data-classification="@movie.Classification"
+                         data-duration="@movie.Duration"
+                         data-language="@movie.Language"
+                         data-release-date="@movie.ReleaseDate.ToString("yyyy-MM-dd")"
+                         data-title="@movie.Title.ToLower()"
+                         data-movie-id="@movie.MovieId">
+
+                        <div class="movie-card-image">
+                            @if (!string.IsNullOrEmpty(movie.Poster))
+                            {
+                                @if (movie.Poster.Contains("themoviedb.org"))
+                                {
+                                    var optimizedPoster = movie.Poster.Replace("/t/p/original/", "/t/p/w500/");
+                                    <img src="@optimizedPoster" alt="@movie.Title" loading="lazy">
+                                }
+                                else if (movie.Poster.StartsWith("/") || movie.Poster.StartsWith("~"))
+                                {
+                                    <img src="@Url.Content(movie.Poster)" alt="@movie.Title" loading="lazy">
+                                }
+                                else
+                                {
+                                    <img src="@Url.Content("~/MovieUpload/poster/" + movie.Poster)" alt="@movie.Title" loading="lazy">
+                                }
+                            }
+                            else
+                            {
+                                <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                                     alt="@movie.Title">
+                            }
+
+                            <span class="coming-soon-badge">Coming Soon</span>
+
+                            <div class="movie-card-title-overlay">
+                                <h3 class="movie-title">@movie.Title</h3>
+                            </div>
+
+                            <div class="movie-card-content">
+                                <h3 class="movie-title">@movie.Title</h3>
+
+                                <div class="movie-meta">
+                                    <div class="movie-meta-item">
+                                        <span class="movie-meta-label">Genre</span>
+                                        <span>@movie.Genre</span>
+                                    </div>
+                                    <div class="movie-meta-item">
+                                        <span class="movie-meta-label">Duration</span>
+                                        <span>@movie.Duration min</span>
+                                    </div>
+                                    <div class="movie-meta-item">
+                                        <span class="movie-meta-label">Language</span>
+                                        <span>@movie.Language</span>
+                                    </div>
+                                    <div class="movie-meta-item">
+                                        <span class="movie-meta-label">Release</span>
+                                        <span>@movie.ReleaseDate.ToString("MMM dd, yyyy")</span>
+                                    </div>
+                                </div>
+
+                                <div class="movie-card-actions">
+                                    <button class="btn btn-outline btn-notify">
+                                        <span class="material-symbols-outlined">notifications</span>
+                                        Pre-Book
+                                    </button>
+                                    <button class="btn btn-outline btn-info" onclick="location.href='/Home/Movie?Page=MovieInfo&id=@movie.MovieId'">
+                                        <span class="material-symbols-outlined">info</span>
+                                        More Info
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="empty-state">
+                <span class="material-symbols-outlined empty-icon">movie</span>
+                <h3>No Upcoming Movies</h3>
+                <p>Stay tuned for announcements!</p>
+            </div>
+        }
+
+       
+        <div class="pagination"></div>
+    </div>
+
+    <div class="tab-content" id="top-rated">
+        @if (Model.TopRatedMovies != null && Model.TopRatedMovies.Any())
+        {
+            <div class="movies-grid" id="topRatedGrid">
+                @foreach (var movie in Model.TopRatedMovies)
+                {
+                    <div class="movie-card"
+                         data-genre="@movie.Genre"
+                         data-classification="@movie.Classification"
+                         data-duration="@movie.Duration"
+                         data-language="@movie.Language"
+                         data-release-date="@movie.ReleaseDate.ToString("yyyy-MM-dd")"
+                         data-title="@movie.Title.ToLower()"
+                         data-movie-id="@movie.MovieId">
+
+                        <div class="movie-card-image">
+                            @if (!string.IsNullOrEmpty(movie.Poster))
+                            {
+                                @if (movie.Poster.Contains("themoviedb.org"))
+                                {
+                                    var optimizedPoster = movie.Poster.Replace("/t/p/original/", "/t/p/w500/");
+                                    <img src="@optimizedPoster" alt="@movie.Title" loading="lazy">
+                                }
+                                else if (movie.Poster.StartsWith("/") || movie.Poster.StartsWith("~"))
+                                {
+                                    <img src="@Url.Content(movie.Poster)" alt="@movie.Title" loading="lazy">
+                                }
+                                else
+                                {
+                                    <img src="@Url.Content("~/MovieUpload/poster/" + movie.Poster)" alt="@movie.Title" loading="lazy">
+                                }
+                            }
+                            else
+                            {
+                                <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                                     alt="@movie.Title">
+                            }
+
+                            <span class="top-rated-badge">
+                                <span class="material-symbols-outlined">star</span>
+                                4.5
+                            </span>
+
+                            <div class="movie-card-title-overlay">
+                                <h3 class="movie-title">@movie.Title</h3>
+                            </div>
+
+                            <div class="movie-card-content">
+                                <h3 class="movie-title">@movie.Title</h3>
+
+                                <div class="movie-meta">
+                                    <div class="movie-meta-item">
+                                        <span class="movie-meta-label">Genre</span>
+                                        <span>@movie.Genre</span>
+                                    </div>
+                                    <div class="movie-meta-item">
+                                        <span class="movie-meta-label">Duration</span>
+                                        <span>@movie.Duration min</span>
+                                    </div>
+                                    <div class="movie-meta-item">
+                                        <span class="movie-meta-label">Language</span>
+                                        <span>@movie.Language</span>
+                                    </div>
+                                    <div class="movie-meta-item">
+                                        <span class="movie-meta-label">Review</span>
+                                        <span>★★★★★</span>
+                                    </div>
+                                </div>
+
+                                <div class="movie-card-actions">
+                                    <button class="btn btn-primary btn-buy" onclick="location.href='/Home/Showtime?movieId=@movie.MovieId'">
+                                        <span class="material-symbols-outlined">local_movies</span>
+                                        Book Now
+                                    </button>
+                                    <button class="btn btn-outline btn-info" onclick="location.href='/Home/Movie?Page=MovieInfo&id=@movie.MovieId'">
+                                        <span class="material-symbols-outlined">info</span>
+                                        More Info
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="empty-state">
+                <span class="material-symbols-outlined empty-icon">movie</span>
+                <h3>No Top Rated Movies</h3>
+                <p>Movies will be rated soon!</p>
+            </div>
+        }
+
+       
+        <div class="pagination"></div>
+    </div>
+</section>
+
+@section Script {
+    <script src="~/js/Customer View/Home/Movie/MovieMenu.js"></script>
+}

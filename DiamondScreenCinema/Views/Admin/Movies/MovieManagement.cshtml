@@ -1,0 +1,173 @@
+﻿@model List<Movie>
+
+@{
+    ViewBag.Title = "Diamond Screen Cinema - Movie Management";
+    Layout = "_AdminLayout";
+}
+
+@section head {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="~/css/Admin View/Dashboard.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Admin View/Movies/MovieManagement.css" asp-append-version="true" />
+}
+
+<div class="dashboard-top">
+    <div class="title">
+        <h1 class="page-title">Movie Management</h1>
+        <p>Manage Movies in the Cinema</p>
+    </div>
+
+    <div class="buttons">
+        <div class="btn-dark">
+            <a asp-controller="Admin" asp-action="Movies" asp-route-Page="MovieCreate" class="add-movie-btn">
+                Add New Movie
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="movie-management">
+    <div class="controls-section">
+        <div class="search-section">
+            <div class="search-header">
+                <h3>Search for a movie by title, code or distributor</h3>
+            </div>
+            <div class="searchbar">
+                <input type="text" id="searchInput" placeholder="Enter movie title, code or distributor..." class="search-input" value="@ViewBag.Search">
+                <button id="searchBtn" class="search-btn">
+                    <i class="fas fa-search"></i> Search
+                </button>
+            </div>
+        </div>
+
+        <div class="filters-section">
+            <div class="left-filters">
+                <div class="filter-group">
+                    <label class="filter-label">Filter by Genre</label>
+
+                    <div class="custom-dropdown movie-filter" data-type="genre">
+                        <div class="dropdown-header">
+                            <span class="selected-value">
+                                @(string.IsNullOrEmpty(ViewBag.GenreFilter) ? "All Genres" : ViewBag.GenreFilter)
+                            </span>
+                            <span class="material-symbols-outlined dropdown-arrow">expand_more</span>
+                        </div>
+
+                        <div class="dropdown-list">
+                            <div class="dropdown-item" data-value="">
+                                <span class="item-text">All Genres</span>
+                            </div>
+
+                            @foreach (var g in new[] {
+                                                        "Action","Adventure","Animation","Comedy","Crime","Documentary","Fantasy",
+                                                        "Horror","Mystery","Romance","Science Fiction","Sports","Thriller",
+                                                        "War","Western","Family","Musical","Biography"
+                                                        })
+                            {
+                                <div class="dropdown-item" data-value="@g">
+                                    <span class="item-text">@g</span>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <label class="filter-label">Filter by Language</label>
+
+                    <div class="custom-dropdown movie-filter" data-type="language">
+                        <div class="dropdown-header">
+                            <span class="selected-value">
+                                @(string.IsNullOrEmpty(ViewBag.LanguageFilter) ? "All Languages" : ViewBag.LanguageFilter)
+                            </span>
+                            <span class="material-symbols-outlined dropdown-arrow">expand_more</span>
+                        </div>
+
+                        <div class="dropdown-list">
+                            <div class="dropdown-item" data-value="">
+                                <span class="item-text">All Languages</span>
+                            </div>
+
+                            @foreach (var l in new[] {
+                                                        "English","Mandarin","Malay","Korean","Japanese",
+                                                        "Thai","Hindi","Spanish","French","German"
+                                                        })
+                            {
+                                <div class="dropdown-item" data-value="@l">
+                                    <span class="item-text">@l</span>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <label class="filter-label">Sort By</label>
+
+                    <div class="custom-dropdown movie-filter" data-type="sort">
+                        <div class="dropdown-header">
+                            <span class="selected-value">
+                                @{
+                                    var sortLabel = ViewBag.SortBy switch
+                                    {
+                                        "title" => "Title A-Z",
+                                        "title-desc" => "Title Z-A",
+                                        "release_date" => "Newest Release",
+                                        "release_date_old" => "Oldest Release",
+                                        _ => "Title A-Z"
+                                    };
+                                }
+                                @sortLabel
+                            </span>
+                            <span class="material-symbols-outlined dropdown-arrow">expand_more</span>
+                        </div>
+
+                        <div class="dropdown-list">
+                            <div class="dropdown-item" data-value="title"><span class="item-text">Title A-Z</span></div>
+                            <div class="dropdown-item" data-value="title-desc"><span class="item-text">Title Z-A</span></div>
+                            <div class="dropdown-item" data-value="release_date"><span class="item-text">Newest Release</span></div>
+                            <div class="dropdown-item" data-value="release_date_old"><span class="item-text">Oldest Release</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-filters">
+                <div class="stats-filters">
+                    @foreach (var status in new[] { "all", "showing", "upcoming", "cancelled" })
+                    {
+                        var active = ((ViewBag.StatusFilter as string) ?? "all") == status ? "active" : "";
+                        var count = ViewBag.StatusCounts?[status] ?? 0;
+                        var label = char.ToUpper(status[0]) + status.Substring(1);
+                        <div class="stat-filter @status @active" data-filter="@status">
+                            <span class="stat-number">@count</span>
+                            <span class="stat-label">@label</span>
+                        </div>
+                    }
+                </div>
+                <button class="select-all-btn" id="selectAllBtn">
+                    <i class="fas fa-check-double"></i> Select All
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="movieListArea">
+        @await Html.PartialAsync("Movies/_MovieListing", Model)
+    </div>
+</div>
+
+@section Script {
+
+    <script src="~/js/Admin View/Movies/MovieManagement.js" asp-append-version="true"></script>
+    
+    <script>
+        @if (TempData["NotificationMessage"] != null)
+        {
+            <text>
+            showNotification('@TempData["NotificationMessage"]', '@TempData["NotificationType"]');
+            </text>
+        }
+    </script>
+
+}

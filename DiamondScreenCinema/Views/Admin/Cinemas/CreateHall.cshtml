@@ -1,0 +1,192 @@
+﻿@{
+    Layout = "_AdminLayout";
+}
+
+@section head {
+    <link href="~/css/Admin View/Cinemas and Halls/CreateHall.css" rel="stylesheet" asp-append-version="true" />
+}
+
+<div class="create-container">
+    <div class="create-hall-container">
+        <div class="create-hall-header">
+            <h1>
+                <span class="material-symbols-outlined">door_sliding</span>
+                Create New Hall
+            </h1>
+            <p class="subtitle">Add a new cinema hall to the system</p>
+        </div>
+
+        <form class="hall-form" id="createHallForm">
+            <div class="create-hall-content">
+                <!-- Hall Information Section -->
+                <div class="create-hall-section">
+                    <div class="create-hall-section-title">HALL INFORMATION</div>
+
+                    <div class="create-hall-form-grid">
+                        <div class="create-hall-form-group">
+                            <label for="hallName" class="create-hall-form-label required">Hall Name</label>
+                            <input type="text" id="hallName" name="hallName" class="create-hall-form-control" placeholder="Enter hall name" required>
+                            <div class="create-hall-form-hint">E.g., Hall 1</div>
+                        </div>
+
+                        <div class="create-hall-form-group">
+                            <label for="hallType" class="create-hall-form-label required">Hall Type</label>
+                            <select id="hallType" name="hallType" class="create-hall-form-control" required>
+                                <option value="">Select Hall Type</option>
+                                <option value="standard">Standard</option>
+                                <option value="premium">Premium</option>
+                                <option value="imax">IMAX</option>
+                                <option value="4dx">4DX</option>
+                                <option value="vip">VIP</option>
+                                <option value="deluxe">Deluxe</option>
+                            </select>
+                        </div>
+
+                        <div class="create-hall-form-group">
+                            <label for="status" class="create-hall-form-label required">Status</label>
+                            <select id="status" name="status" class="create-hall-form-control" required>
+                                <option value="active" selected>Active</option>
+                                <option value="inactive">Inactive</option>
+                                <option value="maintenance">Maintenance</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cinema Information Section -->
+                <div class="create-hall-section">
+                    <div class="create-hall-section-title">CINEMA INFORMATION</div>
+
+                    <div class="create-hall-form-grid">
+                        <div class="create-hall-form-group">
+                            <label for="cinemaId" class="create-hall-form-label required">Cinema ID</label>
+                            <select id="cinemaId" name="cinemaId" class="create-hall-form-control" required>
+                                <option value="">Select Cinema ID</option>
+                                <option value="C0001">C0001</option>
+                                <option value="C0002">C0002</option>
+                                <option value="C0003">C0003</option>
+                                <option value="C0004">C0004</option>
+                                <option value="C0005">C0005</option>
+                            </select>
+                        </div>
+
+                        <div class="create-hall-form-group">
+                            <label for="cinemaName" class="create-hall-form-label">Cinema Name</label>
+                            <input type="text" id="cinemaName" name="cinemaName" class="create-hall-form-control readonly-field" readonly placeholder="Cinema name will appear here">
+                            <div class="create-hall-form-hint">Automatically displays based on Cinema ID</div>
+                        </div>
+
+                        <div class="create-hall-form-group full-width">
+                            <label for="cinemaAddress" class="create-hall-form-label">Cinema Address</label>
+                            <input type="text" id="cinemaAddress" name="cinemaAddress" class="create-hall-form-control readonly-field" readonly placeholder="Cinema address will appear here">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="create-hall-button-group">
+                <a asp-controller="Admin" asp-action="Cinemas" asp-route-Page="HallManagement" data-page="HallManagement" class="btn btn-cancel" title="Back">
+                    <span class="material-symbols-outlined">close</span>
+                    CANCEL
+                </a>
+                <button type="reset" class="btn btn-reset">
+                    <span class="material-symbols-outlined">restart_alt</span>
+                    RESET
+                </button>
+                <button type="submit" class="btn btn-create">
+                    <span class="material-symbols-outlined">add</span>
+                    CREATE HALL
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    // Cinema data mapping
+    const cinemaData = {
+        'C0001': {
+            name: 'GSC One Utama',
+            address: '1 Utama Shopping Centre, Lebuh Bandar Utama, 47800 Petaling Jaya, Selangor'
+        },
+        'C0002': {
+            name: 'GSC Pavillion Bukit Jalil',
+            address: 'Pavilion Bukit Jalil, Persiaran Jalil Utama, Bukit Jalil, 57000 Kuala Lumpur'
+        },
+        'C0003': {
+            name: 'GSC Mid Valley',
+            address: 'Mid Valley Megamall, Lingkaran Syed Putra, 59200 Kuala Lumpur'
+        },
+        'C0004': {
+            name: 'GSC IOI City Mall',
+            address: 'IOI City Mall, Lebuh IRC, IOI Resort City, 62502 Putrajaya'
+        },
+        'C0005': {
+            name: 'GSC Sunway Pyramid',
+            address: 'Sunway Pyramid, Bandar Sunway, 47500 Selangor'
+        }
+    };
+
+    // Update cinema name and address when cinema ID is selected
+    document.getElementById('cinemaId').addEventListener('change', function() {
+        const cinemaId = this.value;
+        const cinemaNameField = document.getElementById('cinemaName');
+        const cinemaAddressField = document.getElementById('cinemaAddress');
+
+        if (cinemaId && cinemaData[cinemaId]) {
+            cinemaNameField.value = cinemaData[cinemaId].name;
+            cinemaAddressField.value = cinemaData[cinemaId].address;
+        } else {
+            cinemaNameField.value = '';
+            cinemaAddressField.value = '';
+        }
+    });
+
+    // Auto-calculate capacity when rows and seats per row are entered
+    document.getElementById('rowCount').addEventListener('input', calculateCapacity);
+    document.getElementById('seatsPerRow').addEventListener('input', calculateCapacity);
+
+    function calculateCapacity() {
+        const rowCount = parseInt(document.getElementById('rowCount').value) || 0;
+        const seatsPerRow = parseInt(document.getElementById('seatsPerRow').value) || 0;
+        const capacityField = document.getElementById('capacity');
+
+        if (rowCount > 0 && seatsPerRow > 0) {
+            capacityField.value = rowCount * seatsPerRow;
+        }
+    }
+
+    // Form submission
+    document.getElementById('createHallForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        // Basic validation
+        const cinemaId = document.getElementById('cinemaId').value;
+        if (!cinemaId) {
+            alert('Please select a Cinema ID');
+            return;
+        }
+
+        // In a real application, you would submit the form to the server here
+        alert('Hall created successfully!');
+        // this.submit(); // Uncomment for actual form submission
+    });
+
+    // Reset form
+    document.querySelector('.btn-reset').addEventListener('click', function() {
+        if (confirm('Are you sure you want to reset all fields?')) {
+            document.getElementById('createHallForm').reset();
+            document.getElementById('cinemaName').value = '';
+            document.getElementById('cinemaAddress').value = '';
+        }
+    });
+
+    // Cancel button
+    document.querySelector('.btn-cancel').addEventListener('click', function() {
+        if (confirm('Are you sure you want to cancel? All unsaved changes will be lost.')) {
+            window.history.back();
+        }
+    });
+</script>
+

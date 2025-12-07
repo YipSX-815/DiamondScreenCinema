@@ -1,0 +1,230 @@
+﻿@model AuthenticateVM
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title id="pageTitle">Login | Diamond Screen Cinema</title>
+    <link rel="icon" href="~/images/Slogan.png" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/dark.css">
+    <link rel="stylesheet" href="~/css/Customer View/Account/Authenticate.css" asp-append-version="true">
+</head>
+
+<body>
+    <div class="logo">
+        <a asp-action="Index" asp-controller="Home">
+            <img src="~/images/Icon.png">
+            <h1>Diamond Screen Cinema</h1>
+        </a>
+    </div>
+
+    <div class="auth-wrapper">
+        <div class="auth-panel image-panel left-image hidden" id="registerImage"></div>
+
+        <div class="auth-panel form-panel" id="loginPanel">
+            <div class="content">
+                <h1>Welcome Back</h1>
+                <p class="subtitle">Login to your Diamond Screen Cinema account</p>
+
+                <p class="toggle-text">
+                    Don’t have an account?
+                    <span class="toggle-btn" onclick="showRegister()">Register</span>
+                    <div asp-validation-summary="ModelOnly"></div>
+                </p>
+
+                <form class="auth-form" asp-action="Login" method="post">
+                    <span asp-validation-for="LoginVM.Email"></span>
+                    <div class="input-group" id="emailGroup">
+                        <span class="material-symbols-outlined">mail</span>
+                        <input asp-for="LoginVM.Email" placeholder="Email">
+                    </div>
+
+                    <div class="phone-row" id="phoneLoginRow" style="display:none;">
+                        <div class="input-group phone-prefix-group">
+                            <div class="prefix-box">
+                                <img src="https://flagcdn.com/w2560/my.png" class="flag-icon">
+                                <span class="prefix-text">+60</span>
+                                <input asp-for="LoginVM.PhonePrefix" type="hidden" value="+60" />
+                            </div>
+                        </div>
+
+                        <div class="input-group phone-number-group">
+                            <span class="material-symbols-outlined phone-icon">call</span>
+                            <input asp-for="LoginVM.Phone" class="phone-input" placeholder="Phone Number">
+                        </div>
+                    </div>
+
+                    <span asp-validation-for="LoginVM.Password"></span>
+                    <div class="input-group">
+                        <span class="material-symbols-outlined">lock</span>
+                        <input asp-for="LoginVM.Password" type="password" placeholder="Password" required>
+                    </div>
+
+                    <label class="remember-me">
+                        <input asp-for="LoginVM.RememberMe" type="checkbox" checked />
+                        <span class="checkmark"></span>
+                        Remember me
+                    </label>
+
+                    <button class="primary-btn">Login</button>
+
+                    <div class="form-bottom">
+                        <p class="toggle-text">
+                            <span class="toggle-btn" id="phoneLoginBtn">Login with phone number</span>
+                            <span class="toggle-btn" id="emailLoginBtn" style="display:none;">Login with email</span>
+                        </p>
+                        <p class="toggle-text">
+                            <span class="toggle-btn">Forgot Password?</span>
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="auth-panel image-panel right-image" id="loginImage"></div>
+
+        <div class="auth-panel form-panel hidden" id="registerPanel">
+            <div class="content">
+
+                <h1>Create Account</h1>
+                <p class="subtitle">Join the Diamond Screen Cinema family</p>
+
+                <p class="toggle-text">
+                    Already have an account?
+                    <span class="toggle-btn" onclick="showLogin()">Login</span>
+                </p>
+
+                <form class="auth-form" asp-action="Register" method="post">
+                    <span asp-validation-for="RegisterVM.Username"></span>
+                    <div class="input-group">
+                        <span class="material-symbols-outlined">person</span>
+                        <input asp-for="RegisterVM.Username" placeholder="Username" autocomplete="off" autocorrect="off" required>
+                    </div>
+                    
+                    <span asp-validation-for="RegisterVM.DateOfBirth"></span>
+                    <div class="input-group">
+                        <span class="material-symbols-outlined">calendar_month</span>
+                        <input asp-for="RegisterVM.DateOfBirth"
+                               type="text"
+                               id="dobInput"
+                               placeholder="Date of Birth"
+                               required />
+                    </div>
+
+                    <span asp-validation-for="RegisterVM.Gender"></span>
+                    <div class="gender-selector">
+                        <span class="section-title">
+                            <span class="material-symbols-outlined">diversity_3</span>
+                            Gender
+                        </span>
+                        <div class="selector-options">
+                            <label class="selector-option">
+                                <input type="radio" asp-for="RegisterVM.Gender" value="Male" />
+                                <span class="option-content">
+                                    <span class="option-icon">♂</span>
+                                    <span class="option-label">Male</span>
+                                </span>
+                            </label>
+
+                            <label class="selector-option">
+                                <input type="radio" asp-for="RegisterVM.Gender" value="Female" />
+                                <span class="option-content">
+                                    <span class="option-icon">♀</span>
+                                    <span class="option-label">Female</span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <span asp-validation-for="RegisterVM.Email"></span>
+                    <div class="input-group" id="registerEmailGroup">
+                        <span class="material-symbols-outlined">mail</span>
+                        <input asp-for="RegisterVM.Email" type="email" placeholder="Email" autocomplete="off" autocorrect="off">
+                    </div>
+
+                    <div class="phone-row" id="registerPhoneRow" style="display:none;">
+                        <div class="input-group phone-prefix-group">
+                            <div class="prefix-box">
+                                <img src="https://flagcdn.com/w2560/my.png" class="flag-icon">
+                                <span class="prefix-text">+60</span>
+                                <input asp-for="RegisterVM.PhonePrefix" type="hidden" value="+60" />
+                            </div>
+                        </div>
+
+                        <div class="input-group phone-number-group">
+                            <span class="material-symbols-outlined phone-icon">call</span>
+                            <input asp-for="RegisterVM.Phone" class="phone-input" placeholder="Phone Number" autocomplete="off" autocorrect="off">
+                        </div>
+                    </div>
+                    
+                    <span asp-validation-for="RegisterVM.ConfirmPassword"></span>
+                    <div class="input-group">
+                        <span class="material-symbols-outlined">lock</span>
+                        <input asp-for="RegisterVM.Password"
+                               type="password"
+                               placeholder="Password"
+                               required
+                               oncopy="return false"
+                               onpaste="return false"
+                               oncut="return false"
+                               onselectstart="return false"
+                               oncontextmenu="return false"
+                               ondragstart="return false"
+                               style="user-select: none;" 
+                               autocomplete="off" 
+                               autocorrect="off" />
+                    </div>
+
+                    <div class="password-rules">
+                        <p class="rule" id="rule-length">• At least 8 characters</p>
+                        <p class="rule" id="rule-uppercase">• At least 1 uppercase letter (A-Z)</p>
+                        <p class="rule" id="rule-lowercase">• At least 1 lowercase letter (a-z)</p>
+                        <p class="rule" id="rule-number">• At least 1 number (0-9)</p>
+                        <p class="rule" id="rule-special">• At least 1 special character (!&#64;#$%^&*)</p>
+                    </div>
+
+                    <div class="input-group">
+                        <span class="material-symbols-outlined">lock</span>
+                        <input asp-for="RegisterVM.ConfirmPassword"
+                               type="password"
+                               placeholder="Confirm Password"
+                               required
+                               oncopy="return false"
+                               onpaste="return false"
+                               oncut="return false"
+                               onselectstart="return false"
+                               oncontextmenu="return false"
+                               ondragstart="return false"
+                               style="user-select: none;" 
+                               autocomplete="off" 
+                               autocorrect="off" />
+                    </div>
+
+                    <button class="primary-btn">Register</button>
+
+                    <p class="toggle-text">
+                        <span class="toggle-btn" id="registerPhoneBtn">Register with phone number</span>
+                        <span class="toggle-btn" id="registerEmailBtn" style="display:none;">Register with email</span>
+                    </p>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const openRegister = @(Model?.ShowRegister == true ? "true" : "false");
+    </script>
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/js/jquery.validate.min.js"></script>
+    <script src="~/js/jquery.validate.unobtrusive.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="~/js/Customer View/Account/Authenticate.js"></script>
+
+</body>
+</html>

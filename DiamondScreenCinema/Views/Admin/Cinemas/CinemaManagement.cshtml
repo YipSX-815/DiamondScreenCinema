@@ -1,0 +1,635 @@
+﻿@{
+    Layout = "_AdminLayout";
+}
+
+@section head {
+    <link rel="stylesheet" href="~/css/Admin View/AdminLayout.css" asp-append-version="true" />
+    <link href="~/css/Admin View/Cinemas and Halls/CinemaManagement.css" rel="stylesheet" asp-append-version="true" />
+}
+
+
+<div class="menu-container">
+    <div class="title-top">
+        <h1>Cinemas Management</h1>
+        <p>Manage all cinemas</p>
+    </div>
+
+    <div class="menu-icon">
+        <a asp-controller="Admin" asp-action="Cinemas" asp-route-Page="CinemaManagement" class="menu-item">
+            <span class="material-symbols-outlined" title="View All Cinema">theaters</span>
+        </a>
+        <a asp-controller="Admin" asp-action="Cinemas" asp-route-Page="CreateCinema" class="menu-item">
+            <span class="material-symbols-outlined" title="Add New Cinema">add_2</span>
+        </a>
+    </div>
+</div>
+
+<!-- Filter Bar -->
+<div class="cinema-filter-bar">
+    <div class="cinema-filter-left">
+        <div class="cinema-filter-group">
+            <label class="cinema-filter-label">Filter by State</label>
+            <select class="cinema-filter-select" id="stateFilter">
+                <option value="all">All States</option>
+                <option value="Kuala Lumpur">Kuala Lumpur</option>
+                <option value="Selangor">Selangor</option>
+                <option value="Penang">Penang</option>
+                <option value="Johor">Negeri Sembilan</option>
+                <option value="Perak">Perak</option>
+            </select>
+        </div>
+
+        <div class="cinema-filter-group">
+            <label class="cinema-filter-label">Filter by City</label>
+            <select class="cinema-filter-select" id="cityFilter">
+                <option value="all">All Cities</option>
+                <option value="Kuala Lumpur">Kuala Lumpur</option>
+                <option value="Petaling Jaya">Petaling Jaya</option>
+                <option value="Bangsar">Bangsar</option>
+                <option value="Bukit Mertajam">Bukit Mertajam</option>
+                <option value="Seremban">Seremban</option>
+            </select>
+        </div>
+
+
+    </div>
+
+    <div class="cinema-filter-right">
+        <div class="cinema-search-container">
+            <input type="text" class="cinema-search-input" placeholder="Search cinemas..." id="cinemaSearch">
+        </div>
+
+        <button class="cinema-clear-filters" id="clearFilters">
+            Clear Filters
+        </button>
+    </div>
+</div>
+
+<!-- Results Count -->
+<div class="cinema-results-count" id="resultsCount">
+    Showing 5 cinemas
+</div>
+
+<!-- Cinema Grid -->
+<div class="cinema-grid" id="cinemaGrid">
+    <!-- Cinema 1 -->
+    <div class="cinema-card">
+        <input type="checkbox" class="cinema-checkbox">
+        <div class="cinema-image">
+            <img src="https://asset.gsc.com.my/dsites/cinema/cover/1U-23.jpg?VersionId=2b.bAcJQ4UvyjFtmqY5spxwTJW9pxPpK&quot" alt="GSC Mid Valley">
+        </div>
+        <div class="cinema-content">
+            <h3 class="cinema-name">GSC Mid Valley</h3>
+            <div class="cinema-info">
+                <span class="cinema-id">C0001</span>
+                <span class="cinema-phone">03-1234 5678</span>
+                <span class="cinema-city">Kuala Lumpur</span>
+                <span class="cinema-state">Bangsar</span>
+            </div>
+            <div class="cinema-actions">
+                <div class="status-toggle">
+                    <button class="status-btn status-active">
+                        <i class="fas fa-play-circle"></i> Active
+                    </button>
+                </div>
+                <div class="action-buttons">
+                    <a asp-controller="Admin" asp-action="Cinemas" asp-route-Page="ViewCinema" class="action-btn action-view" title="View Cinema">
+                        <span class="material-symbols-outlined">visibility</span>
+                    </a>
+                    <a asp-controller="Admin" asp-action="Cinemas" asp-route-Page="UpdateCinemas" class="action-btn action-edit" title="Edit Cinema">
+                        <span class="material-symbols-outlined" style="font-size: 16px;">edit</span>
+                    </a>
+                    <button class="action-btn action-delete" onclick="#" title="Delete">
+                        <span class="material-symbols-outlined" style="font-size: 16px;">delete</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cinema 2 -->
+    <div class="cinema-card">
+        <input type="checkbox" class="cinema-checkbox">
+        <div class="cinema-image">
+            <img src="https://asset.gsc.com.my/dsites/cinema/cover/1U-23.jpg?VersionId=2b.bAcJQ4UvyjFtmqY5spxwTJW9pxPpK&quot" alt="GSC Mid Valley">
+        </div>
+        <div class="cinema-content">
+            <h3 class="cinema-name">GSC One Utama</h3>
+            <div class="cinema-info">
+                <span class="cinema-id">C0002</span>
+                <span class="cinema-phone">03-3476 5648</span>
+                <span class="cinema-city">Selangor</span>
+                <span class="cinema-state">Petaling Jaya</span>
+            </div>
+            <div class="cinema-actions">
+                <div class="status-toggle">
+                    <button class="status-btn status-active">
+                        <i class="fas fa-play-circle"></i> Active
+                    </button>
+                </div>
+                <div class="action-buttons">
+                    <a asp-controller="Admin" asp-action="Cinemas" asp-route-id="ViewCinema" class="action-btn action-view" title="View Cinema">
+                        <span class="material-symbols-outlined">visibility</span>
+                    </a>
+                    <a asp-controller="Admin" asp-action="Cinemas" asp-route-id="UpdateCinema" class="action-btn action-edit" title="Edit Cinema">
+                        <span class="material-symbols-outlined" style="font-size: 16px;">edit</span>
+                    </a>
+                    <button class="action-btn action-delete" onclick="#" title="Delete">
+                        <span class="material-symbols-outlined" style="font-size: 16px;">delete</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cinema 3 -->
+    <div class="cinema-card">
+        <input type="checkbox" class="cinema-checkbox">
+        <div class="cinema-image">
+            <img src="https://images.unsplash.com/photo-1489599809505-fc6c1e3c6c27?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="GSC Mid Valley">
+        </div>
+        <div class="cinema-content">
+            <h3 class="cinema-name">GSC Pavillion Bukit Jalil</h3>
+            <div class="cinema-info">
+                <span class="cinema-id">C0003</span>
+                <span class="cinema-phone">03-99876 2345</span>
+                <span class="cinema-city">Kuala Lumpur</span>
+                <span class="cinema-state">Bukit Jalil</span>
+            </div>
+            <div class="cinema-actions">
+                <div class="status-toggle">
+                    <button class="status-btn status-active">
+                        <i class="fas fa-play-circle"></i> Active
+                    </button>
+                </div>
+                <div class="action-buttons">
+                    <a asp-controller="Admin" asp-action="Cinemas" asp-route-id="ViewCinema" class="action-btn action-view" title="View Cinema">
+                        <span class="material-symbols-outlined">visibility</span>
+                    </a>
+                    <a asp-controller="Admin" asp-action="Cinemas" asp-route-id="UpdateCinema" class="action-btn action-edit" title="Edit Cinema">
+                        <span class="material-symbols-outlined" style="font-size: 16px;">edit</span>
+                    </a>
+                    <button class="action-btn action-delete" onclick="#" title="Delete">
+                        <span class="material-symbols-outlined" style="font-size: 16px;">delete</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cinema 4 -->
+    <div class="cinema-card">
+        <input type="checkbox" class="cinema-checkbox">
+        <div class="cinema-image">
+            <img src="https://images.unsplash.com/photo-1489599809505-fc6c1e3c6c27?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="GSC Mid Valley">
+        </div>
+        <div class="cinema-content">
+            <h3 class="cinema-name">GSC Gurney Plaza</h3>
+            <div class="cinema-info">
+                <span class="cinema-id">C0004</span>
+                <span class="cinema-phone">03-3452 8976</span>
+                <span class="cinema-city">Penang</span>
+                <span class="cinema-state">Bukit Mertajam</span>
+            </div>
+            <div class="cinema-actions">
+                <div class="status-toggle">
+                    <button class="status-btn status-inactive">
+                        <i class="fas fa-play-circle"></i> Inactive
+                    </button>
+                </div>
+                <div class="action-buttons">
+                    <a asp-controller="Admin" asp-action="Cinemas" asp-route-id="ViewCinema" class="action-btn action-view" title="View Cinema">
+                        <span class="material-symbols-outlined">visibility</span>
+                    </a>
+                    <a asp-controller="Admin" asp-action="Cinemas" asp-route-id="UpdateCinema" class="action-btn action-edit" title="Edit Cinema">
+                        <span class="material-symbols-outlined" style="font-size: 16px;">edit</span>
+                    </a>
+                    <button class="action-btn action-delete" onclick="#" title="Delete">
+                        <span class="material-symbols-outlined" style="font-size: 16px;">delete</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cinema 5 -->
+    <div class="cinema-card">
+        <input type="checkbox" class="cinema-checkbox">
+        <div class="cinema-image">
+            <img src="https://images.unsplash.com/photo-1489599809505-fc6c1e3c6c27?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="GSC Mid Valley">
+        </div>
+        <div class="cinema-content">
+            <h3 class="cinema-name">GSC Seremban</h3>
+            <div class="cinema-info">
+                <span class="cinema-id">C0005</span>
+                <span class="cinema-phone">03-2345 9977</span>
+                <span class="cinema-city">Negeri Sembilan</span>
+                <span class="cinema-state">Seremban</span>
+            </div>
+            <div class="cinema-actions">
+                <div class="status-toggle">
+                    <button class="status-btn status-active">
+                        <i class="fas fa-play-circle"></i> Active
+                    </button>
+                </div>
+                <div class="action-buttons">
+                    <a asp-controller="Admin" asp-action="Cinemas" asp-route-id="ViewCinema" class="action-btn action-view" title="View Cinema">
+                        <span class="material-symbols-outlined">visibility</span>
+                    </a>
+                    <a asp-controller="Admin" asp-action="Cinemas" asp-route-id="UpdateCinema" class="action-btn action-edit" title="Edit Cinema">
+                        <span class="material-symbols-outlined" style="font-size: 16px;">edit</span>
+                    </a>
+                    <button class="action-btn action-delete" onclick="#" title="Delete">
+                        <span class="material-symbols-outlined" style="font-size: 16px;">delete</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    // Sample cinema data
+    const cinemas = [
+        {
+            id: "CIN001",
+            name: "GSC Mid Valley",
+            address: "Level 3, Mid Valley Megamall, Lingkaran Syed Putra",
+            contact: "03-1234 5678",
+            city: "Kuala Lumpur",
+            state: "Kuala Lumpur",
+            status: "active",
+            image: "https://images.unsplash.com/photo-1489599809505-fc6c1e3c6c27?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+        },
+        {
+            id: "CIN002",
+            name: "TGV 1 Utama",
+            address: "1 Utama Shopping Centre, Bandar Utama",
+            contact: "03-8765 4321",
+            city: "Petaling Jaya",
+            state: "Selangor",
+            status: "active",
+            image: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+        },
+        {
+            id: "CIN003",
+            name: "MBO Kepong",
+            address: "Kepong Village Mall, Jalan 3/33a",
+            contact: "03-5678 9012",
+            city: "Kuala Lumpur",
+            state: "Kuala Lumpur",
+            status: "maintenance",
+            image: "https://images.unsplash.com/photo-1595769816263-9b910be24d5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+        },
+        {
+            id: "CIN004",
+            name: "GSC Gurney Plaza",
+            address: "Gurney Plaza, Persiaran Gurney",
+            contact: "04-3456 7890",
+            city: "Penang",
+            state: "Penang",
+            status: "active",
+            image: "https://images.unsplash.com/photo-1579536930745-2593a8a5f76fe?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+        },
+        {
+            id: "CIN005",
+            name: "TGV Johor Bahru",
+            address: "Johor Bahru City Square, Jalan Wong Ah Fook",
+            contact: "07-2345 6789",
+            city: "Johor Bahru",
+            state: "Johor",
+            status: "inactive",
+            image: "https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+        },
+        {
+            id: "CIN006",
+            name: "MBO Ipoh",
+            address: "Ipoh Parade, Jalan Sultan Abdul Jalil",
+            contact: "05-6789 0123",
+            city: "Ipoh",
+            state: "Perak",
+            status: "active",
+            image: "https://images.unsplash.com/photo-1543536448-d209d2d13a1c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+        }
+    ];
+
+       // Function to filter cinemas
+    function filterCinemas() {
+        const searchTerm = document.getElementById('cinemaSearch').value.toLowerCase();
+        const cityFilter = document.getElementById('cityFilter').value;
+        const stateFilter = document.getElementById('stateFilter').value;
+
+        const cinemaCards = document.querySelectorAll('.cinema-card');
+        let visibleCount = 0;
+
+        cinemaCards.forEach(card => {
+            const cardText = card.textContent.toLowerCase();
+            const name = card.querySelector('.cinema-name').textContent.toLowerCase();
+
+            // Simple text matching approach
+            const matchesSearch = name.includes(searchTerm) || cardText.includes(searchTerm);
+            const matchesCity = cityFilter === 'all' || cardText.includes(cityFilter.toLowerCase());
+            const matchesState = stateFilter === 'all' || cardText.includes(stateFilter.toLowerCase());
+
+            if (matchesSearch && matchesCity && matchesState) {
+                card.style.display = 'block';
+                visibleCount++;
+            } else {
+                card.style.display = 'none';
+            }
+        });
+
+        // Update results count
+        document.getElementById('resultsCount').textContent = `Showing ${visibleCount} cinemas`;
+    }
+
+    // Function to clear all filters
+    function clearFilters() {
+        document.getElementById('cinemaSearch').value = '';
+        document.getElementById('cityFilter').value = 'all';
+        document.getElementById('stateFilter').value = 'all';
+        filterCinemas();
+    }
+
+    // Initialize event listeners
+    document.addEventListener('DOMContentLoaded', function() {
+        // Add event listeners for filtering
+        document.getElementById('cinemaSearch').addEventListener('input', filterCinemas);
+        document.getElementById('cityFilter').addEventListener('change', filterCinemas);
+        document.getElementById('stateFilter').addEventListener('change', filterCinemas);
+
+        // Add event listener for clear filters button
+        document.getElementById('clearFilters').addEventListener('click', clearFilters);
+    });
+
+    // Function to clear all filters
+    function clearFilters() {
+        document.getElementById('cinemaSearch').value = '';
+        document.getElementById('cityFilter').value = 'all';
+        document.getElementById('stateFilter').value = 'all';
+        filterCinemas();
+    }
+
+    // Function to handle adding a new cinema
+    function addCinema() {
+        alert('Add New Cinema functionality would be implemented here');
+        // In a real application, this would open a modal or form
+    }
+
+    // Function to handle bulk actions
+    function handleBulkAction(action) {
+        const selectedCheckboxes = document.querySelectorAll('.cinema-checkbox:checked');
+
+        if (selectedCheckboxes.length === 0) {
+            alert('Please select at least one cinema to perform this action.');
+            return;
+        }
+
+        const cinemaIds = Array.from(selectedCheckboxes).map(checkbox => {
+            return checkbox.closest('.cinema-card').querySelector('.cinema-id').textContent;
+        });
+
+        switch(action) {
+            case 'delete':
+                if (confirm(`Are you sure you want to delete ${cinemaIds.length} cinema(s)?`)) {
+                    alert(`Deleting cinemas: ${cinemaIds.join(', ')}`);
+                    // Implement bulk delete logic here
+                }
+                break;
+            case 'activate':
+                alert(`Activating cinemas: ${cinemaIds.join(', ')}`);
+                // Implement bulk activate logic here
+                break;
+            case 'deactivate':
+                alert(`Deactivating cinemas: ${cinemaIds.join(', ')}`);
+                // Implement bulk deactivate logic here
+                break;
+        }
+    }
+
+    // Function to update bulk actions UI
+    function updateBulkActions() {
+        const selectedCheckboxes = document.querySelectorAll('.cinema-checkbox:checked');
+        const bulkActions = document.querySelector('.cinema-bulk-actions');
+        const selectedCount = document.querySelector('.bulk-selected-count');
+
+        if (selectedCheckboxes.length > 0) {
+            bulkActions.classList.add('show');
+            selectedCount.textContent = `${selectedCheckboxes.length} selected`;
+        } else {
+            bulkActions.classList.remove('show');
+        }
+    }
+
+    // Function to handle checkbox selection
+    function handleCheckboxSelection(checkbox) {
+        const card = checkbox.closest('.cinema-card');
+        if (checkbox.checked) {
+            card.classList.add('selected');
+        } else {
+            card.classList.remove('selected');
+        }
+        updateBulkActions();
+    }
+
+    // Function to select/deselect all checkboxes
+    function toggleSelectAll() {
+        const checkboxes = document.querySelectorAll('.cinema-checkbox');
+        const selectAll = document.getElementById('selectAll');
+
+        checkboxes.forEach(checkbox => {
+            checkbox.checked = selectAll.checked;
+            handleCheckboxSelection(checkbox);
+        });
+    }
+
+    // Function to handle status toggle
+    function toggleStatus(button) {
+        const currentStatus = button.textContent.trim().split(' ')[1];
+        const cinemaId = button.closest('.cinema-card').querySelector('.cinema-id').textContent;
+
+        let newStatus, newClass, newIcon, newText;
+
+        if (currentStatus === 'Active') {
+            newStatus = 'Inactive';
+            newClass = 'status-btn status-inactive';
+            newIcon = '<i class="fas fa-pause-circle"></i>';
+            newText = 'Inactive';
+        } else if (currentStatus === 'Inactive') {
+            newStatus = 'Maintenance';
+            newClass = 'status-btn status-maintenance';
+            newIcon = '<i class="fas fa-tools"></i>';
+            newText = 'Maintenance';
+        } else {
+            newStatus = 'Active';
+            newClass = 'status-btn status-active';
+            newIcon = '<i class="fas fa-play-circle"></i>';
+            newText = 'Active';
+        }
+
+        button.className = newClass;
+        button.innerHTML = `${newIcon} ${newText}`;
+
+        // Show confirmation for status changes
+        if (confirm(`Change cinema ${cinemaId} status to ${newStatus}?`)) {
+            // Implement actual status change logic here
+            console.log(`Cinema ${cinemaId} status changed to ${newStatus}`);
+        } else {
+            // Revert changes if cancelled
+            if (newStatus === 'Inactive') {
+                button.className = 'status-btn status-active';
+                button.innerHTML = '<i class="fas fa-play-circle"></i> Active';
+            } else if (newStatus === 'Maintenance') {
+                button.className = 'status-btn status-inactive';
+                button.innerHTML = '<i class="fas fa-pause-circle"></i> Inactive';
+            } else {
+                button.className = 'status-btn status-maintenance';
+                button.innerHTML = '<i class="fas fa-tools"></i> Maintenance';
+            }
+        }
+    }
+
+    // Function to handle action buttons
+    function handleAction(action, element) {
+        const cinemaCard = element.closest('.cinema-card');
+        const cinemaId = cinemaCard.querySelector('.cinema-id').textContent;
+        const cinemaName = cinemaCard.querySelector('.cinema-name').textContent;
+
+        switch(action) {
+            case 'view':
+                alert(`Viewing cinema: ${cinemaName} (${cinemaId})`);
+                // Implement view logic here
+                break;
+            case 'edit':
+                alert(`Editing cinema: ${cinemaName} (${cinemaId})`);
+                // Implement edit logic here
+                break;
+            case 'delete':
+                if (confirm(`Are you sure you want to delete cinema "${cinemaName}" (${cinemaId})? This action cannot be undone.`)) {
+                    alert(`Cinema ${cinemaId} would be deleted here`);
+                    // Implement delete logic here
+                }
+                break;
+        }
+    }
+
+    // Initialize event listeners
+    document.addEventListener('DOMContentLoaded', function() {
+        // Add event listeners for filtering
+        document.getElementById('cinemaSearch').addEventListener('input', filterCinemas);
+        document.getElementById('cityFilter').addEventListener('change', filterCinemas);
+        document.getElementById('stateFilter').addEventListener('change', filterCinemas);
+
+        // Add event listener for clear filters button
+        document.getElementById('clearFilters').addEventListener('click', clearFilters);
+
+        // Add event listener for add button (if exists)
+        const addBtn = document.getElementById('addCinemaBtn');
+        if (addBtn) {
+            addBtn.addEventListener('click', addCinema);
+        }
+
+        // Add event listeners to individual checkboxes
+        document.querySelectorAll('.cinema-checkbox').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                handleCheckboxSelection(this);
+            });
+        });
+
+        // Add event listener for select all checkbox (if exists)
+        const selectAll = document.getElementById('selectAll');
+        if (selectAll) {
+            selectAll.addEventListener('change', toggleSelectAll);
+        }
+
+        // Add event listeners to action buttons using event delegation
+        document.addEventListener('click', function(e) {
+            // Handle view buttons
+            if (e.target.closest('.action-view')) {
+                handleAction('view', e.target.closest('.action-view'));
+            }
+            // Handle edit buttons
+            else if (e.target.closest('.action-edit')) {
+                handleAction('edit', e.target.closest('.action-edit'));
+            }
+            // Handle delete buttons
+            else if (e.target.closest('.action-delete')) {
+                handleAction('delete', e.target.closest('.action-delete'));
+            }
+            // Handle status buttons
+            else if (e.target.closest('.status-btn')) {
+                toggleStatus(e.target.closest('.status-btn'));
+            }
+        });
+
+        // Add event listeners for bulk action buttons
+        const bulkDeleteBtn = document.querySelector('.bulk-delete-btn');
+        const bulkActivateBtn = document.querySelector('.bulk-activate-btn');
+        const bulkDeactivateBtn = document.querySelector('.bulk-deactivate-btn');
+
+        if (bulkDeleteBtn) {
+            bulkDeleteBtn.addEventListener('click', () => handleBulkAction('delete'));
+        }
+        if (bulkActivateBtn) {
+            bulkActivateBtn.addEventListener('click', () => handleBulkAction('activate'));
+        }
+        if (bulkDeactivateBtn) {
+            bulkDeactivateBtn.addEventListener('click', () => handleBulkAction('deactivate'));
+        }
+
+        // Initialize filters
+        filterCinemas();
+    });
+
+    // Utility function to simulate API calls (for demonstration)
+    function simulateAPICall(action, data) {
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                console.log(`${action} completed:`, data);
+                resolve({ success: true, data });
+            }, 1000);
+        });
+    }
+
+    // Function to show loading state
+    function showLoading(card, isLoading) {
+        if (isLoading) {
+            card.classList.add('loading');
+        } else {
+            card.classList.remove('loading');
+        }
+    }
+
+    // Function to show notification
+    function showNotification(message, type = 'info') {
+        // Create notification element
+        const notification = document.createElement('div');
+        notification.className = `notification notification-${type}`;
+        notification.textContent = message;
+
+        // Add styles for notification
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 12px 20px;
+            background: ${type === 'success' ? 'var(--green)' :
+                         type === 'error' ? 'var(--red)' : 'var(--blue)'};
+            color: white;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 1000;
+            font-family: var(--font);
+            font-weight: 500;
+        `;
+
+        document.body.appendChild(notification);
+
+        // Remove notification after 3 seconds
+        setTimeout(() => {
+            notification.remove();
+        }, 3000);
+    }
+</script>

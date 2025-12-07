@@ -1,0 +1,99 @@
+﻿@{
+    Layout = "_AdminLayout";
+}
+
+@section head {
+    <link href="~/css/Admin View/Cinemas and Halls/SeatManagement.css" rel="stylesheet" asp-append-version="true" />
+    <link href="~/css/Admin View - Dark/Cinemas/SeatManagement.css" rel="stylesheet" asp-append-version="true" />
+}
+
+<div class="seat-top">
+    <h1>Seat Management</h1>
+    <p>Manage seats for all halls</p>
+</div>
+
+<div class="seat-management">
+    <div class="seat-controls">
+        <div class="hall-selector">
+            <label for="hall-select">Select Hall:</label>
+            <div class="custom-dropdown">
+                <div class="dropdown-header">
+                    <span class="selected-value">Hall 1 - Main Theater</span>
+                    <span class="material-symbols-outlined dropdown-arrow">expand_more</span>
+                </div>
+                <div class="dropdown-list">
+                    <div class="dropdown-item" data-value="Hall 1">
+                        <span class="item-text">Hall 1 - Main Theater</span>
+                        <span class="checkmark">✓</span>
+                    </div>
+                    <div class="dropdown-item" data-value="Hall 2">
+                        <span class="item-text">Hall 2 - Premium Lounge</span>
+                        <span class="checkmark">✓</span>
+                    </div>
+                    <div class="dropdown-item" data-value="Hall 3">
+                        <span class="item-text">Hall 3 - Standard</span>
+                        <span class="checkmark">✓</span>
+                    </div>
+                    <div class="dropdown-item" data-value="Hall 4">
+                        <span class="item-text">Hall 4 - IMAX</span>
+                        <span class="checkmark">✓</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="seat-actions">
+            <button class="btn btn-secondary" id="view-mode" type="button">View Mode</button>
+            <button class="btn btn-primary" id="edit-mode" type="button">Edit Layout</button>
+            <button class="btn btn-danger" id="reset-layout" type="button">Reset Changes</button>
+            <button class="btn btn-success" id="save-layout" type="button">Save Changes</button>
+        </div>
+    </div>
+
+    <div class="seat-layout-container">
+        <div class="screen"></div>
+
+        <div class="seat-grid" id="seat-grid">
+        </div>
+
+        <div class="seat-legend">
+            <div class="legend-item">
+                <div class="legend-color legend-available"></div>
+                <span>Available</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color legend-unavailable"></div>
+                <span>Unavailable</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color legend-vip"></div>
+                <span>VIP Seat</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color legend-couple"></div>
+                <span>Couple Seat</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color legend-selected"></div>
+                <span>Selected</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="edit-panel" id="edit-panel">
+        <div class="edit-actions">
+            <div class="seat-type-selector">
+                <span>Seat Type:</span>
+                <button class="seat-type-btn active" data-type="available">Available</button>
+                <button class="seat-type-btn" data-type="unavailable">Unavailable</button>
+                <button class="seat-type-btn" data-type="vip">VIP</button>
+                <button class="seat-type-btn" data-type="couple">Couple</button>
+                <button class="seat-type-btn" data-type="aisle">Aisle</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Script {
+    <script src="~/js/Admin View/Cinemas/SeatManagement.js"></script>
+}

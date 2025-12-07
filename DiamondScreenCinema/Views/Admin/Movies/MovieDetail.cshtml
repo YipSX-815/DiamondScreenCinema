@@ -1,0 +1,120 @@
+﻿@model MovieVM
+@{
+    Layout = "_AdminLayout";
+}
+
+@section head {
+    <link rel="stylesheet" href="~/css/Admin View/Movies/MovieCreate.css" asp-append-version="true" />
+}
+
+<div class="form-container">
+    <h2 class="form-title">Movie Information - View Movie Detail</h2>
+
+    <div class="view-form">
+        <div class="form-layout">
+            <div class="poster-section">
+                <label>Poster</label>
+
+                <div class="file-upload-label poster-upload" style="cursor: default; pointer-events: none;">
+                    @if (!string.IsNullOrEmpty(Model.Poster))
+                    {
+                        <img src="@Model.Poster" class="preview-image" style="display: block;" />
+                    }
+                    else
+                    {
+                        <span class="upload-text">No Poster Available</span>
+                    }
+                </div>
+            </div>
+
+            <div class="form-fields">
+                <div class="form-group">
+                    <label>Title</label>
+                    <div class="detail-text">@Model.Title</div>
+                </div>
+                <div class="form-group">
+                    <label>Genre</label>
+                    <div class="detail-text">@Model.Genre</div>
+                </div>
+                <div class="form-group">
+                    <label>Duration</label>
+                    <div class="detail-text">@Model.Duration min</div>
+                </div>
+                <div class="form-group">
+                    <label>Language</label>
+                    <div class="detail-text">@Model.Language</div>
+                </div>
+                <div class="form-group">
+                    <label>Director</label>
+                    <div class="detail-text">@Model.Director</div>
+                </div>
+                <div class="form-group">
+                    <label>Cast</label>
+                    <div class="detail-text">@Model.Cast</div>
+                </div>
+                <div class="form-group">
+                    <label>Classification</label>
+                    <div class="detail-text">@Model.Classification</div>
+                </div>
+                <div class="form-group">
+                    <label>Subtitle</label>
+                    <div class="detail-text">@Model.Subtitle</div>
+                </div>
+                <div class="form-group">
+                    <label>Release Date</label>
+                    <div class="detail-text">@Model.ReleaseDate.ToString("yyyy-MM-dd")</div>
+                </div>
+                <div class="form-group">
+                    <label>Status</label>
+                    <div class="detail-text">@Model.Status</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group full-width">
+            <label>Synopsis</label>
+            <div class="detail-text">
+                @(string.IsNullOrEmpty(Model.Synopsis) ? "No synopsis available" : Model.Synopsis)
+            </div>
+        </div>
+
+        <div class="poster-section">
+            <label class="horizontalPoster-Label">Horizontal Poster</label>
+            <div class="file-upload-label horizontal-upload" style="cursor: default; pointer-events:none;">
+
+                @if (!string.IsNullOrEmpty(Model.HorizontalPoster))
+                {
+                    <img src="@Model.HorizontalPoster" class="preview-horizontal" style="display:block;" />
+                }
+                else
+                {
+                    <span class="upload-text">No Horizontal Poster Available</span>
+                }
+            </div>
+        </div>
+
+        <div class="trailer-section">
+            <label>Trailer</label>
+
+            <div class="file-upload-label trailer-upload" style="cursor: default;">
+                @if (!string.IsNullOrEmpty(Model.Trailer))
+                {
+                    <video class="preview-video" controls style="display: block;">
+                        <source src="@Model.Trailer" type="video/mp4" />
+                        <source src="@Model.Trailer" type="video/webm" />
+                        Your browser does not support the video tag.
+                    </video>
+                }
+                else
+                {
+                    <span class="upload-text">No Trailer Available</span>
+                }
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <a asp-controller="Admin" asp-action="Movies" asp-route-Page="MovieManagement" class="btn btn-cancel">Back</a>
+        </div>
+
+    </div>
+</div>

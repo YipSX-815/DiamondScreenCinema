@@ -1,0 +1,339 @@
+﻿/* -------------- Update Hall CSS --------------------- */
+.update-container {
+    max-width: 1000px;
+    margin: 30px auto;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    font-family: var(--font);
+}
+
+.update-hall-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.update-hall-header {
+    background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue) 100%);
+    color: white;
+    padding: 30px 40px;
+}
+
+    .update-hall-header h1 {
+        font-size: 28px;
+        font-weight: 700;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .update-hall-header .material-symbols-outlined {
+        font-size: 32px;
+    }
+
+.subtitle {
+    font-size: 16px;
+    font-weight: 400;
+    opacity: 0.9;
+    margin-left: 44px;
+}
+
+.update-hall-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.update-hall-content {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.update-hall-section {
+    background-color: white;
+    border: 1px solid var(--grey-light);
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.update-hall-section-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    color: var(--blue-dark);
+    border-bottom: 2px solid var(--blue-light);
+    padding-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-family: var(--font);
+}
+
+.update-hall-form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+.update-hall-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+    .update-hall-form-group.full-width {
+        grid-column: 1 / -1;
+    }
+
+.update-hall-form-label {
+    font-weight: 600;
+    color: var(--grey-darker);
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-family: var(--font);
+}
+
+    .update-hall-form-label.required::after {
+        content: " *";
+        color: var(--red);
+    }
+
+.update-hall-form-control {
+    padding: 14px 16px;
+    border: 2px solid var(--grey-light);
+    border-radius: 8px;
+    font-family: var(--font);
+    font-size: 15px;
+    transition: all 0.3s ease;
+    background-color: white;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+    .update-hall-form-control:focus {
+        outline: none;
+        border-color: var(--blue);
+        box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.15);
+        transform: translateY(-1px);
+    }
+
+    .update-hall-form-control.readonly-field {
+        background-color: var(--grey-light);
+        color: var(--grey-dark);
+        cursor: not-allowed;
+        border-color: var(--grey);
+    }
+
+/* Features Grid */
+.update-hall-features-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.update-hall-checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.update-hall-checkbox {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--blue);
+    flex-shrink: 0;
+}
+
+.update-hall-checkbox-label {
+    font-size: 14px;
+    color: var(--grey-darker);
+    line-height: 1.4;
+    font-weight: 500;
+    font-family: var(--font);
+}
+
+/* Update Hall Button Group */
+.update-hall-button-group {
+    display: flex;
+    justify-content: center;
+    padding: 25px 40px;
+    background-color: var(--grey-light);
+    border-top: 1px solid var(--grey);
+    gap: 15px;
+}
+
+/* Common Button Styles */
+.btn {
+    padding: 14px 25px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font);
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    justify-content: center;
+}
+
+.btn-back {
+    background-color: var(--grey);
+    color: white;
+}
+
+    .btn-back:hover {
+        background-color: var(--grey-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+.btn-edit {
+    background-color: var(--blue);
+    color: white;
+}
+
+    .btn-edit:hover {
+        background-color: var(--blue-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(59, 183, 229, 0.3);
+    }
+
+.btn-cancel {
+    background-color: var(--grey);
+    color: white;
+}
+
+    .btn-cancel:hover {
+        background-color: var(--grey-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+.btn-reset {
+    background-color: var(--orange);
+    color: white;
+    border: 1px solid var(--orange);
+}
+
+    .btn-reset:hover {
+        background-color: var(--orange-dark);
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(234, 88, 12, 0.3);
+    }
+
+.btn-update {
+    background-color: var(--green);
+    color: white;
+}
+
+    .btn-update:hover {
+        background-color: var(--green-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+    }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .view-container,
+    .update-container {
+        margin: 15px;
+        border-radius: 8px;
+    }
+
+    .view-hall-content,
+    .update-hall-content {
+        padding: 25px;
+        gap: 20px;
+    }
+
+    .view-hall-section,
+    .update-hall-section {
+        padding: 20px;
+    }
+
+    .view-hall-details-grid,
+    .update-hall-form-grid,
+    .update-hall-features-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .view-hall-button-group,
+    .update-hall-button-group {
+        flex-direction: column;
+        padding: 20px 25px;
+    }
+
+    .btn {
+        width: 100%;
+    }
+
+    .view-hall-header,
+    .update-hall-header {
+        padding: 20px 25px;
+    }
+
+        .view-hall-header h1,
+        .update-hall-header h1 {
+            font-size: 24px;
+        }
+
+    .subtitle {
+        margin-left: 0;
+        font-size: 14px;
+    }
+
+    .layout-legend {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .view-hall-header,
+    .update-hall-header {
+        padding: 15px 20px;
+    }
+
+        .view-hall-header h1,
+        .update-hall-header h1 {
+            font-size: 22px;
+        }
+
+        .view-hall-header .material-symbols-outlined,
+        .update-hall-header .material-symbols-outlined {
+            font-size: 28px;
+        }
+
+    .view-hall-content,
+    .update-hall-content {
+        padding: 20px;
+    }
+
+    .view-hall-section,
+    .update-hall-section {
+        padding: 15px;
+    }
+
+    .view-hall-section-title,
+    .update-hall-section-title {
+        font-size: 16px;
+    }
+
+    .view-hall-detail-value,
+    .update-hall-form-control {
+        padding: 12px 14px;
+        font-size: 14px;
+    }
+}

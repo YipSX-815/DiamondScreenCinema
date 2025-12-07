@@ -1,0 +1,207 @@
+﻿@{
+    Layout = "_AdminLayout";
+}
+
+@section head {
+    <link href="~/css/Admin View - Dark/Dashboard.css" rel="stylesheet" asp-append-version="true" />
+    <link href="~/css/Admin View/Dashboard.css" rel="stylesheet" asp-append-version="true" />
+}
+
+<div class="dashboard-top">
+    <div class="title">
+        <h1>Welcome, John Doe!</h1>
+        <p>Here's what's happening in the cinema today</p>
+    </div>
+
+    <div class="buttons">
+        <div class="custom-dropdown">
+            <div class="dropdown-header">
+                <span class="selected-value">Yearly</span>
+                <span class="material-symbols-outlined dropdown-arrow">expand_more</span>
+            </div>
+            <div class="dropdown-list">
+                <div class="dropdown-item" data-value="yearly">
+                    <span class="item-text">Yearly</span>
+                    <span class="checkmark">✓</span>
+                </div>
+                <div class="dropdown-item" data-value="monthly">
+                    <span class="item-text">Monthly</span>
+                    <span class="checkmark">✓</span>
+                </div>
+                <div class="dropdown-item" data-value="weekly">
+                    <span class="item-text">Weekly</span>
+                    <span class="checkmark">✓</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="btn-dark">
+            <a href="#">View Detail Report</a>
+        </div>
+    </div>
+</div>
+
+<div class="statistics">
+    <div class="stat-card">
+        <div class="stat-icon">
+            <span class="material-symbols-outlined">local_activity</span>
+        </div>
+        <div class="stat-content">
+            <div class="stat-title">
+                <p>Total Bookings</p>
+                <h1>2,345</h1>
+            </div>
+            <div class="stat-trend up">
+                <div class="trend-indicator">
+                    <span class="material-symbols-outlined">arrow_upward</span>
+                    <span class="trend-value">14.9%</span>
+                </div>
+                <span class="trend-text">(+200 this month)</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-icon revenue">
+            <span class="material-symbols-outlined">payments</span>
+        </div>
+        <div class="stat-content">
+            <div class="stat-title">
+                <p>Total Revenue</p>
+                <h1>$45,678</h1>
+            </div>
+            <div class="stat-trend up">
+                <div class="trend-indicator">
+                    <span class="material-symbols-outlined">arrow_upward</span>
+                    <span class="trend-value">8.2%</span>
+                </div>
+                <span class="trend-text">(+$3,450)</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-icon occupancy">
+            <span class="material-symbols-outlined">theaters</span>
+        </div>
+        <div class="stat-content">
+            <div class="stat-title">
+                <p>Occupancy Rate</p>
+                <h1>78%</h1>
+            </div>
+            <div class="stat-trend down">
+                <div class="trend-indicator">
+                    <span class="material-symbols-outlined">arrow_downward</span>
+                    <span class="trend-value">2.1%</span>
+                </div>
+                <span class="trend-text">(-5% from peak)</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-icon satisfaction">
+            <span class="material-symbols-outlined">sentiment_satisfied</span>
+        </div>
+        <div class="stat-content">
+            <div class="stat-title">
+                <p>Customer Review</p>
+                <h1>4.8/5</h1>
+            </div>
+            <div class="stat-trend up">
+                <div class="trend-indicator">
+                    <span class="material-symbols-outlined">arrow_upward</span>
+                    <span class="trend-value">0.3</span>
+                </div>
+                <span class="trend-text">(+0.2 points)</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-icon refund">
+            <span class="material-symbols-outlined">assignment_return</span>
+        </div>
+        <div class="stat-content">
+            <div class="stat-title">
+                <p>Refund Rate</p>
+                <h1>2.3%</h1>
+            </div>
+            <div class="stat-trend down">
+                <div class="trend-indicator">
+                    <span class="material-symbols-outlined">arrow_downward</span>
+                    <span class="trend-value">1.4%</span>
+                </div>
+                <span class="trend-text">(-0.8% improvement)</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="charts-container">
+    <div class="chart-wrapper">
+        <div class="chart-header">
+            <div class="chart-title">
+                <h2>Sales Trend</h2>
+                <p>Revenue performance overview</p>
+            </div>
+            <div class="chart-controls">
+                <div class="chart-dropdown">
+                    <div class="dropdown-header">
+                        <span class="selected-value">Monthly</span>
+                        <span class="material-symbols-outlined dropdown-arrow">expand_more</span>
+                    </div>
+                    <div class="dropdown-list">
+                        <div class="dropdown-item" data-value="weekly">
+                            <span class="item-text">Weekly</span>
+                            <span class="checkmark">✓</span>
+                        </div>
+                        <div class="dropdown-item" data-value="monthly">
+                            <span class="item-text">Monthly</span>
+                            <span class="checkmark">✓</span>
+                        </div>
+                        <div class="dropdown-item" data-value="yearly">
+                            <span class="item-text">Yearly</span>
+                            <span class="checkmark">✓</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <canvas id="salesChart"></canvas>
+        </div>
+
+        <div class="chart-stats">
+            <div class="stat-item">
+                <div class="stat-value">$42.3k</div>
+                <div class="stat-label">Current</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" style="color: #22c55e;">+12.5%</div>
+                <div class="stat-label">Growth</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">$28.9k</div>
+                <div class="stat-label">Average</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">$42.3k</div>
+                <div class="stat-label">Peak</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="chart-sidebar" id="shortcut-area">
+        <div class="placeholder-content">
+            <h3>Quick Access</h3>
+            <p>Drag frequently used menu items here for quick access</p>
+        </div>
+    </div>
+</div>
+
+@section Script {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="~/js/Admin View/Dashboard.js"></script>
+}

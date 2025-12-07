@@ -1,0 +1,448 @@
+﻿/* ---------------- View Cinema Page CSS ------------------ */
+
+/* View Container */
+.view-container {
+    max-width: 1000px;
+    margin: 30px auto;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    font-family: var(--font);
+}
+
+.view-cinema-container {
+    display: flex;
+    flex-direction: column;
+}
+
+/* View Cinema Header */
+.view-cinema-header {
+    background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue) 100%);
+    color: white;
+    padding: 30px 40px;
+}
+
+    .view-cinema-header h1 {
+        font-size: 28px;
+        font-weight: 700;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .view-cinema-header .material-symbols-outlined {
+        font-size: 32px;
+    }
+
+.subtitle {
+    font-size: 16px;
+    font-weight: 400;
+    opacity: 0.9;
+    margin-left: 44px;
+}
+
+/* View Content */
+.view-content {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* View Sections */
+.view-section {
+    background-color: white;
+    border: 1px solid var(--grey-light);
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Cinema Image Section */
+.cinema-image-section {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.cinema-image-container {
+    position: relative;
+    width: 300px;
+    height: 200px;
+    border-radius: 12px;
+    overflow: hidden;
+    flex-shrink: 0;
+    border: 2px solid var(--blue-light);
+    box-shadow: 0 4px 15px rgba(59, 183, 229, 0.2);
+}
+
+.cinema-main-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.image-label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 8px 15px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+.cinema-basic-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.cinema-id-display {
+    background-color: var(--blue-lighter);
+    color: var(--blue-dark);
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 18px;
+    border-left: 4px solid var(--blue);
+    display: inline-block;
+    width: fit-content;
+}
+
+.cinema-name {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--grey-darker);
+    margin: 0;
+}
+
+.cinema-status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    width: fit-content;
+}
+
+    .cinema-status-badge.active {
+        background-color: var(--green-light);
+        color: var(--green-dark);
+    }
+
+    .cinema-status-badge.inactive {
+        background-color: var(--red-light);
+        color: var(--red-dark);
+    }
+
+    .cinema-status-badge .material-symbols-outlined {
+        font-size: 18px;
+        color: var(--green-dark);
+    }
+
+/* Section Title */
+.section-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    color: var(--blue-dark);
+    border-bottom: 2px solid var(--blue-light);
+    padding-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-family: var(--font);
+}
+
+/* Info Grid */
+.info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+.info-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+    .info-group.full-width {
+        grid-column: 1 / -1;
+    }
+
+.info-label {
+    font-weight: 600;
+    color: var(--grey-darker);
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-family: var(--font);
+}
+
+.info-value {
+    padding: 14px 16px;
+    background-color: var(--grey-light);
+    border-radius: 8px;
+    font-size: 15px;
+    color: var(--grey-dark);
+    font-weight: 500;
+    font-family: var(--font);
+    border-left: 4px solid var(--blue);
+}
+
+    .info-value.address-value {
+        line-height: 1.6;
+        white-space: pre-line;
+    }
+
+/* Location Badge */
+.location-badge-state {
+    display: inline-block;
+    padding: 6px 12px;
+    background-color: var(--purple-light);
+    color: var(--blue-dark);
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    border: 1px solid var(--purple);
+}
+
+.location-badge-city {
+    display: inline-block;
+    padding: 6px 12px;
+    background-color: var(--orange-light);
+    color: var(--blue-dark);
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    border: 1px solid var(--orange);
+}
+
+/* View Actions */
+.view-actions {
+    display: flex;
+    justify-content: center;
+    padding: 25px 40px;
+    background-color: var(--grey-light);
+    border-top: 1px solid var(--grey);
+    gap: 15px;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.btn {
+    padding: 14px 25px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font);
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    justify-content: center;
+}
+
+.btn-back {
+    background-color: var(--grey);
+    color: white;
+}
+
+    .btn-back:hover {
+        background-color: var(--grey-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+.btn-edit {
+    background-color: var(--blue);
+    color: white;
+}
+
+    .btn-edit:hover {
+        background-color: var(--blue-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(59, 183, 229, 0.3);
+    }
+
+.btn-delete {
+    background-color: var(--red);
+    color: white;
+}
+
+    .btn-delete:hover {
+        background-color: var(--red-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+    }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .view-container {
+        margin: 15px;
+        border-radius: 8px;
+    }
+
+    .view-content {
+        padding: 25px;
+        gap: 20px;
+    }
+
+    .view-section {
+        padding: 20px;
+    }
+
+    .cinema-image-section {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
+
+    .cinema-image-container {
+        width: 100%;
+        height: 200px;
+    }
+
+    .cinema-basic-info {
+        align-items: center;
+        text-align: center;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .view-actions {
+        flex-direction: column;
+        padding: 20px 25px;
+    }
+
+    .action-buttons {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+    }
+
+    .view-cinema-header {
+        padding: 20px 25px;
+    }
+
+        .view-cinema-header h1 {
+            font-size: 24px;
+        }
+
+    .subtitle {
+        margin-left: 0;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .view-cinema-header {
+        padding: 15px 20px;
+    }
+
+        .view-cinema-header h1 {
+            font-size: 22px;
+        }
+
+        .view-cinema-header .material-symbols-outlined {
+            font-size: 28px;
+        }
+
+    .view-content {
+        padding: 20px;
+    }
+
+    .view-section {
+        padding: 15px;
+    }
+
+    .cinema-name {
+        font-size: 20px;
+    }
+
+    .cinema-id-display {
+        font-size: 16px;
+        padding: 10px 16px;
+    }
+
+    .section-title {
+        font-size: 16px;
+    }
+
+    .info-value {
+        padding: 12px 14px;
+        font-size: 14px;
+    }
+
+    .info-label {
+        font-size: 13px;
+    }
+}
+
+/* Additional Styles for Better Readability */
+.cinema-main-image:hover {
+    transform: scale(1.02);
+    transition: transform 0.3s ease;
+}
+
+
+/* Focus states for accessibility */
+.btn:focus,
+.btn-back:focus,
+.btn-edit:focus,
+.btn-delete:focus {
+    outline: 2px solid var(--blue);
+    outline-offset: 2px;
+}
+
+/* Print styles */
+@media print {
+    .view-actions {
+        display: none;
+    }
+
+    .view-container {
+        box-shadow: none;
+        margin: 0;
+        border-radius: 0;
+    }
+
+    .view-cinema-header {
+        background: none;
+        color: black;
+        border-bottom: 2px solid black;
+    }
+
+    .view-section {
+        border: 1px solid #ccc;
+        box-shadow: none;
+        page-break-inside: avoid;
+    }
+}

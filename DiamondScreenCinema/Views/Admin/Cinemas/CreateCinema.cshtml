@@ -1,0 +1,276 @@
+﻿@{
+    Layout = "_AdminLayout";
+}
+
+@section head {
+    <link href="~/css/Admin View/Cinemas and Halls/CreateCinema.css" rel="stylesheet" asp-append-version="true" />
+}
+
+<div class="create-form-container">
+
+    <div class="create-cinema-header">
+        <h1>
+            <span class="material-symbols-outlined">theaters</span>
+            Create New Cinema
+        </h1>
+        <p class="subtitle">Add a new cinema to the system</p>
+    </div>
+
+    <form asp-controller="Admin" asp-action="CreateCinema" method="post" enctype="multipart/form-data">
+        <div class="create-form-layout">
+            <div class="picture-section">
+                <label class="section-label">Cinema Image</label>
+                <label class="file-upload-label" for="cinemaImage">
+                    <img id="cinemaImagePreview" class="preview-image" style="display:none;" />
+                    <span id="uploadText" class="upload-text">
+                        <span class="material-symbols-outlined">add_photo_alternate</span>
+                        Click to Upload Image<br>
+                        <span class="upload-subtext">Recommended: 1200×800</span>
+                    </span>
+                </label>
+                <input type="file" id="cinemaImage" name="CinemaImage" accept="image/*" hidden />
+                <div class="image-info">
+                    <p>Max file size: 5MB</p>
+                    <p>Supported formats: JPG, PNG, JPEG</p>
+                </div>
+            </div>
+
+            <div class="create-form-fields">
+                <div class="form-group">
+                    <label class="form-label required">Cinema Name</label>
+                    <input type="text" name="Name" class="name" placeholder="Enter cinema name" required />
+                    <div class="form-hint">E.g: GSC One Utama</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label required">Contact Number</label>
+                    <input type="tel" name="ContactNumber" placeholder="e.g., 03-1234 5678" required />
+                    <div class="form-hint">Format: 03-XXXX XXXX or 0X-XXXX XXXX</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label required">Location State</label>
+                    <select name="LocationState" required>
+                        <option value="">Select State</option>
+                        <option value="Kuala Lumpur">Kuala Lumpur</option>
+                        <option value="Selangor">Selangor</option>
+                        <option value="Johor">Johor</option>
+                        <option value="Penang">Pulau Pinang</option>
+                        <option value="Perak">Perak</option>
+                        <option value="Melaka">Melaka</option>
+                        <option value="Negeri Sembilan">Negeri Sembilan</option>
+                        <option value="Pahang">Pahang</option>
+                        <option value="Kelantan">Kelantan</option>
+                        <option value="Terengganu">Terengganu</option>
+                        <option value="Kedah">Kedah</option>
+                        <option value="Perlis">Perlis</option>
+                        <option value="Sabah">Sabah</option>
+                        <option value="Sarawak">Sarawak</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label required">Location City</label>
+                    <select name="LocationCity" required>
+                        <option value="">Select State</option>
+                        <option value="Alor Setar">Alor Setar</option>
+                        <option value="Selangor">Selangor</option>
+                        <option value="Kuala Lumpur">Kuala Lumpur</option>
+                        <option value="Petaling Jaya">Petaling Jaya</option>
+                        <option value="Puchong">Puchong</option>
+                        <option value="Pulau Pinang">Pulau Pinang</option>
+                        <option value="Seremban">Seremban</option>
+                        <option value="Shah Alam">Shah Alam</option>
+                        <option value="Subang Jaya">Subang Jaya</option>
+                        <option value="Sungai Petani">Sungai Petani</option>
+                        <option value="Melaka">Melaka</option>
+                        <option value="Miri">Miri</option>
+                        <option value="Klang">Klang</option>
+                        <option value="Kota Kinabalu">Kota Kinabalu</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group full-width">
+            <label class="form-label required">Address</label>
+            <textarea name="Address" rows="4" placeholder="Enter complete cinema address" required></textarea>
+            <div class="form-hint">Include building name, floor, and full address details</div>
+        </div>
+
+        <div class="form-actions">
+            <a asp-controller="Admin" asp-action="Cinemas" asp-route-Page="CinemaManagement" class="btn btn-cancel">
+                <span class="material-symbols-outlined">close</span>
+                Cancel
+            </a>
+            <button type="reset" class="btn btn-reset">
+                <span class="material-symbols-outlined">restart_alt</span>
+                Reset
+            </button>
+            <button type="submit" class="btn btn-create">
+                <span class="material-symbols-outlined">add</span>
+                Create Cinema
+            </button>
+        </div>
+    </form>
+</div>
+
+<script>
+        // Image upload functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        const cinemaImageInput = document.getElementById('cinemaImage');
+        const cinemaImagePreview = document.getElementById('cinemaImagePreview');
+        const uploadText = document.getElementById('uploadText');
+        const fileUploadLabel = document.querySelector('.file-upload-label');
+
+        // Image upload preview
+        cinemaImageInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+
+            if (file) {
+                // Check file size (5MB limit)
+                if (file.size > 5 * 1024 * 1024) {
+                    alert('File size must be less than 5MB');
+                    this.value = '';
+                    return;
+                }
+
+                // Check file type
+                const validTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+                if (!validTypes.includes(file.type)) {
+                    alert('Please upload a valid image file (JPG, PNG only)');
+                    this.value = '';
+                    return;
+                }
+
+                // Show loading state
+                fileUploadLabel.classList.add('loading');
+
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    cinemaImagePreview.src = e.target.result;
+                    cinemaImagePreview.style.display = 'block';
+                    uploadText.style.display = 'none';
+                    fileUploadLabel.classList.add('has-image');
+
+                    // Remove loading state
+                    setTimeout(() => {
+                        fileUploadLabel.classList.remove('loading');
+                    }, 500);
+                };
+
+                reader.onerror = function() {
+                    alert('Error reading file. Please try again.');
+                    fileUploadLabel.classList.remove('loading');
+                };
+
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Click on preview to change image
+        cinemaImagePreview.addEventListener('click', function() {
+            cinemaImageInput.click();
+        });
+
+        // Form validation
+        const form = document.querySelector('form');
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Basic validation
+            const cinemaImage = cinemaImageInput.files[0];
+            const name = document.querySelector('[name="Name"]').value.trim();
+            const contactNumber = document.querySelector('[name="ContactNumber"]').value.trim();
+            const address = document.querySelector('[name="Address"]').value.trim();
+            const state = document.querySelector('[name="LocationState"]').value;
+            const city = document.querySelector('[name="LocationCity"]').value;
+
+            // Validation checks
+            let isValid = true;
+            let errorMessage = '';
+
+            if (!cinemaImage) {
+                isValid = false;
+                errorMessage = 'Please upload a cinema image';
+            } else if (!name) {
+                isValid = false;
+                errorMessage = 'Please enter cinema name';
+            } else if (!contactNumber) {
+                isValid = false;
+                errorMessage = 'Please enter contact number';
+            } else if (!address) {
+                isValid = false;
+                errorMessage = 'Please enter address';
+            } else if (!state) {
+                isValid = false;
+                errorMessage = 'Please select location state';
+            } else if (!city) {
+                isValid = false;
+                errorMessage = 'Please select location city';
+            }
+
+            // Contact number format validation
+            const phoneRegex = /^0\d-\d{4}\s?\d{4}$/;
+            if (contactNumber && !phoneRegex.test(contactNumber)) {
+                isValid = false;
+                errorMessage = 'Please enter a valid contact number (e.g., 03-1234 5678)';
+            }
+
+            if (!isValid) {
+                alert(errorMessage);
+                return;
+            }
+
+            // Submit form
+            alert('Cinema created successfully!');
+            // this.submit(); // Uncomment for actual form submission
+        });
+
+        // Reset form
+        document.querySelector('.btn-reset').addEventListener('click', function() {
+            if (confirm('Are you sure you want to reset all fields?')) {
+                form.reset();
+                cinemaImagePreview.style.display = 'none';
+                uploadText.style.display = 'block';
+                fileUploadLabel.classList.remove('has-image');
+            }
+        });
+
+        // City dropdown based on state selection
+        const stateSelect = document.querySelector('[name="LocationState"]');
+        const citySelect = document.querySelector('[name="LocationCity"]');
+
+        // City data based on states
+        const cityData = {
+            'Kuala Lumpur': ['Kuala Lumpur', 'Cheras', 'Kepong', 'Setapak'],
+            'Selangor': ['Petaling Jaya', 'Shah Alam', 'Subang Jaya', 'Klang', 'Puchong'],
+            'Johor': ['Johor Bahru', 'Pasir Gudang', 'Muar', 'Batu Pahat'],
+            'Penang': ['Georgetown', 'Butterworth', 'Bayan Lepas'],
+            'Melaka': ['Melaka City', 'Alor Gajah'],
+            'Negeri Sembilan': ['Seremban', 'Port Dickson', 'Nilai'],
+            'Pahang': ['Kuantan', 'Bentong', 'Cameron Highlands'],
+            'Kedah': ['Alor Setar', 'Sungai Petani', 'Kulim'],
+            'Perak': ['Ipoh', 'Taiping', 'Teluk Intan'],
+            'Kelantan': ['Kota Bharu', 'Pasir Mas'],
+            'Terengganu': ['Kuala Terengganu', 'Kemaman'],
+            'Sabah': ['Kota Kinabalu', 'Sandakan', 'Tawau'],
+            'Sarawak': ['Kuching', 'Miri', 'Sibu']
+        };
+
+        stateSelect.addEventListener('change', function() {
+            const selectedState = this.value;
+            citySelect.innerHTML = '<option value="">Select City</option>';
+
+            if (selectedState && cityData[selectedState]) {
+                cityData[selectedState].forEach(city => {
+                    const option = document.createElement('option');
+                    option.value = city;
+                    option.textContent = city;
+                    citySelect.appendChild(option);
+                });
+            }
+        });
+    });
+
+</script>

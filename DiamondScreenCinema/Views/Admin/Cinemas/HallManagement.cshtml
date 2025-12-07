@@ -1,0 +1,268 @@
+﻿@{
+    Layout = "_AdminLayout";
+}
+
+@section head {
+    <link href="~/css/Admin View/Cinemas and Halls/HallManagement.css" rel="stylesheet" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Admin View/AdminLayout.css" asp-append-version="true" />
+}
+
+<div class="menu-container">
+    <div class="title-top">
+        <h1>Hall Management</h1>
+        <p>Manage all halls</p>
+    </div>
+
+
+    <div class="menu-icon">
+        <a asp-controller="Admin" asp-action="Cinemas" asp-route-Page="HallManagement" class="menu-item">
+            <span class="material-symbols-outlined" title="View All Hall">door_sliding</span>
+        </a>
+        <a asp-controller="Admin" asp-action="Cinemas" asp-route-Page="CreateHall" class="menu-item">
+            <span class="material-symbols-outlined" title="Add New Hall">add_2</span>
+        </a>
+    </div>
+</div>
+
+<div class="hall-table-container">
+    <!-- Filter Bar -->
+    <div class="hall-filter-bar">
+        <div class="hall-filter-left">
+            <div class="hall-filter-group">
+                <label class="hall-filter-label">Filter by Cinema</label>
+                <select class="hall-filter-select" id="cinemaFilter">
+                    <option value="all">All Cinemas</option>
+                    <option value="C0001">GSC One Utama</option>
+                    <option value="C0002">GSC Pavillion Bukit Jalil</option>
+                    <option value="C0003">GSC Mid Valley</option>
+                    <option value="C0004">GSC IOI City Mall</option>
+                </select>
+            </div>
+
+            <div class="hall-filter-group">
+                <label class="hall-filter-label">Status</label>
+                <select class="hall-filter-select" id="statusFilter">
+                    <option value="all">All Status</option>
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+                    <option value="maintenance">Maintenance</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="hall-filter-right">
+            <div class="hall-search-container">
+                <span class="material-symbols-outlined hall-search-icon">search</span>
+                <input type="text" class="hall-search-input" placeholder="Search halls..." id="hallSearch">
+            </div>
+
+            <button class="hall-clear-filters" id="clearFilters">
+                Clear Filters
+            </button>
+        </div>
+    </div>
+
+    <!-- Results Count -->
+    <div class="hall-results-count" id="resultsCount">
+        Showing 3 halls
+    </div>
+
+    <!-- Hall Table -->
+    <table class="hall-table">
+        <thead>
+            <tr>
+                <th>Hall ID</th>
+                <th>Hall Name</th>
+                <th>Hall Type</th>
+                <th>Status</th>
+                <th>Cinema ID</th>
+                <th>Cinema Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>H0001</td>
+                <td>Hall 1</td>
+                <td>Main Theater</td>
+                <td><span class="hall-status-active">Active</span></td>
+                <td>C0001</td>
+                <td>GSC One Utama</td>
+                <td>
+                    <div class="action-buttons">
+                        <a asp-controller="Admin" asp-action="Cinemas" asp-route-id="ViewHall" class="action-btn action-view" title="View Hall">
+                            <span class="material-symbols-outlined">visibility</span>
+                        </a>
+                        <a asp-controller="Admin" asp-action="Cinemas" asp-route-id="UpdateHall" class="action-btn action-edit" title="Edit Hall">
+                            <span class="material-symbols-outlined" style="font-size: 16px;">edit</span>
+                        </a>
+                        <button class="action-btn action-delete" onclick="#" title="Delete">
+                            <span class="material-symbols-outlined" style="font-size: 16px;">delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>H0002</td>
+                <td>Hall 2</td>
+                <td>Premium Lounge</td>
+                <td><span class="hall-status-maintenance">Maintenance</span></td>
+                <td>C0001</td>
+                <td>GSC One Utama</td>
+                <td>
+                    <div class="action-buttons">
+                        <a asp-controller="Admin" asp-action="ViewHall" asp-route-id="#" class="action-btn action-view" title="View Hall">
+                            <span class="material-symbols-outlined">visibility</span>
+                        </a>
+                        <a asp-controller="Admin" asp-action="UpdateHall" asp-route-id="#" class="action-btn action-edit" title="Edit Hall">
+                            <span class="material-symbols-outlined" style="font-size: 16px;">edit</span>
+                        </a>
+                        <button class="action-btn action-delete" onclick=# title="Delete Hall">
+                            <span class="material-symbols-outlined" style="font-size: 16px;">delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>H0003</td>
+                <td>Hall 2</td>
+                <td>IMAX</td>
+                <td><span class="hall-status-inactive">Inactive</span></td>
+                <td>C0002</td>
+                <td>GSC Pavillion Bukit Jalil</td>
+                <td>
+                    <div class="action-buttons">
+                        <a asp-controller="Admin" asp-action="ViewHall" asp-route-id="#" class="action-btn action-view" title="View Hall">
+                            <span class="material-symbols-outlined">visibility</span>
+                        </a>
+                        <a asp-controller="Admin" asp-action="UpdateHall" asp-route-id="#" class="action-btn action-edit" title="Edit Hall">
+                            <span class="material-symbols-outlined" style="font-size: 16px;">edit</span>
+                        </a>
+                        <button class="action-btn action-delete" onclick=# title="Delete">
+                            <span class="material-symbols-outlined" style="font-size: 16px;">delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<script>
+                // Hall Management Filter JavaScript
+            document.addEventListener('DOMContentLoaded', function() {
+                // Get all hall table rows (excluding header)
+                const hallRows = document.querySelectorAll('.hall-table tbody tr');
+                const resultsCount = document.getElementById('resultsCount');
+
+                // Get filter elements
+                const cinemaFilter = document.getElementById('cinemaFilter');
+                const statusFilter = document.getElementById('statusFilter');
+                const searchInput = document.getElementById('hallSearch');
+                const clearFiltersBtn = document.getElementById('clearFilters');
+
+                // Function to filter halls
+                function filterHalls() {
+                    const searchTerm = searchInput.value.toLowerCase();
+                    const selectedCinema = cinemaFilter.value;
+                    const selectedStatus = statusFilter.value;
+
+                    let visibleCount = 0;
+
+                    hallRows.forEach(row => {
+                        // Get data from each row
+                        const hallName = row.cells[1].textContent.toLowerCase();
+                        const hallType = row.cells[2].textContent.toLowerCase();
+                        const statusElement = row.cells[3].querySelector('span');
+                        const status = statusElement ? statusElement.textContent.toLowerCase() : '';
+                        const cinemaId = row.cells[4].textContent;
+                        const cinemaName = row.cells[5].textContent.toLowerCase();
+
+                        // Check search term match
+                        const matchesSearch = searchTerm === '' ||
+                                             hallName.includes(searchTerm) ||
+                                             hallType.includes(searchTerm) ||
+                                             cinemaName.includes(searchTerm);
+
+                        // Check cinema filter match
+                        const matchesCinema = selectedCinema === 'all' ||
+                                             cinemaId === selectedCinema ||
+                                             cinemaName.includes(selectedCinema.toLowerCase());
+
+                        // Check status filter match
+                        const matchesStatus = selectedStatus === 'all' ||
+                                             status.includes(selectedStatus.toLowerCase());
+
+                        // Show or hide row based on all filters
+                        if (matchesSearch && matchesCinema && matchesStatus) {
+                            row.style.display = '';
+                            visibleCount++;
+                        } else {
+                            row.style.display = 'none';
+                        }
+                    });
+
+                    // Update results count
+                    resultsCount.textContent = `Showing ${visibleCount} halls`;
+                }
+
+                // Function to clear all filters
+                function clearFilters() {
+                    cinemaFilter.value = 'all';
+                    statusFilter.value = 'all';
+                    searchInput.value = '';
+                    filterHalls();
+                }
+
+                // Add event listeners for filtering
+                cinemaFilter.addEventListener('change', filterHalls);
+                statusFilter.addEventListener('change', filterHalls);
+                searchInput.addEventListener('input', filterHalls);
+
+                // Add event listener for clear filters button
+                clearFiltersBtn.addEventListener('click', clearFilters);
+
+                // Add event listeners for delete buttons (example functionality)
+                document.querySelectorAll('.action-delete').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const hallId = this.closest('tr').cells[0].textContent;
+                        const hallName = this.closest('tr').cells[1].textContent;
+
+                        if (confirm(`Are you sure you want to delete "${hallName}" (${hallId})?`)) {
+                            // In a real application, you would make an AJAX call here
+                            alert(`Hall ${hallId} would be deleted. This is a demo - no actual deletion performed.`);
+
+                            // For demo purposes, you could hide the row
+                            // this.closest('tr').style.display = 'none';
+                            // filterHalls(); // Re-run filter to update count
+                        }
+                    });
+                });
+
+                // Add event listeners for edit/view buttons (example functionality)
+                document.querySelectorAll('.action-edit').forEach(btn => {
+                    btn.addEventListener('click', function(e) {
+                        // If the href is "#", prevent default and show message
+                        if (this.getAttribute('href') === '#') {
+                            e.preventDefault();
+                            const hallId = this.closest('tr').cells[0].textContent;
+                            alert(`Edit Hall ${hallId} functionality would open here.`);
+                        }
+                    });
+                });
+
+                document.querySelectorAll('.action-view').forEach(btn => {
+                    btn.addEventListener('click', function(e) {
+                        // If the href is "#", prevent default and show message
+                        if (this.getAttribute('href') === '#') {
+                            e.preventDefault();
+                            const hallId = this.closest('tr').cells[0].textContent;
+                            alert(`View Hall ${hallId} details would open here.`);
+                        }
+                    });
+                });
+
+                // Initial filter to set correct count
+                filterHalls();
+            });
+</script>
