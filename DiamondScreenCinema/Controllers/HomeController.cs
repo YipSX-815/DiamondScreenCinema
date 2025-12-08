@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using DiamondScreenCinema.Models;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace DiamondScreenCinema.Controllers;
 
@@ -39,6 +42,7 @@ public class HomeController : Controller
             .Take(10)
             .ToListAsync();
 
+        // Create ViewModel with proper poster and trailer paths
         var viewModel = new HomeViewModel
         {
             HeroMovies = heroMovies.Select(m => new Movie
@@ -48,8 +52,8 @@ public class HomeController : Controller
                 Genre = m.Genre,
                 Duration = m.Duration,
                 ReleaseDate = m.ReleaseDate,
-                HorizontalPoster = GetPosterPath(m.HorizontalPoster!),
                 Poster = GetPosterPath(m.Poster),
+                HorizontalPoster = GetHorizontalPosterPath(m.HorizontalPoster),
                 Classification = m.Classification,
                 Language = m.Language,
                 Director = m.Director,
@@ -187,6 +191,32 @@ public class HomeController : Controller
         return posterFileName;
     }
 
+    private string GetHorizontalPosterPath(string horizontalPosterFileName)
+    {
+        if (string.IsNullOrEmpty(horizontalPosterFileName))
+            return null;
+
+        if (horizontalPosterFileName.StartsWith("http://") || horizontalPosterFileName.StartsWith("https://"))
+            return horizontalPosterFileName;
+
+        if (horizontalPosterFileName.StartsWith("/MovieUpload/HorizontalPoster/", StringComparison.OrdinalIgnoreCase))
+        {
+            var lastSlashIndex = horizontalPosterFileName.LastIndexOf('/');
+            if (lastSlashIndex >= 0 && lastSlashIndex < horizontalPosterFileName.Length - 1)
+            {
+                return horizontalPosterFileName.Substring(lastSlashIndex + 1);
+            }
+        }
+
+        if (horizontalPosterFileName.StartsWith("/"))
+            return horizontalPosterFileName;
+
+        if (horizontalPosterFileName.StartsWith("~"))
+            return horizontalPosterFileName;
+
+        return horizontalPosterFileName;
+    }
+
 
     private string GetTrailerPath(string trailerFileName)
     {
@@ -235,6 +265,7 @@ public class HomeController : Controller
             return NotFound();
         }
 
+        // Convert Movie entity to MovieVM
         var movieVM = new MovieVM
         {
             MovieId = movie.MovieId,
@@ -249,8 +280,9 @@ public class HomeController : Controller
             ReleaseDate = movie.ReleaseDate,
             Status = movie.Status,
             Synopsis = movie.Synopsis,
-            Poster = GetPosterPath(movie.Poster),
-            Trailer = GetTrailerPath(movie.Trailer)
+            Poster = GetPosterPath(movie.Poster),  // Already processed
+            HorizontalPoster = GetHorizontalPosterPath(movie.HorizontalPoster), // Add horizontal poster
+            Trailer = GetTrailerPath(movie.Trailer) // Already processed
         };
 
         return View("Movie/MovieInfo", movieVM);

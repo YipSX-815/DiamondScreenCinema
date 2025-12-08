@@ -11,15 +11,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/dark.css">
-    <link rel="stylesheet" href="~/css/Customer View/Account/Authenticate.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/css/Customer View/Account/Authenticate.css">
 </head>
 
 <body>
     <div class="logo">
-        <a asp-action="Index" asp-controller="Home">
-            <img src="~/images/Icon.png">
-            <h1>Diamond Screen Cinema</h1>
-        </a>
+        <img src="~/images/Icon.png">
+        <h1>Diamond Screen Cinema</h1>
     </div>
 
     <div class="auth-wrapper">
@@ -37,7 +35,6 @@
                 </p>
 
                 <form class="auth-form" asp-action="Login" method="post">
-                    <span asp-validation-for="LoginVM.Email"></span>
                     <div class="input-group" id="emailGroup">
                         <span class="material-symbols-outlined">mail</span>
                         <input asp-for="LoginVM.Email" placeholder="Email">
@@ -78,7 +75,7 @@
                             <span class="toggle-btn" id="emailLoginBtn" style="display:none;">Login with email</span>
                         </p>
                         <p class="toggle-text">
-                            <span class="toggle-btn"><a asp-action="ForgotPassword" asp-controller="Account">Forgot Password?</a></span>
+                            <span class="toggle-btn">Forgot Password?</span>
                         </p>
                     </div>
                 </form>

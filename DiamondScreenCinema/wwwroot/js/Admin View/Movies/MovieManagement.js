@@ -463,10 +463,14 @@ function attachMovieListDelegates() {
         if (e.target.closest('.view-btn') || e.target.closest('.update-btn')) return;
         if (e.target.closest('.custom-dropdown')) return;
 
-        const card = e.target.closest('.movie-card');
-        if (card) {
-            card.classList.toggle('selected');
-            updateSelectionButtons();
+        // Only allow selection when clicking the poster-wrapper area
+        const posterWrapper = e.target.closest('.poster-wrapper');
+        if (posterWrapper) {
+            const card = posterWrapper.closest('.movie-card');
+            if (card) {
+                card.classList.toggle('selected');
+                updateSelectionButtons();
+            }
         }
     });
 }

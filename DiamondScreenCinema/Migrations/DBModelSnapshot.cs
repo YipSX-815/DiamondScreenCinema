@@ -215,7 +215,6 @@ namespace DiamondScreenCinema.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("HorizontalPoster")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Language")
@@ -245,7 +244,6 @@ namespace DiamondScreenCinema.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Trailer")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("MovieId");
@@ -476,12 +474,6 @@ namespace DiamondScreenCinema.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProfileImage")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.PrimitiveCollection<string>("SecurityAnswer")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.PrimitiveCollection<string>("SecurityQuestions")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Username")

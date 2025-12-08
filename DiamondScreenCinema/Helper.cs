@@ -1,12 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
-using System.ComponentModel.DataAnnotations;
 using System.Net;
 using System.Net.Mail;
 using System.Security.Claims;
-using System.Text.Json;
 
 public class Helper
 {
@@ -78,42 +74,5 @@ public class Helper
         };
 
         smtp.Send(mail);
-    }
-
-    private const string TempDataModelKey = "ViewModel";
-    private const string TempDataModelStateKey = "ModelState";
-
-    public void SaveModel<T>(ITempDataDictionary tempData, T model)
-    {
-        tempData[TempDataModelKey] = JsonSerializer.Serialize(model);
-    }
-
-    public T? LoadModel<T>(ITempDataDictionary tempData)
-    {
-        if (tempData.TryGetValue(TempDataModelKey, out var stored))
-        {
-            return JsonSerializer.Deserialize<T>(stored!.ToString()!);
-        }
-        return default;
-    }
-
-    public void SaveModelState(ITempDataDictionary tempData, ModelStateDictionary modelState)
-    {
-        var dict = modelState.ToDictionary(
-            kv => kv.Key,
-            kv => kv.Value.Errors.Select(e => e.ErrorMessage).ToArray()
-        );
-
-        tempData[TempDataModelStateKey] = JsonSerializer.Serialize(dict);
-    }
-
-    public Dictionary<string, string[]>? LoadModelState(ITempDataDictionary tempData)
-    {
-        if (tempData.TryGetValue(TempDataModelStateKey, out var stored))
-        {
-            return JsonSerializer.Deserialize<Dictionary<string, string[]>>(stored!.ToString()!);
-        }
-
-        return null;
     }
 }

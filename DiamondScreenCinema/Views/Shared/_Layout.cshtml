@@ -16,8 +16,8 @@
         <div class="brand">
             <a asp-controller="Home" asp-action="Index">
                 <img src="~/images/Icon.png" class="logo-img" />
-                <h1>Diamond Screen Cinema</h1>
-            </a>      
+                <h1>DSC</h1>
+            </a>
         </div>
         <nav>
             <a asp-controller="Home" asp-action="MovieMenu">MOVIE</a>
@@ -28,15 +28,17 @@
             @if (User.Identity!.IsAuthenticated)
             {
                 <a asp-controller="Account" asp-action="Logout" style="background: transparent; border: 2px solid var(--blue); color: white; padding: 10px 20px;">LOGOUT</a>
-            } else {
+            }
+            else
+            {
                 <a asp-controller="Account" asp-action="Authenticate" style="background: var(--blue); color: #041f29; padding: 10px 20px;">LOGIN</a>
             }
         </nav>
     </header>
 
     @RenderBody()
-   
-   <footer>
+
+    <footer>
         <div class="footer-section">
             <img src="~/images/Logo.png" alt="DSC Cinema Logo" class="footer-logo">
             <p class="footer-tagline">Experience Movies. Redefined.</p>
@@ -87,11 +89,11 @@
         </div>
     </footer>
 
-   <script src="~/js/jquery.min.js"></script>
-   <script src="~/js/jquery.unobtrusive-ajax.min.js"></script>
-   <script src="~/js/jquery.validate.min.js"></script>
-   <script src="~/js/jquery.validate.unobtrusive.min.js"></script>
-   <script src="~/js/Customer View/Layout.js"></script>
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/js/jquery.validate.min.js"></script>
+    <script src="~/js/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/js/Customer View/Layout.js"></script>
     @RenderSection("Script", false)
 
 

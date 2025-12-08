@@ -237,7 +237,6 @@ a {
     .movie-card:hover {
         transform: translateY(-4px);
         box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-        cursor: pointer;
     }
 
     .movie-card.selected {
@@ -255,6 +254,7 @@ a {
     align-items: center;
     justify-content: center;
     padding: 0;
+    cursor: pointer;
 }
 
 .movie-poster {
@@ -305,22 +305,43 @@ a {
     border-radius: 10px;
     font-size: 12px;
     font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+    font-family: var(--font);
 }
+
+    .status-badge:hover {
+        opacity: 0.8;
+        transform: scale(1.05);
+    }
 
     .status-badge.showing {
         background: #dcfce7;
         color: #166534;
     }
 
+        .status-badge.showing:hover {
+            background: #bbf7d0;
+        }
+
     .status-badge.upcoming {
         background: #fef9c3;
         color: #92400e;
     }
 
+        .status-badge.upcoming:hover {
+            background: #fef08a;
+        }
+
     .status-badge.cancelled {
         background: #fee2e2;
         color: #b91c1c;
     }
+
+        .status-badge.cancelled:hover {
+            background: #fecaca;
+        }
 
 .action-buttons {
     display: flex;

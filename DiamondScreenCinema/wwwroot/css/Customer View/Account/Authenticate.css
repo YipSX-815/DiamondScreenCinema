@@ -18,18 +18,11 @@ body {
     top: 40px;
     left: 40px;
     display: flex;
+    align-items: center;
+    gap: 14px;
     z-index: 200;
     color: white;
     user-select: none;
-}
-
-.logo a {
-    display: flex;
-    flex-direction: row;
-    text-decoration: none;
-    color: white;
-    gap: 14px;
-        align-items: center;
 }
 
 .logo img {
@@ -44,7 +37,7 @@ body {
 }
 
 .auth-form {
-    margin-top: 20px;
+    margin-top: 40px;
 }
 
 .auth-wrapper {
@@ -128,7 +121,7 @@ body {
 }
 
 .content .subtitle {
-    font-size: 18px;
+    font-size: 28px;
     opacity: .75;
     margin-bottom: 15px;
 }
@@ -136,11 +129,11 @@ body {
 .input-group {
     display: flex;
     align-items: center;
-    padding: 15px 12px;
+    padding: 20px 22px;
     background: rgba(255,255,255,0.06);
     border: 1px solid rgba(255,255,255,0.15);
     border-radius: 14px;
-    margin-bottom: 15px;
+    margin-bottom: 30px;
     font-size: 18px;
     transition: 0.25s;
 }
@@ -157,6 +150,7 @@ body {
     color: white;
     width: 100%;
     outline: none;
+    font-size: 20px;
 }
 
 .input-group span {
@@ -165,7 +159,7 @@ body {
 
 .primary-btn {
     width: 100%;
-    padding: 10px;
+    padding: 14px;
     background: #3BB7E5;
     border: none;
     border-radius: 12px;
@@ -184,12 +178,7 @@ body {
 .toggle-text {
     margin-top: 20px;
     opacity: .8;
-    font-size: 15px;
-}
-
-.toggle-text a {
-    text-decoration: none;
-    color: inherit;
+    font-size: 19px;
 }
 
 .toggle-btn {
@@ -216,14 +205,14 @@ body {
 
 .prefix-text {
     font-weight: 600;
-    font-size: 15px;
+    font-size: 20px;
     margin-right: 0;
 }
 
 .phone-prefix-group {
     width: 120px;
     justify-content: center;
-    padding: 18px 15px;
+    padding: 20px 15px;
 }
 
 .prefix-box {
@@ -234,8 +223,8 @@ body {
 }
 
 .flag-icon {
-    width: 24px;
-    height: 14px;
+    width: 28px;
+    height: 18px;
     border-radius: 2px;
 }
 
@@ -276,12 +265,11 @@ body {
     align-items: center;
     gap: 10px;
     font-size: 18px;
-    margin-top: 10px;
+    margin-top: -10px;
     margin-bottom: 20px;
     cursor: pointer;
     color: #fff;
     user-select: none;
-    font-size: 15px;
 }
 
 .remember-me input {
@@ -289,11 +277,8 @@ body {
 }
 
 .checkmark {
-    display; flex;
-    justify-content: center;
-    align-content: center;
-    width: 15px;
-    height: 15px;
+    width: 22px;
+    height: 22px;
     border: 2px solid rgba(255,255,255,0.4);
     border-radius: 6px;
     display: inline-block;
@@ -310,10 +295,10 @@ body {
 .checkmark::after {
     content: "";
     position: absolute;
-    left: 2px;
-    bottom: 1px;
+    left: 7px;
+    top: 3px;
     width: 4px;
-    height: 8px;
+    height: 10px;
     border: solid #000;
     border-width: 0 3px 3px 0;
     transform: rotate(45deg);
@@ -328,7 +313,7 @@ body {
 .validation-summary-errors {
     color: red;
     font-weight: bold;
-    font-size: 15px;
+    font-size: 20px;
     margin-top: 15px;
     margin-bottom: -15px;
 }
@@ -365,17 +350,17 @@ body {
     color: red;
     position: relative;
     font-weight: bold;
-    font-size: 13px;
+    font-size: 18px;
     display: block;
     margin-bottom: 10px;
-    margin-top: 10px;
+    margin-top: -20px;
 }
 
 .password-rules {
     display: block;
     margin-top: -10px;
     margin-bottom: 20px;
-    font-size: 15px;
+    font-size: 18px;
     line-height: 1.3;
 }
 

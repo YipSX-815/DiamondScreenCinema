@@ -16,9 +16,6 @@
 
 	<ItemGroup>
 	  <Folder Include="wwwroot\css\Admin View\Bookings\" />
-	  <Folder Include="wwwroot\MovieUpload\HorizontalPoster\" />
-	  <Folder Include="wwwroot\MovieUpload\poster\" />
-	  <Folder Include="wwwroot\MovieUpload\trailer\" />
 	</ItemGroup>
 
 </Project>

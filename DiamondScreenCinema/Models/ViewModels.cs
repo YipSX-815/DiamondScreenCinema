@@ -1,7 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
-using static Helper;
 
 namespace DiamondScreenCinema.Models;
 
@@ -72,38 +70,6 @@ public class EmailVerificationVM
     public string SixthDigit { get; set; }
 }
 
-public class PhoneVerificationVM
-{
-    public string UserId { get; set; }
-    public List<string> AvailableQuestions { get; set; } = new()
-    {
-        "What is your favourite movie?",
-        "What was the name of your first pet?",
-        "What city were you born in?",
-        "What is your mother's maiden name?",
-        "What is your favourite food?",
-        "What is your dream travel destination?"
-    };
-
-    [Required(ErrorMessage = "Please select question 1")]
-    public string Question1 { get; set; }
-
-    [Required(ErrorMessage = "Please enter your answer")]
-    public string Answer1 { get; set; }
-
-    [Required(ErrorMessage = "Please select question 2")]
-    public string Question2 { get; set; }
-
-    [Required(ErrorMessage = "Please enter your answer")]
-    public string Answer2 { get; set; }
-
-    [Required(ErrorMessage = "Please select question 3")]
-    public string Question3 { get; set; }
-
-    [Required(ErrorMessage = "Please enter your answer")]
-    public string Answer3 { get; set; }
-}
-
 public class MovieVM
 {
     public string? MovieId { get; set; }
@@ -124,12 +90,10 @@ public class MovieVM
     public string? Trailer { get; set; }
     public string? HorizontalPoster { get; set; }
 
-    [JsonIgnore]
     public IFormFile? PosterFile { get; set; }
-    [JsonIgnore]
     public IFormFile? TrailerFile { get; set; }
-    [JsonIgnore]
     public IFormFile? HorizontalPosterFile { get; set; }
+
 }
 
 public class UpdateStatusRequest
@@ -137,6 +101,7 @@ public class UpdateStatusRequest
     public string Id { get; set; }
     public string Status { get; set; }
 }
+
 
 public class HomeViewModel
 {
@@ -146,21 +111,10 @@ public class HomeViewModel
     public List<Movie> ComingSoonMovies { get; set; } = new List<Movie>();
 }
 
+
 public class MovieMenuViewModel
 {
     public List<Movie> ShowingNowMovies { get; set; } = new List<Movie>();
     public List<Movie> ComingSoonMovies { get; set; } = new List<Movie>();
     public List<Movie> TopRatedMovies { get; set; } = new List<Movie>();
-}
-
-public class ForgotPasswordVM
-{
-    [EmailAddress(ErrorMessage = "Invalid Email Address")]
-    public string? Email { get; set; }
-
-    public string? PhonePrefix { get; set; }
-    public string? Phone { get; set; }
-    public string? Password { get; set; }
-    [Compare("Password", ErrorMessage = "Password do not match")]
-    public string? ConfirmPassword { get; set; }
 }

@@ -66,20 +66,20 @@
 
                 <div class="form-group">
                     <label>Language <span style="color: red;">*</span></label>
-                    <select asp-for="Language" required>
-                        <option value="">Select Language</option>
-                        <option>English</option>
-                        <option>Mandarin</option>
-                        <option>Malay</option>
-                        <option>Tamil</option>
-                        <option>Korean</option>
-                        <option>Japanese</option>
-                        <option>Thai</option>
-                        <option>Hindi</option>
-                        <option>Spanish</option>
-                        <option>French</option>
-                        <option>German</option>
-                    </select>
+                    <input asp-for="Language" list="languages" placeholder="Select or type" required />
+                    <datalist id="languages">
+                        <option value="English" />
+                        <option value="Mandarin" />
+                        <option value="Malay" />
+                        <option value="Tamil" />
+                        <option value="Korean" />
+                        <option value="Japanese" />
+                        <option value="Thai" />
+                        <option value="Hindi" />
+                        <option value="Spanish" />
+                        <option value="French" />
+                        <option value="German" />
+                    </datalist>
                 </div>
 
                 <div class="form-group">
@@ -125,29 +125,32 @@
                         <option value="">Select Status</option>
                         <option>Upcoming</option>
                         <option>Showing</option>
-                        <option>Cancelled</option>
                     </select>
                 </div>
             </div>
         </div>
 
         <div class="form-group full-width">
-            <label>Synopsis</label>
+            <label>Synopsis <span style="color: red;">*</span></label>
             <textarea asp-for="Synopsis" required></textarea>
         </div>
 
         <div class="poster-section">
-            <label class="horizontalPoster-Label">Horizontal Poster<span style="color: red;">*</span></label>
+            <label class="horizontalPoster-Label">Horizontal Poster <span style="color: red;">*</span></label>
 
             <label class="file-upload-label horizontal-upload" for="HorizontalPosterFile">
                 <img id="horizontalPosterPreview" class="preview-horizontal" />
 
                 <span id="horizontalUploadText" class="upload-text">
-                    Click to Upload Horizontal Poster<br>(Recommended: 1280×720 or 1920×1080)
+                    Click to Upload Horizontal Poster<br>
+                    <small style="color: #64748b; font-size: 12px; margin-top: 8px; display: block;">
+                        📐 Recommended: 1920×1080 (16:9) or 1920×800 (21:9)<br>
+                        📏 Max width: 2560px | Must be landscape
+                    </small>
                 </span>
             </label>
 
-            <input asp-for="HorizontalPosterFile" type="file" accept="image/*" hidden id="HorizontalPosterFile" required/>
+            <input asp-for="HorizontalPosterFile" type="file" accept="image/*" hidden id="HorizontalPosterFile" />
 
             <button type="button" id="removeHorizontalPoster" class="remove-btn" style="display:none;">
                 Remove Horizontal Poster
@@ -155,7 +158,7 @@
         </div>
 
         <div class="trailer-section">
-            <label>Trailer<span style="color: red;">*</span></label>
+            <label>Trailer <span style="color: red;">*</span></label>
             <label class="file-upload-label trailer-upload" for="TrailerFile">
                 <video id="trailerPreview" class="preview-video" controls style="display:none;"></video>
                 <span id="trailerUploadText" class="upload-text">
@@ -180,9 +183,9 @@
     <script>
         @if (TempData["NotificationMessage"] != null)
         {
-                <text>
-                showNotification('@TempData["NotificationMessage"]', '@TempData["NotificationType"]');
-                </text>
+                    <text>
+                    showNotification('@TempData["NotificationMessage"]', '@TempData["NotificationType"]');
+                    </text>
         }
     </script>
 }

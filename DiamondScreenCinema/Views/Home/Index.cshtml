@@ -1,13 +1,11 @@
 ﻿@model HomeViewModel
 @{
     Layout = "_Layout";
-    ViewBag.Title = "Home | Diamond Screen Cinema";
+    ViewBag.Title = "Diamond Screen Cinema - Homepage";
 }
 
-@section Head {
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="~/css/Customer View/Home/Index.css" asp-append-version="true" />
-}
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="~/css/Customer View/Index.css" asp-append-version="true" />
 
 
 @if (Model.HeroMovies.Any())
@@ -18,15 +16,37 @@
             {
                 var movie = Model.HeroMovies[i];
                 <div class="slide @(i == 0 ? "active" : "")" data-trailer="@movie.Trailer" data-movie-id="@movie.MovieId">
-                    <img src="@Url.Content(movie.HorizontalPoster)" class="slide-img" alt="@movie.Title" loading="lazy" />
-                   
+                    @if (!string.IsNullOrEmpty(movie.HorizontalPoster))
+                    {
+                        @if (movie.HorizontalPoster.Contains("themoviedb.org"))
+                        {
+                            var optimizedPoster = movie.HorizontalPoster.Replace("/t/p/original/", "/t/p/w1920_and_h800_multi_faces/");
+                            <img src="@optimizedPoster" class="slide-img" alt="@movie.Title" loading="lazy" />
+                        }
+                        else if (movie.HorizontalPoster.StartsWith("/") || movie.HorizontalPoster.StartsWith("~"))
+                        {
+                            <img src="@Url.Content(movie.HorizontalPoster)" class="slide-img" alt="@movie.Title" loading="lazy" />
+                        }
+                        else
+                        {
+                            <img src="@Url.Content("~/MovieUpload/HorizontalPoster/" + movie.HorizontalPoster)" class="slide-img" alt="@movie.Title" loading="lazy" />
+                        }
+                    }
+                    else
+                    {
+                        <img src="https://images.unsplash.com/photo-1595769816263-9b910be24d5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=90&fit=crop&crop=entropy"
+                             class="slide-img" alt="@movie.Title" />
+                    }
+
+
                     <div class="trailer-overlay">
-                       
+
                         <div class="trailer-video">
                             <video loop playsinline crossorigin="anonymous">
                                 Your browser does not support the video tag.
                             </video>
                         </div>
+
 
                         <iframe class="trailer-iframe"
                                 frameborder="0"
@@ -42,7 +62,7 @@
                         </div>
                     </div>
 
-                   
+
                     <div class="trailer-timer-bar"></div>
 
                     <div class="slide-content">
@@ -166,7 +186,7 @@ else
         <button class="tab-btn" data-tab="coming-soon">COMING SOON</button>
     </div>
 
-   
+
     <div class="tab-content active" id="now-showing">
         @if (Model.NowShowingMovies.Any())
         {
@@ -234,7 +254,7 @@ else
         }
     </div>
 
-  
+
     <div class="tab-content" id="coming-soon">
         @if (Model.ComingSoonMovies.Any())
         {
@@ -301,5 +321,9 @@ else
 
 
 @section Script {
-    <script src="~/js/Customer View/Home/Index.js"></script>
+
+    <script src="~/js/Customer View/Index.js"></script>
+
+
+
 }

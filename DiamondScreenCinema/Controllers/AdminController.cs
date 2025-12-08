@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DiamondScreenCinema.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace DiamondScreenCinema.Controllers;
@@ -7,20 +8,18 @@ public class AdminController : Controller
 {
     private readonly DB db;
     private readonly IWebHostEnvironment en;
-    private readonly Helper hp;
 
-    public AdminController(DB db, IWebHostEnvironment en, Helper hp)
+    public AdminController(DB db, IWebHostEnvironment en)
     {
         this.db = db;
         this.en = en;
-        this.hp = hp;
     }
 
     public IActionResult Index() => RedirectToAction("Dashboard");
 
     public IActionResult Dashboard()
     {
-        ViewBag.title = "Admin Dashboard | Diamond Screen Cinema";
+        ViewBag.title = "Diamond Screen Cinema - Admin Dashboard";
         return View();
     }
 
@@ -29,39 +28,31 @@ public class AdminController : Controller
         switch (Page)
         {
             case "CinemaManagement":
-                ViewBag.title = "Cinema Management | Diamond Screen Cinema";
+                ViewBag.title = "Diamond Screen Cinema - CinemaManagement";
                 return View("Cinemas/CinemaManagement");
-
             case "HallManagement":
-                ViewBag.title = "Hall Management | Diamond Screen Cinema";
+                ViewBag.title = "Diamond Screen Cinema - HallManagement";
                 return View("Cinemas/HallManagement");
-
             case "CreateHall":
-                ViewBag.title = "Create New Hall | Diamond Screen Cinema";
+                ViewBag.title = "Diamond Screen Cinema - Create New Hall";
                 return View("Cinemas/CreateHall");
-
             case "ViewHall":
-                ViewBag.title = "View Hall | Diamond Screen Cinema";
+                ViewBag.title = "Diamond Screen Cinema - View Hall";
                 return View("Cinemas/ViewHall");
-
             case "UpdateHall":
-                ViewBag.title = "Update Hall | Diamond Screen Cinema";
+                ViewBag.title = "Diamond Screen Cinema - Update Hall";
                 return View("Cinemas/UpdateHall");
-
             case "CreateCinema":
-                ViewBag.title = "Create New Cinema | Diamond Screen Cinema";
+                ViewBag.title = "Diamond Screen Cinema - Create New Cinema";
                 return View("Cinemas/CreateCinema");
-
             case "ViewCinema":
-                ViewBag.title = "View Cinema | Diamond Screen Cinema";
+                ViewBag.title = "Diamond Screen Cinema - View Cinema";
                 return View("Cinemas/ViewCinema");
-
             case "UpdateCinema":
-                ViewBag.title = "Update Cinema | Diamond Screen Cinema";
+                ViewBag.title = "Diamond Screen Cinema - Update Cinema";
                 return View("Cinemas/UpdateCinema");
-
             default:
-                ViewBag.title = "Seat Management | Diamond Screen Cinema";
+                ViewBag.title = "Diamond Screen Cinema - SeatManagement";
                 return View("Cinemas/SeatManagement");
         }
     }
@@ -70,47 +61,47 @@ public class AdminController : Controller
     {
         if (Page == "CustomerManagement")
         {
-            ViewBag.title = "Customer Management | Diamond Screen Cinema";
+            ViewBag.title = "Diamond Screen Cinema - CustomerManagement";
             return View("Users/CustomerManagement");
         }
         else if (Page == "StaffManagement")
         {
-            ViewBag.title = "Staff Management | Diamond Screen Cinema";
+            ViewBag.title = "Diamond Screen Cinema - StaffManagement";
             return View("Users/StaffManagement");
         }
         else if (Page == "UpdateCustomer")
         {
-            ViewBag.title = "Update Customer Details | Diamond Screen Cinema";
+            ViewBag.title = "Diamond Screen Cinema - Update Customer Details";
             return View("Users/UpdateCustomer");
         }
         else if (Page == "CreateCustomer")
         {
-            ViewBag.title = "Create New Customer | Diamond Screen Cinema";
+            ViewBag.title = "Diamond Screen Cinema - Create New Customer";
             return View("Users/CreateCustomer");
         }
         else if (Page == "UpdateStaff")
         {
-            ViewBag.title = "Update Staff Details | Diamond Screen Cinema";
+            ViewBag.title = "Diamond Screen Cinema - Update Staff Details";
             return View("Users/UpdateStaff");
         }
         else if (Page == "CreateStaff")
-        {
-            ViewBag.title = "Create New Staff | Diamond Screen Cinema";
+        { 
+            ViewBag.title = "Diamond Screen Cinema - Create New Staff";
             return View("Users/CreateStaff");
         }
         else if (Page == "UpdateAdmin")
         {
-            ViewBag.title = "Update Admin Details | Diamond Screen Cinema";
+            ViewBag.title = "Diamond Screen Cinema - Update Admin Details";
             return View("Users/UpdateAdmin");
         }
         else if (Page == "CreateAdmin")
         {
-            ViewBag.title = "Create New Admin | Diamond Screen Cinema";
+            ViewBag.title = "Diamond Screen Cinema - Create New Admin";
             return View("Users/CreateAdmin");
         }
         else
         {
-            ViewBag.title = "Admin Management | Diamond Screen Cinema";
+            ViewBag.title = "Diamond Screen Cinema - AdminManagement";
             return View("Users/AdminManagement");
         }
     }
@@ -120,58 +111,22 @@ public class AdminController : Controller
         switch (Page)
         {
             case "MovieManagement":
-                ViewBag.title = "Movie Management | Diamond Screen Cinema";
+                ViewBag.title = "Diamond Screen Cinema - Movie Management";
                 return await MovieManagement();
-
             case "ShowtimeManagement":
-                ViewBag.title = "Showtime Management | Diamond Screen Cinema";
+                ViewBag.title = "Diamond Screen Cinema - Showtime Management";
                 return View("Movies/ShowtimeManagement");
-
             case "MovieCreate":
-                ViewBag.title = "Create Movie | Diamond Screen Cinema";
-                var savedCreateModel = hp.LoadModel<MovieVM>(TempData);
-                var savedCreateErrors = hp.LoadModelState(TempData);
-
-                if (savedCreateModel != null)
-                {
-                    if (savedCreateErrors != null)
-                    {
-                        foreach (var kv in savedCreateErrors)
-                            foreach (var msg in kv.Value)
-                                ModelState.AddModelError(kv.Key, msg);
-                    }
-
-                    return View("Movies/MovieCreate", savedCreateModel);
-                }
-
+                ViewBag.title = "Diamond Screen Cinema - Movie Create";
                 return View("Movies/MovieCreate", new MovieVM());
-
             case "MovieDetail":
-                ViewBag.title = "Movie Detail | Diamond Screen Cinema";
+                ViewBag.title = "Diamond Screen Cinema - Movie Detail";
                 return MovieDetail(Request.Query["id"]!);
-
             case "MovieUpdate":
-                ViewBag.title = "Update Movie | Diamond Screen Cinema";
-
-                var savedUpdateModel = hp.LoadModel<MovieVM>(TempData);
-                var savedUpdateErrors = hp.LoadModelState(TempData);
-
-                if (savedUpdateModel != null)
-                {
-                    if (savedUpdateErrors != null)
-                    {
-                        foreach (var kv in savedUpdateErrors)
-                            foreach (var msg in kv.Value)
-                                ModelState.AddModelError(kv.Key, msg);
-                    }
-
-                    return View("Movies/MovieUpdate", savedUpdateModel);
-                }
-
+                ViewBag.title = "Diamond Screen Cinema - Movie Update";
                 return MovieUpdate(Request.Query["id"]!);
-
             case "ShowtimeCUD":
-                ViewBag.title = "Showtime CUD | Diamond Screen Cinema";
+                ViewBag.title = "Diamond Screen Cinema - Showtime CUD";
 
                 var movies = db.Movies
                     .OrderBy(m => m.Title)
@@ -189,7 +144,6 @@ public class AdminController : Controller
                     .ToList();
 
                 return View("Movies/ShowtimeCUD", movies);
-
             default:
                 return RedirectToAction("Movies", new { Page = "MovieManagement" });
         }
@@ -197,8 +151,8 @@ public class AdminController : Controller
 
     [HttpGet]
     public async Task<IActionResult> MovieManagement(string search = "",
-     string genreFilter = "", string languageFilter = "", string sortBy = "title",
-     string statusFilter = "all", int page = 1, bool ajax = false)
+         string genreFilter = "", string languageFilter = "", string sortBy = "title",
+         string statusFilter = "all", int page = 1, bool ajax = false)
     {
         await AutoUpdateMovieStatuses();
         const int PageSize = 8;
@@ -251,6 +205,7 @@ public class AdminController : Controller
 
         return View("Movies/MovieManagement", movies);
     }
+
 
     public async Task<IActionResult> DeleteMovie(string id)
     {
@@ -308,6 +263,12 @@ public class AdminController : Controller
                     if (System.IO.File.Exists(trailerPath))
                         System.IO.File.Delete(trailerPath);
                 }
+                if (!string.IsNullOrEmpty(movie.Trailer))
+                {
+                    var hPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", movie.HorizontalPoster.TrimStart('/'));
+                    if (System.IO.File.Exists(hPath))
+                        System.IO.File.Delete(hPath);
+                }
 
                 db.Movies.Remove(movie);
             }
@@ -322,33 +283,27 @@ public class AdminController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> MovieCreate(MovieVM model)
     {
-        if (model.PosterFile == null ||
-            model.HorizontalPosterFile == null ||
-            model.ReleaseDate == default ||
-            string.IsNullOrWhiteSpace(model.Title) ||
+        if (string.IsNullOrWhiteSpace(model.Title) ||
             string.IsNullOrWhiteSpace(model.Genre) ||
             model.Duration <= 0 ||
             string.IsNullOrWhiteSpace(model.Language) ||
             string.IsNullOrWhiteSpace(model.Director) ||
             string.IsNullOrWhiteSpace(model.Cast) ||
             string.IsNullOrWhiteSpace(model.Classification) ||
-            string.IsNullOrWhiteSpace(model.Subtitle))
+            string.IsNullOrWhiteSpace(model.Subtitle) ||
+            model.ReleaseDate == default ||
+            model.PosterFile == null)
         {
             TempData["NotificationMessage"] = "Please fill in all required fields.";
             TempData["NotificationType"] = "warning";
-            hp.SaveModel(TempData, model);
-            hp.SaveModelState(TempData, ModelState);
-            return RedirectToAction("Movies", new { Page = "MovieCreate" });
+            return View("Movies/MovieCreate", model);
         }
 
         if (model.Title.Length > 200)
         {
             TempData["NotificationMessage"] = "Title cannot exceed 200 characters.";
             TempData["NotificationType"] = "warning";
-            hp.SaveModel(TempData, model);
-            hp.SaveModelState(TempData, ModelState);
-            return RedirectToAction("Movies", new { Page = "MovieCreate" });
-
+            return View("Movies/MovieCreate", model);
         }
 
         var existingMovie = await db.Movies
@@ -358,28 +313,21 @@ public class AdminController : Controller
         {
             TempData["NotificationMessage"] = "A movie with this title already exists.";
             TempData["NotificationType"] = "warning";
-            hp.SaveModel(TempData, model);
-            hp.SaveModelState(TempData, ModelState);
-            return RedirectToAction("Movies", new { Page = "MovieCreate" });
-
+            return View("Movies/MovieCreate", model);
         }
 
         if (model.Duration < 30 || model.Duration > 300)
         {
             TempData["NotificationMessage"] = "Duration must be between 30 and 300 minutes.";
             TempData["NotificationType"] = "warning";
-            hp.SaveModel(TempData, model);
-            hp.SaveModelState(TempData, ModelState);
-            return RedirectToAction("Movies", new { Page = "MovieCreate" });
+            return View("Movies/MovieCreate", model);
         }
 
         if (model.ReleaseDate.Year < 1900 || model.ReleaseDate.Year > DateTime.Today.Year + 5)
         {
             TempData["NotificationMessage"] = "Release date must be between 1900 and 5 years from now.";
             TempData["NotificationType"] = "warning";
-            hp.SaveModel(TempData, model);
-            hp.SaveModelState(TempData, ModelState);
-            return RedirectToAction("Movies", new { Page = "MovieCreate" });
+            return View("Movies/MovieCreate", model);
         }
 
         if (model.PosterFile != null)
@@ -388,9 +336,7 @@ public class AdminController : Controller
             {
                 TempData["NotificationMessage"] = "Poster file size cannot exceed 5MB.";
                 TempData["NotificationType"] = "error";
-                hp.SaveModel(TempData, model);
-                hp.SaveModelState(TempData, ModelState);
-                return RedirectToAction("Movies", new { Page = "MovieCreate" });
+                return View("Movies/MovieCreate", model);
             }
 
             var allowedPosterTypes = new[] { ".jpg", ".jpeg", ".png", ".webp" };
@@ -399,19 +345,23 @@ public class AdminController : Controller
             {
                 TempData["NotificationMessage"] = "Poster must be JPG, PNG, or WEBP format.";
                 TempData["NotificationType"] = "error";
-                hp.SaveModel(TempData, model);
-                hp.SaveModelState(TempData, ModelState);
-                return RedirectToAction("Movies", new { Page = "MovieCreate" });
+                return View("Movies/MovieCreate", model);
             }
         }
 
-        if (model.HorizontalPosterFile == null)
+        if (model.HorizontalPosterFile != null)
         {
-            TempData["NotificationMessage"] = "Horizontal poster is required";
-            TempData["NotificationType"] = "error";
-            hp.SaveModel(TempData, model);
-            hp.SaveModelState(TempData, ModelState);
-            return RedirectToAction("Movies", new { Page = "MovieCreate" });
+            string folder = Path.Combine(en.WebRootPath, "MovieUpload/HorizontalPoster");
+            Directory.CreateDirectory(folder);
+
+            string ext = Path.GetExtension(model.HorizontalPosterFile.FileName).ToLower();
+            string fileName = Guid.NewGuid() + ext;
+            string path = Path.Combine(folder, fileName);
+
+            using var fs = new FileStream(path, FileMode.Create);
+            await model.HorizontalPosterFile.CopyToAsync(fs);
+
+            model.HorizontalPoster = "/MovieUpload/HorizontalPoster/" + fileName;
         }
 
         if (model.TrailerFile != null)
@@ -420,9 +370,7 @@ public class AdminController : Controller
             {
                 TempData["NotificationMessage"] = "Trailer file size cannot exceed 100MB.";
                 TempData["NotificationType"] = "error";
-                hp.SaveModel(TempData, model);
-                hp.SaveModelState(TempData, ModelState);
-                return RedirectToAction("Movies", new { Page = "MovieCreate" });
+                return View("Movies/MovieCreate", model);
             }
 
             var allowedTrailerTypes = new[] { ".mp4", ".webm", ".mov" };
@@ -431,9 +379,7 @@ public class AdminController : Controller
             {
                 TempData["NotificationMessage"] = "Trailer must be MP4, WEBM, or MOV format.";
                 TempData["NotificationType"] = "error";
-                hp.SaveModel(TempData, model);
-                hp.SaveModelState(TempData, ModelState);
-                return RedirectToAction("Movies", new { Page = "MovieCreate" });
+                return View("Movies/MovieCreate", model);
             }
         }
 
@@ -445,18 +391,14 @@ public class AdminController : Controller
             {
                 TempData["NotificationMessage"] = "Release Date is in the past. Status should be 'Showing'.";
                 TempData["NotificationType"] = "warning";
-                hp.SaveModel(TempData, model);
-                hp.SaveModelState(TempData, ModelState);
-                return RedirectToAction("Movies", new { Page = "MovieCreate" });
+                return View("Movies/MovieCreate", model);
             }
 
             if (model.ReleaseDate.Date > DateTime.Today && chosenStatus != "Upcoming")
             {
                 TempData["NotificationMessage"] = "Release Date is in the future. Status should be 'Upcoming'.";
                 TempData["NotificationType"] = "warning";
-                hp.SaveModel(TempData, model);
-                hp.SaveModelState(TempData, ModelState);
-                return RedirectToAction("Movies", new { Page = "MovieCreate" });
+                return View("Movies/MovieCreate", model);
             }
         }
 
@@ -484,6 +426,7 @@ public class AdminController : Controller
                 ReleaseDate = model.ReleaseDate,
                 Status = chosenStatus,
                 Synopsis = string.IsNullOrWhiteSpace(model.Synopsis) ? null : model.Synopsis.Trim(),
+                HorizontalPoster = model.HorizontalPoster
             };
 
             if (model.PosterFile != null)
@@ -515,20 +458,6 @@ public class AdminController : Controller
 
                 movie.Trailer = "/MovieUpload/Trailer/" + fileName;
             }
-            if (model.HorizontalPosterFile != null)
-            {
-                string folder = Path.Combine(en.WebRootPath, "MovieUpload/HorizontalPoster");
-                Directory.CreateDirectory(folder);
-
-                string fileExt = Path.GetExtension(model.HorizontalPosterFile.FileName).ToLower();
-                string fileName = Guid.NewGuid().ToString() + fileExt;
-                string filePath = Path.Combine(folder, fileName);
-
-                using var fs = new FileStream(filePath, FileMode.Create);
-                await model.HorizontalPosterFile.CopyToAsync(fs);
-
-                movie.HorizontalPoster = "/MovieUpload/HorizontalPoster/" + fileName;
-            }
 
             db.Movies.Add(movie);
             await db.SaveChangesAsync();
@@ -544,9 +473,7 @@ public class AdminController : Controller
 
             TempData["NotificationMessage"] = "Movie creation failed. Please try again.";
             TempData["NotificationType"] = "error";
-            hp.SaveModel(TempData, model);
-            hp.SaveModelState(TempData, ModelState);
-            return RedirectToAction("Movies", new { Page = "MovieCreate" });
+            return View("Movies/MovieCreate", model);
         }
     }
 
@@ -581,7 +508,7 @@ public class AdminController : Controller
             return RedirectToAction("Movies", new { Page = "MovieManagement" });
         }
 
-        ViewBag.title = "Movie Detail | Diamond Screen Cinema";
+        ViewBag.title = "Diamond Screen Cinema - Movie Detail";
         return View("Movies/MovieDetail", movie);
     }
 
@@ -653,20 +580,14 @@ public class AdminController : Controller
         {
             TempData["NotificationMessage"] = "Please fill in all required fields.";
             TempData["NotificationType"] = "warning";
-            hp.SaveModel(TempData, vm);
-            hp.SaveModelState(TempData, ModelState);
-            return RedirectToAction("Movies", new { Page = "MovieUpdate", id = vm.MovieId });
-
-
+            return View("Movies/MovieUpdate", vm);
         }
 
         if (vm.Title.Length > 200)
         {
             TempData["NotificationMessage"] = "Title cannot exceed 200 characters.";
             TempData["NotificationType"] = "warning";
-            hp.SaveModel(TempData, vm);
-            hp.SaveModelState(TempData, ModelState);
-            return RedirectToAction("Movies", new { Page = "MovieUpdate", id = vm.MovieId });
+            return View("Movies/MovieUpdate", vm);
         }
 
         var existingMovie = await db.Movies
@@ -676,27 +597,21 @@ public class AdminController : Controller
         {
             TempData["NotificationMessage"] = "A movie with this title already exists.";
             TempData["NotificationType"] = "warning";
-            hp.SaveModel(TempData, vm);
-            hp.SaveModelState(TempData, ModelState);
-            return RedirectToAction("Movies", new { Page = "MovieUpdate", id = vm.MovieId });
+            return View("Movies/MovieUpdate", vm);
         }
 
         if (vm.Duration < 30 || vm.Duration > 300)
         {
             TempData["NotificationMessage"] = "Duration must be between 30 and 300 minutes.";
             TempData["NotificationType"] = "warning";
-            hp.SaveModel(TempData, vm);
-            hp.SaveModelState(TempData, ModelState);
-            return RedirectToAction("Movies", new { Page = "MovieUpdate", id = vm.MovieId });
+            return View("Movies/MovieUpdate", vm);
         }
 
         if (vm.ReleaseDate.Year < 1900 || vm.ReleaseDate.Year > DateTime.Today.Year + 5)
         {
             TempData["NotificationMessage"] = "Release date must be between 1900 and 5 years from now.";
             TempData["NotificationType"] = "warning";
-            hp.SaveModel(TempData, vm);
-            hp.SaveModelState(TempData, ModelState);
-            return RedirectToAction("Movies", new { Page = "MovieUpdate", id = vm.MovieId });
+            return View("Movies/MovieUpdate", vm);
         }
 
 
@@ -707,9 +622,7 @@ public class AdminController : Controller
             {
                 TempData["NotificationMessage"] = "Poster file size cannot exceed 5MB.";
                 TempData["NotificationType"] = "error";
-                hp.SaveModel(TempData, vm);
-                hp.SaveModelState(TempData, ModelState);
-                return RedirectToAction("Movies", new { Page = "MovieUpdate", id = vm.MovieId });
+                return View("Movies/MovieUpdate", vm);
             }
 
 
@@ -719,10 +632,7 @@ public class AdminController : Controller
             {
                 TempData["NotificationMessage"] = "Poster must be JPG, PNG, or WEBP format.";
                 TempData["NotificationType"] = "error";
-                hp.SaveModel(TempData, vm);
-                hp.SaveModelState(TempData, ModelState);
-                return RedirectToAction("Movies", new { Page = "MovieUpdate", id = vm.MovieId });
-
+                return View("Movies/MovieUpdate", vm);
             }
         }
 
@@ -732,10 +642,7 @@ public class AdminController : Controller
             {
                 TempData["NotificationMessage"] = "Horizontal poster cannot exceed 5MB.";
                 TempData["NotificationType"] = "error";
-                hp.SaveModel(TempData, vm);
-                hp.SaveModelState(TempData, ModelState);
-                return RedirectToAction("Movies", new { Page = "MovieUpdate", id = vm.MovieId });
-
+                return View("Movies/MovieUpdate", vm);
             }
 
             var allowedHorizontalTypes = new[] { ".jpg", ".jpeg", ".png", ".webp" };
@@ -745,10 +652,7 @@ public class AdminController : Controller
             {
                 TempData["NotificationMessage"] = "Horizontal poster must be JPG, PNG, or WEBP.";
                 TempData["NotificationType"] = "error";
-                hp.SaveModel(TempData, vm);
-                hp.SaveModelState(TempData, ModelState);
-                return RedirectToAction("Movies", new { Page = "MovieUpdate", id = vm.MovieId });
-
+                return View("Movies/MovieUpdate", vm);
             }
         }
 
@@ -759,10 +663,7 @@ public class AdminController : Controller
             {
                 TempData["NotificationMessage"] = "Trailer file size cannot exceed 100MB.";
                 TempData["NotificationType"] = "error";
-                hp.SaveModel(TempData, vm);
-                hp.SaveModelState(TempData, ModelState);
-                return RedirectToAction("Movies", new { Page = "MovieUpdate", id = vm.MovieId });
-
+                return View("Movies/MovieUpdate", vm);
             }
 
 
@@ -772,9 +673,7 @@ public class AdminController : Controller
             {
                 TempData["NotificationMessage"] = "Trailer must be MP4, WEBM, or MOV format.";
                 TempData["NotificationType"] = "error";
-                hp.SaveModel(TempData, vm);
-                hp.SaveModelState(TempData, ModelState);
-                return RedirectToAction("Movies", new { Page = "MovieUpdate", id = vm.MovieId });
+                return View("Movies/MovieUpdate", vm);
             }
         }
 
@@ -784,18 +683,14 @@ public class AdminController : Controller
             {
                 TempData["NotificationMessage"] = "Release Date is in the past. Status should be 'Showing'.";
                 TempData["NotificationType"] = "warning";
-                hp.SaveModel(TempData, vm);
-                hp.SaveModelState(TempData, ModelState);
-                return RedirectToAction("Movies", new { Page = "MovieUpdate", id = vm.MovieId });
+                return View("Movies/MovieUpdate", vm);
             }
 
             if (vm.ReleaseDate.Date > DateTime.Today && vm.Status != "Upcoming")
             {
                 TempData["NotificationMessage"] = "Release Date is in the future. Status should be 'Upcoming'.";
                 TempData["NotificationType"] = "warning";
-                hp.SaveModel(TempData, vm);
-                hp.SaveModelState(TempData, ModelState);
-                return RedirectToAction("Movies", new { Page = "MovieUpdate", id = vm.MovieId });
+                return View("Movies/MovieUpdate", vm);
             }
         }
 
@@ -812,6 +707,7 @@ public class AdminController : Controller
             movie.ReleaseDate = vm.ReleaseDate;
             movie.Status = vm.Status;
             movie.Synopsis = string.IsNullOrWhiteSpace(vm.Synopsis) ? null : vm.Synopsis.Trim();
+
 
             if (vm.PosterFile != null)
             {
@@ -874,6 +770,11 @@ public class AdminController : Controller
                 movie.HorizontalPoster = "/MovieUpload/HorizontalPoster/" + fileName;
             }
 
+            if (vm.HorizontalPosterFile == null && string.IsNullOrEmpty(vm.HorizontalPoster))
+            {
+                movie.HorizontalPoster = null;
+            }
+
             if (vm.TrailerFile != null)
             {
 
@@ -922,9 +823,7 @@ public class AdminController : Controller
 
             TempData["NotificationMessage"] = "Movie update failed. Please try again.";
             TempData["NotificationType"] = "error";
-            hp.SaveModel(TempData, vm);
-            hp.SaveModelState(TempData, ModelState);
-            return RedirectToAction("Movies", new { Page = "MovieUpdate", id = vm.MovieId });
+            return View("Movies/MovieUpdate", vm);
         }
     }
 

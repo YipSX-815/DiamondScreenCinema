@@ -349,14 +349,18 @@ input[type="date"] {
 }
 
 .halls-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    display: flex;
+    flex-direction:row;
+    overflow-x:scroll;
+/*    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));*/
     gap: 12px;
-    margin-top: 8px;
+    margin-top: 6px;
     margin-bottom: 15px;
+    padding-top:10px;
 }
 
 .hall-option {
+    min-width:100px;
     background: white;
     border: 1px solid rgba(226, 232, 240, 0.8);
     border-radius: 12px;
@@ -367,6 +371,7 @@ input[type="date"] {
     position: relative;
     overflow: hidden;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+
 }
 
 .hall-option:hover:not(.disabled) {

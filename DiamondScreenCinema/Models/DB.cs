@@ -210,8 +210,8 @@ public class Movie
     public string MovieId { get; set; }
     public string Title { get; set; }
     public string Poster { get; set; }
-    public string HorizontalPoster { get; set; } 
-    public string Trailer { get; set; }
+    public string? HorizontalPoster { get; set; } 
+    public string? Trailer { get; set; }
     public int Duration { get; set; }
     public string Language { get; set; }
     public string Director { get; set; }
@@ -384,8 +384,6 @@ public class User
     public string Gender { get; set; }
     public string? ProfileImage { get; set; }
     public string AccountStatus { get; set; }
-    public List<string>? SecurityQuestions { get; set; }
-    public List<string>? SecurityAnswer { get; set; }
 
     public string Role => GetType().Name;
 

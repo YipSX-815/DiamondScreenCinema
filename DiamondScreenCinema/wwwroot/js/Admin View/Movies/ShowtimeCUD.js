@@ -32,7 +32,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const HALLS = [
         { id: 1, name: "Hall 1", capacity: 120 },
         { id: 2, name: "Hall 2", capacity: 120 },
-        { id: 3, name: "Hall 3", capacity: 120 }
+        { id: 3, name: "Hall 3", capacity: 120 },
+        { id: 4, name: "Hall 3", capacity: 120 },
+        { id: 5, name: "Hall 3", capacity: 120 },
+        { id: 6, name: "Hall 3", capacity: 120 },
+        { id: 7, name: "Hall 3", capacity: 120 },
+        { id: 8, name: "Hall 3", capacity: 120 },
+        { id: 9, name: "Hall 3", capacity: 120 },
+        { id: 10, name: "Hall 3", capacity: 120 },
+        { id: 11, name: "Hall 3", capacity: 120 },
+        { id: 12, name: "Hall 3", capacity: 120 },
     ];
 
     let pxPerMin = 1;

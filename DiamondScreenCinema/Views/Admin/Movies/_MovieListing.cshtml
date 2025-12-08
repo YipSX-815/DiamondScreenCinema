@@ -17,30 +17,31 @@
                     <div class="poster-wrapper">
                         <img src="@Url.Content(movie.Poster)" class="movie-poster" draggable="false" />
                     </div>
-
                     <div class="movie-content">
                         <h3 class="movie-title">@movie.Title</h3>
-
                         <div class="movie-info">
                             <span>@movie.Genre</span>
                             <span class="dot">•</span>
                             <span>@movie.Language</span>
+                            <span class="dot">•</span>
+                            <span>@movie.ReleaseDate.ToString("dd-MM-yyyy")</span>
                         </div>
-
                         <div class="movie-actions">
-                            <span class="status-badge @statusClass">@movie.Status</span>
-
+                            <button class="status-badge @statusClass status-btn"
+                                    data-status="@movie.Status"
+                                    data-id="@movie.MovieId"
+                                    type="button">
+                                @movie.Status
+                            </button>
                             <div class="action-buttons">
                                 <a class="action-btn view-btn"
                                    href="/Admin/Movies?Page=MovieDetail&id=@movie.MovieId">
                                     <i class="fas fa-eye"></i>
                                 </a>
-
                                 <a class="action-btn update-btn"
                                    href="/Admin/Movies?Page=MovieUpdate&id=@movie.MovieId">
                                     <i class="fas fa-edit"></i>
                                 </a>
-
                                 <a class="action-btn delete-btn delete-single"
                                    data-id="@movie.MovieId">
                                     <i class="fas fa-trash"></i>
@@ -51,7 +52,6 @@
                 </div>
             }
         </div>
-
         <div class="pagination" data-total-pages="@ViewBag.TotalPages">
             @if (ViewBag.TotalPages > 1)
             {
