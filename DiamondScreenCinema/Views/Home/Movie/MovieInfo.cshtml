@@ -160,6 +160,22 @@
                                  onerror="this.src='https://img.youtube.com/vi/@youtubeId/hqdefault.jpg'">
                         }
                     }
+                    else if (!string.IsNullOrEmpty(Model.HorizontalPoster))
+                    {
+                        @if (Model.HorizontalPoster.Contains("themoviedb.org"))
+                        {
+                            var optimizedHPoster = Model.HorizontalPoster.Replace("/t/p/original/", "/t/p/w1280/");
+                            <img src="@optimizedHPoster" alt="@Model.Title" class="trailer-thumbnail">
+                        }
+                        else if (Model.HorizontalPoster.StartsWith("/") || Model.HorizontalPoster.StartsWith("~"))
+                        {
+                            <img src="@Url.Content(Model.HorizontalPoster)" alt="@Model.Title" class="trailer-thumbnail">
+                        }
+                        else
+                        {
+                            <img src="@Url.Content("~/MovieUpload/HorizontalPoster/" + Model.HorizontalPoster)" alt="@Model.Title" class="trailer-thumbnail">
+                        }
+                    }
                     else if (!string.IsNullOrEmpty(Model.Poster))
                     {
                         @if (Model.Poster.Contains("themoviedb.org"))
